@@ -1,12 +1,42 @@
-﻿<Window x:Class="NETworkManager.MainWindow"
+﻿<Controls:MetroWindow x:Name="MetroWindowMain" x:Class="NETworkManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="NETworkManager" Height="350" Width="525">
+        Title="NETworkManager" Height="350" Width="525" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Name="btnGithub" Click="btnGithub_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_GitHub}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_github}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4,0,0,0" 
+                               VerticalAlignment="Center" 
+                               Text="GitHub.com/BornToBeRoot" />
+                </StackPanel>
+            </Button>
+
+            <Button Name="btnSettings" Click="btnSettings_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_Settings}">
+                <Rectangle Width="20"
+                   Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    
     <Grid>
         
     </Grid>
-</Window>
+</Controls:MetroWindow>
