@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NETworkManager"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="NETworkManager" Height="350" Width="525" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+        Title=".NETworkManager" Height="450" Width="600" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Name="btnGithub" Click="btnGithub_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_GitHub}">

@@ -3,7 +3,8 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <!-- <system:String x:Key="LocalizedString_"></system:String> -->
-    <system:String x:Key="LocalizedString_ToolTip_Settings">Open settings</system:String>
+    <system:String x:Key="LocalizedString_ToolTip_Settings">Settings</system:String>
     <system:String x:Key="LocalizedString_ToolTip_GitHub">Show project on GitHub</system:String>
-
+    <system:String x:Key="LocalizedString_Application">Application</system:String>
+    <system:String x:Key="LocalizedString_About">About</system:String>
 </ResourceDictionary>

@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="Window_AppAccent" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Lime</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Window_AppTheme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BaseLight</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Localization_CultureCode" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

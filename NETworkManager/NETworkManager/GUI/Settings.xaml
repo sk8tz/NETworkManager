@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="Settings" Height="300" Width="300">
+        Title="Settings" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650">
+    <Controls:MetroWindow.Resources>
+        <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+            <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
+        </Style>
+    </Controls:MetroWindow.Resources>
     <Grid>
-        
+        <TabControl>
+            <TabItem  Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_About}">
+                
+            </TabItem>
+        </TabControl>
     </Grid>
 </Controls:MetroWindow>

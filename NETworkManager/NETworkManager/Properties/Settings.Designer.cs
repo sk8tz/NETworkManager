@@ -25,7 +25,7 @@ namespace NETworkManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Lime")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Window_AppAccent {
             get {
                 return ((string)(this["Window_AppAccent"]));
@@ -37,7 +37,7 @@ namespace NETworkManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BaseLight")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Window_AppTheme {
             get {
                 return ((string)(this["Window_AppTheme"]));
