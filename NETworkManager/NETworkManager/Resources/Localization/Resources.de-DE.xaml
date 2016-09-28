@@ -7,4 +7,8 @@
     <system:String x:Key="LocalizedString_ToolTip_GitHub">Öffne GitHub-Projektseite</system:String>
     <system:String x:Key="LocalizedString_Application">Anwendung</system:String>
     <system:String x:Key="LocalizedString_About">Über</system:String>
+    <system:String x:Key="LocalizedString_General">Allgemein</system:String>
+    <system:String x:Key="LocalizedString_Language">Sprache</system:String>
+    <system:String x:Key="LocalizedString_Appearance">Aussehen</system:String>
+    <system:String x:Key="LocalizedString_Settings">Einstellungen</system:String>
 </ResourceDictionary>

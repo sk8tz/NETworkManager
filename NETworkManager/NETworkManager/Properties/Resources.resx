@@ -121,4 +121,7 @@
     <value>https://github.com/BornToBeRoot/NETworkManager</value>
     <comment>URL of the GitHub project page</comment>
   </data>
+  <data name="Localization_DefaultCultureCode" xml:space="preserve">
+    <value>en-US</value>
+  </data>
 </root>

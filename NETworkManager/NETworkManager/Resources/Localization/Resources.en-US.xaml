@@ -7,4 +7,8 @@
     <system:String x:Key="LocalizedString_ToolTip_GitHub">Show project on GitHub</system:String>
     <system:String x:Key="LocalizedString_Application">Application</system:String>
     <system:String x:Key="LocalizedString_About">About</system:String>
+    <system:String x:Key="LocalizedString_General">General</system:String>
+    <system:String x:Key="LocalizedString_Language">Language</system:String>
+    <system:String x:Key="LocalizedString_Appearance">Appearance</system:String>
+    <system:String x:Key="LocalizedString_Settings">Settings</system:String>
 </ResourceDictionary>

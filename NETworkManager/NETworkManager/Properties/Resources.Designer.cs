@@ -68,5 +68,14 @@ namespace NETworkManager.Properties {
                 return ResourceManager.GetString("GitHubProjectURL", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die en-US ähnelt.
+        /// </summary>
+        internal static string Localization_DefaultCultureCode {
+            get {
+                return ResourceManager.GetString("Localization_DefaultCultureCode", resourceCulture);
+            }
+        }
     }
 }

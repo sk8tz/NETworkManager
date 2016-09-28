@@ -10,7 +10,7 @@ namespace NETworkManager.Core.Localization
     public static class LocalizationController
     {
         // List of all available localizations
-        public static List<LocalizationInfo> GetLocalizationList
+        public static List<LocalizationInfo> LocalizationList
         {
             get
             {
@@ -20,7 +20,7 @@ namespace NETworkManager.Core.Localization
                 };
             }
         }
-        
+
         // Current localization
         private static LocalizationInfo _currentLocalization;
         public static LocalizationInfo CurrentLocalization
@@ -28,32 +28,42 @@ namespace NETworkManager.Core.Localization
             get { return _currentLocalization; }
             set { _currentLocalization = value; }
         }
-
-        // Load localization from user settings, alternative use system language and if it's not available choose english
-        private static ResourceDictionary lastLocalization;
-
+        
+        // Load localization from the settings
         public static void LoadLocalization()
         {
             string cultureCode = Properties.Settings.Default.Localization_CultureCode;
-                        
+
             if (string.IsNullOrEmpty(cultureCode))
                 cultureCode = CultureInfo.CurrentCulture.Name;
 
-            LocalizationInfo localizationInfo = GetLocalizationList.Where(x => x.Code == cultureCode).FirstOrDefault();
+            LocalizationInfo info = LocalizationList.Where(x => x.Code == cultureCode).FirstOrDefault();
 
-            if (localizationInfo == null)
-                localizationInfo = GetLocalizationList.First();
+            if (info == null)
+                info = LocalizationList.First();
 
-            if (lastLocalization != null)
-                Application.Current.Resources.MergedDictionaries.Remove(lastLocalization);
-
-            lastLocalization = new ResourceDictionary { Source = new Uri(localizationInfo.Path, UriKind.Relative) };
-
-            CurrentLocalization = localizationInfo;
-
-            Application.Current.Resources.MergedDictionaries.Add(lastLocalization);
-
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(CurrentLocalization.Code);
+            if(info.Code != Properties.Resources.Localization_DefaultCultureCode)
+                    ChangeLocalization(info);
+            
         }
+
+        private static ResourceDictionary _localizationResourceDictionary;
+
+        // Change localization 
+        public static void ChangeLocalization(LocalizationInfo info)
+        {
+            CurrentLocalization = info;
+
+            if (_localizationResourceDictionary != null)
+                Application.Current.Resources.MergedDictionaries.Remove(_localizationResourceDictionary);
+
+            _localizationResourceDictionary = new ResourceDictionary { Source = new Uri(info.Path, UriKind.Relative) };
+
+            Application.Current.Resources.MergedDictionaries.Add(_localizationResourceDictionary);   
+                        
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(info.Code);
+        }
+
+
     }
 }

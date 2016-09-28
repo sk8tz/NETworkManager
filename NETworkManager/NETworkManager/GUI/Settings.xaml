@@ -4,27 +4,84 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
+        xmlns:localization="clr-namespace:NETworkManager.Core.Localization"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="Settings" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650">
+        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
     <Controls:MetroWindow.Resources>
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
+        <Style x:Key="StackPanelItemTab" TargetType="StackPanel">
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
     </Controls:MetroWindow.Resources>
     <Grid>
         <TabControl>
+            <!-- Application -->
             <TabItem  Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush}">
+                        <ListBox.Resources>
+                            <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="Margin" Value="0,0,10,0" />
+                            </Style>
+                        </ListBox.Resources>
+                        <ListBoxItem Content="{DynamicResource LocalizedString_General}" />
+                        <ListBoxItem Content="{DynamicResource LocalizedString_Appearance}" />
+                        <ListBoxItem Content="{DynamicResource LocalizedString_Language}" />
+                    </ListBox>
+                    <TabControl SelectedIndex="{Binding ElementName=listBoxSettings, Path=SelectedIndex}" Grid.Column="1">
+                        <TabControl.Resources>
+                            <Style TargetType="TabItem">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Style>
+                        </TabControl.Resources>
+                        <!-- General -->
+                        <TabItem>
+                            <StackPanel Style="{StaticResource StackPanelItemTab}">
+
+                            </StackPanel>
+                        </TabItem>
+                        <!-- Appearance -->
+                        <TabItem>
+                            <StackPanel Style="{StaticResource StackPanelItemTab}">
+
+                            </StackPanel>
+                        </TabItem>
+                        <!-- Language -->
+                        <TabItem>
+                            <StackPanel Style="{StaticResource StackPanelItemTab}">
+                                <ListView x:Name="listBoxLanguage" Background="Transparent" ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}"                                           BorderThickness="0" SelectionChanged="listBoxLanguage_SelectionChanged">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="40" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding Icon}" />
+                                                <StackPanel Grid.Column="1" Margin="10,5,0,5" Orientation="Vertical">
+                                                    <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Name}" />
+                                                    <TextBlock Text="{Binding Translator}" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
             </TabItem>
+            <!-- About -->
             <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_About}">
-                
+
             </TabItem>
         </TabControl>
     </Grid>

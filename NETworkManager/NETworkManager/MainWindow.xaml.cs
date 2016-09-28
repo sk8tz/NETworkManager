@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using NETworkManager.Core.Localization;
 using NETworkManager.GUI;
 using System;
 using System.Collections.Generic;
@@ -61,5 +62,10 @@ namespace NETworkManager
             window.ShowDialog();
         }
         #endregion
+
+        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
+        {
+            LocalizationController.LoadLocalization();
+        }
     }
 }
