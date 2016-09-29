@@ -75,9 +75,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Appearance\ConvertAccentToBrush.cs" />
+    <Compile Include="Core\Appearance\ConvertAppThemeToBrush.cs" />
     <Compile Include="Core\Localization\LocalizationController.cs" />
     <Compile Include="Core\Localization\LocalizationInfo.cs" />
+    <Compile Include="Core\Localization\Translator\TranslateAccentName.cs" />
+    <Compile Include="Core\Localization\Translator\TranslateAppThemeName.cs" />
     <Compile Include="Core\Settings\SettingsController.cs" />
+    <Compile Include="GUI\Behaviors\TextBlockBehavior.cs" />
     <Compile Include="GUI\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -143,6 +148,7 @@
   <ItemGroup>
     <Resource Include="Resources\Localization\Flags\en-US.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

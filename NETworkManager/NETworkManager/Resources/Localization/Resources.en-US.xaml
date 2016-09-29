@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-
-    <!-- <system:String x:Key="LocalizedString_"></system:String> -->
+           
     <system:String x:Key="LocalizedString_ToolTip_Settings">Settings</system:String>
     <system:String x:Key="LocalizedString_ToolTip_GitHub">Show project on GitHub</system:String>
     <system:String x:Key="LocalizedString_Application">Application</system:String>
@@ -11,4 +10,33 @@
     <system:String x:Key="LocalizedString_Language">Language</system:String>
     <system:String x:Key="LocalizedString_Appearance">Appearance</system:String>
     <system:String x:Key="LocalizedString_Settings">Settings</system:String>
+
+    <!-- AppTheme.Name -->
+    <system:String x:Key="LocalizedString_AppTheme_BaseLight">Light</system:String>
+    <system:String x:Key="LocalizedString_AppTheme_BaseDark">Dark</system:String>
+
+    <!-- Accent.Name -->
+    <system:String x:Key="LocalizedString_Accent_Red">Red</system:String>
+    <system:String x:Key="LocalizedString_Accent_Green">Green</system:String>
+    <system:String x:Key="LocalizedString_Accent_Blue">Blue</system:String>
+    <system:String x:Key="LocalizedString_Accent_Purple">Purple</system:String>
+    <system:String x:Key="LocalizedString_Accent_Orange">Orange</system:String>
+    <system:String x:Key="LocalizedString_Accent_Lime">Lime</system:String>
+    <system:String x:Key="LocalizedString_Accent_Emerald">Emerald</system:String>
+    <system:String x:Key="LocalizedString_Accent_Teal">Teal</system:String>
+    <system:String x:Key="LocalizedString_Accent_Cyan">Cyan</system:String>
+    <system:String x:Key="LocalizedString_Accent_Cobalt">Cobalt</system:String>
+    <system:String x:Key="LocalizedString_Accent_Indigo">Indigo</system:String>
+    <system:String x:Key="LocalizedString_Accent_Violet">Violet</system:String>
+    <system:String x:Key="LocalizedString_Accent_Pink">Pink</system:String>
+    <system:String x:Key="LocalizedString_Accent_Magenta">Magenta</system:String>
+    <system:String x:Key="LocalizedString_Accent_Crimson">Crimson</system:String>
+    <system:String x:Key="LocalizedString_Accent_Amber">Amber</system:String>
+    <system:String x:Key="LocalizedString_Accent_Yellow">Yellow</system:String>
+    <system:String x:Key="LocalizedString_Accent_Brown">Brown</system:String>
+    <system:String x:Key="LocalizedString_Accent_Olive">Olive</system:String>
+    <system:String x:Key="LocalizedString_Accent_Steel">Steel</system:String>
+    <system:String x:Key="LocalizedString_Accent_Mauve">Mauve</system:String>
+    <system:String x:Key="LocalizedString_Accent_Taupe">Taupe</system:String>
+    <system:String x:Key="LocalizedString_Accent_Sienna">Sienna</system:String>
 </ResourceDictionary>

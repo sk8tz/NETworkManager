@@ -28,7 +28,7 @@ namespace NETworkManager.Core.Localization
             get { return _currentLocalization; }
             set { _currentLocalization = value; }
         }
-        
+
         // Load localization from the settings
         public static void LoadLocalization()
         {
@@ -42,9 +42,10 @@ namespace NETworkManager.Core.Localization
             if (info == null)
                 info = LocalizationList.First();
 
-            if(info.Code != Properties.Resources.Localization_DefaultCultureCode)
-                    ChangeLocalization(info);
-            
+            if (info.Code != Properties.Resources.Localization_DefaultCultureCode)
+                ChangeLocalization(info);
+            else
+                CurrentLocalization = info;
         }
 
         private static ResourceDictionary _localizationResourceDictionary;
@@ -59,8 +60,8 @@ namespace NETworkManager.Core.Localization
 
             _localizationResourceDictionary = new ResourceDictionary { Source = new Uri(info.Path, UriKind.Relative) };
 
-            Application.Current.Resources.MergedDictionaries.Add(_localizationResourceDictionary);   
-                        
+            Application.Current.Resources.MergedDictionaries.Add(_localizationResourceDictionary);
+
             Thread.CurrentThread.CurrentCulture = new CultureInfo(info.Code);
         }
 
