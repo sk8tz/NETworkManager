@@ -26,24 +26,24 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Window_AppAccent {
+        public string Appearance_Accent {
             get {
-                return ((string)(this["Window_AppAccent"]));
+                return ((string)(this["Appearance_Accent"]));
             }
             set {
-                this["Window_AppAccent"] = value;
+                this["Appearance_Accent"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Window_AppTheme {
+        public string Appearance_AppTheme {
             get {
-                return ((string)(this["Window_AppTheme"]));
+                return ((string)(this["Appearance_AppTheme"]));
             }
             set {
-                this["Window_AppTheme"] = value;
+                this["Appearance_AppTheme"] = value;
             }
         }
         

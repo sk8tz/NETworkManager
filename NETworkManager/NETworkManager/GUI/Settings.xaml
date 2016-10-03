@@ -6,26 +6,33 @@
         xmlns:local="clr-namespace:NETworkManager.GUI"
         xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
         xmlns:localization="clr-namespace:NETworkManager.Core.Localization"
-        xmlns:appearance="clr-namespace:NETworkManager.Core.Appearance"
+        xmlns:brushConverter="clr-namespace:NETworkManager.Core.Appearance.BrushConverter"
         xmlns:translator="clr-namespace:NETworkManager.Core.Localization.Translator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
+        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
     <Controls:MetroWindow.Resources>
-        <appearance:ConvertAppThemeToBrush x:Key="ConvertAppThemeToBrush" />
-        <appearance:ConvertAccentToBrush x:Key="ConvertAccentToBrush" />
+        <brushConverter:ConvertAppThemeToBrush x:Key="ConvertAppThemeToBrush" />
+        <brushConverter:ConvertAccentToBrush x:Key="ConvertAccentToBrush" />
 
         <translator:TranslateAccentName x:Key="TranslateAccentName" />
         <translator:TranslateAppThemeName x:Key="TranslateAppThemeName" />
-        
+
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
-        
+
         <Style x:Key="StackPanelItemTab" TargetType="StackPanel">
             <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+
+        <Style x:Key="TextBlockHeader" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
         </Style>
     </Controls:MetroWindow.Resources>
     <Grid>
@@ -37,10 +44,11 @@
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush}">
+                    <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush3}" Padding="0,0,10,0" Margin="0" >
                         <ListBox.Resources>
                             <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
-                                <Setter Property="Margin" Value="0,0,10,0" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
                             </Style>
                         </ListBox.Resources>
                         <ListBoxItem Content="{DynamicResource LocalizedString_General}" />
@@ -62,7 +70,8 @@
                         <!-- Appearance -->
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelItemTab}">
-                                <ListView x:Name="listviewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,2,0,0">
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}" />
+                                <ListView x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,2,0,0" SelectionChanged="listViewAppTheme_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
@@ -70,13 +79,28 @@
                                                     <ColumnDefinition Width="40" />
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Rectangle Width="16" 
-                                                           Height="16" 
-                                                           Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" />
+                                                <Rectangle Width="16" Height="16" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" />
                                                 <TextBlock Grid.Column="1" Text="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}" VerticalAlignment="Center"/>
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
+                                </ListView>
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" Margin="0,15,0,10" />
+                                <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" Margin="0,2,0,0" SelectionChanged="listViewAccent_SelectionChanged">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Rectangle Width="32" Height="32" Margin="2" Fill="{Binding Converter={StaticResource ConvertAccentToBrush}, ConverterParameter='Name'}"
+                                                       ToolTip="{Binding Converter={StaticResource TranslateAccentName}, ConverterParameter='Name'}" />
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                                                       ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
                                 </ListView>
                             </StackPanel>
                         </TabItem>
@@ -107,7 +131,9 @@
             </TabItem>
             <!-- About -->
             <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_About}">
-
+                <Grid>
+                    
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

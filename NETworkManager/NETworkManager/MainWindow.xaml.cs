@@ -1,6 +1,8 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using NETworkManager.Core.Appearance;
 using NETworkManager.Core.Localization;
+using NETworkManager.Core.Settings;
 using NETworkManager.GUI;
 using System;
 using System.Collections.Generic;
@@ -29,7 +31,16 @@ namespace NETworkManager
         {
             InitializeComponent();
         }
+                
+        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Load localization
+            LocalizationController.LoadLocalization();
 
+            // Load appearance
+            AppearanceController.LoadAppearance();
+        }
+        
         #region RightWindowCommands
         private async void btnGithub_Click(object sender, RoutedEventArgs e)
         {
@@ -62,10 +73,5 @@ namespace NETworkManager
             window.ShowDialog();
         }
         #endregion
-
-        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
-        {
-            LocalizationController.LoadLocalization();
-        }
     }
 }

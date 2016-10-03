@@ -10,6 +10,8 @@
     <system:String x:Key="LocalizedString_Language">Language</system:String>
     <system:String x:Key="LocalizedString_Appearance">Appearance</system:String>
     <system:String x:Key="LocalizedString_Settings">Settings</system:String>
+    <system:String x:Key="LocalizedString_Theme">Theme</system:String>
+    <system:String x:Key="LocalizedString_Accent">Accent</system:String>
 
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Light</system:String>

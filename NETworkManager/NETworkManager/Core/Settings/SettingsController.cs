@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MahApps.Metro;
+using System;
+using System.Windows;
 
 namespace NETworkManager.Core.Settings
 {
     public static class SettingsController
     {
-
-
+        public static void LoadSettings()
+        {
+            
+        }
+                
+        
     }
 }

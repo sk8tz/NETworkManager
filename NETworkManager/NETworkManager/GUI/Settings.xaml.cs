@@ -1,5 +1,8 @@
-﻿using MahApps.Metro.Controls;
+﻿using MahApps.Metro;
+using MahApps.Metro.Controls;
+using NETworkManager.Core.Appearance;
 using NETworkManager.Core.Localization;
+using NETworkManager.Core.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,11 +38,22 @@ namespace NETworkManager.GUI
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {            
-            listBoxLanguage.SelectedIndex = LocalizationController.LocalizationList.FindIndex(a => a.Code == LocalizationController.CurrentLocalization.Code);
+        {
+
+            LoadSettings();
 
             // Enable executing of events, when loading is finished
             _isLoading = false;
+        }
+
+        private void LoadSettings()
+        {
+            // Appearance
+            listViewAppTheme.SelectedItem = ThemeManager.DetectAppStyle().Item1;
+            listViewAccent.SelectedItem = ThemeManager.DetectAppStyle().Item2;
+            
+            // Language 
+            listBoxLanguage.SelectedIndex = LocalizationController.LocalizationList.FindIndex(a => a.Code == LocalizationController.CurrentLocalization.Code);
         }
 
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
@@ -47,6 +61,34 @@ namespace NETworkManager.GUI
             // Save settings if they have changed
             if (_settingsChanged)
                 Properties.Settings.Default.Save();
+        }
+
+        private void listViewAppTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isLoading)
+                return;
+
+            _settingsChanged = true;
+
+            string appThemeName = (listViewAppTheme.SelectedItem as AppTheme).Name;
+
+            AppearanceController.ChangeAppTheme(appThemeName);                      
+
+            Properties.Settings.Default.Appearance_AppTheme = appThemeName;
+        }
+
+        private void listViewAccent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isLoading)
+                return;
+
+            _settingsChanged = true;
+
+            string accentName = (listViewAccent.SelectedItem as Accent).Name;
+
+            AppearanceController.ChangeAccent(accentName);
+
+            Properties.Settings.Default.Appearance_Accent = accentName;
         }
 
         private void listBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,6 +106,6 @@ namespace NETworkManager.GUI
 
             // Indicates that the settings are saved when closing the settings dialog
             _settingsChanged = true;
-        }
+        }       
     }
 }
