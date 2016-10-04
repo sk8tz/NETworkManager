@@ -61,7 +61,7 @@ namespace NETworkManager.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Lime ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Emerald ähnelt.
         /// </summary>
         internal static string Appearance_DefaultAccent {
             get {

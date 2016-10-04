@@ -12,7 +12,9 @@
     <system:String x:Key="LocalizedString_Settings">Settings</system:String>
     <system:String x:Key="LocalizedString_Theme">Theme</system:String>
     <system:String x:Key="LocalizedString_Accent">Accent</system:String>
-
+    <system:String x:Key="LocalizedString_RestartRequired">Restart Required</system:String>
+    
+    
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Light</system:String>
     <system:String x:Key="LocalizedString_AppTheme_BaseDark">Dark</system:String>

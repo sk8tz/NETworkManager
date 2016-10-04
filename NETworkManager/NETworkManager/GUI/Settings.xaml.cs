@@ -25,12 +25,19 @@ namespace NETworkManager.GUI
     /// </summary>
     public partial class Settings : MetroWindow
     {
-
         // Prevent execution of event while loading the window
         private bool _isLoading = true;
 
         // Indicates whether the settings have been changed
         private bool _settingsChanged;
+
+        // Some settings need a restarts of the application to apply them
+        private bool _restartRequiered;
+        public bool RestartRequiered
+        {
+            get { return _restartRequiered; }
+            set { _restartRequiered = value; }
+        }
 
         public Settings()
         {
@@ -51,7 +58,7 @@ namespace NETworkManager.GUI
             // Appearance
             listViewAppTheme.SelectedItem = ThemeManager.DetectAppStyle().Item1;
             listViewAccent.SelectedItem = ThemeManager.DetectAppStyle().Item2;
-            
+
             // Language 
             listBoxLanguage.SelectedIndex = LocalizationController.LocalizationList.FindIndex(a => a.Code == LocalizationController.CurrentLocalization.Code);
         }
@@ -72,7 +79,7 @@ namespace NETworkManager.GUI
 
             string appThemeName = (listViewAppTheme.SelectedItem as AppTheme).Name;
 
-            AppearanceController.ChangeAppTheme(appThemeName);                      
+            AppearanceController.ChangeAppTheme(appThemeName);
 
             Properties.Settings.Default.Appearance_AppTheme = appThemeName;
         }
@@ -97,15 +104,16 @@ namespace NETworkManager.GUI
             if (_isLoading)
                 return;
 
+            // Indicates that the settings are saved when closing the settings dialog
+            _settingsChanged = true;
+            _restartRequiered = true;
+
             // Get selected localization and apply it
             LocalizationInfo info = listBoxLanguage.SelectedItem as LocalizationInfo;
             LocalizationController.ChangeLocalization(info);
 
             // Save selected culture code in settings
             Properties.Settings.Default.Localization_CultureCode = info.Code;
-
-            // Indicates that the settings are saved when closing the settings dialog
-            _settingsChanged = true;
-        }       
+        }
     }
 }

@@ -12,7 +12,9 @@
     <system:String x:Key="LocalizedString_Settings">Einstellungen</system:String>
     <system:String x:Key="LocalizedString_Theme">Thema</system:String>
     <system:String x:Key="LocalizedString_Accent">Akzent</system:String>
-
+    <system:String x:Key="LocalizedString_RestartRequired">Neustart Erforderlich</system:String>
+    <system:String x:Key="LocalizedString_RestartRequiredMessage">Einge Einstellungen werden erst nach einem Neustart angewendet!</system:String>
+    
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Hell</system:String>
     <system:String x:Key="LocalizedString_AppTheme_BaseDark">Dunkel</system:String>

@@ -31,7 +31,7 @@ namespace NETworkManager
         {
             InitializeComponent();
         }
-                
+
         private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
         {
             // Load localization
@@ -40,7 +40,7 @@ namespace NETworkManager
             // Load appearance
             AppearanceController.LoadAppearance();
         }
-        
+
         #region RightWindowCommands
         private async void btnGithub_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +63,7 @@ namespace NETworkManager
             }
         }
 
-        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        private async void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             Settings window = new Settings()
             {
@@ -71,6 +71,14 @@ namespace NETworkManager
             };
 
             window.ShowDialog();
+
+            if (window.RestartRequiered)
+            {
+                string localizedHeader = Application.Current.Resources["LocalizedString_RestartRequired"] as string;
+                string localizedMessage = Application.Current.Resources["LocalizedString_RestartRequiredMessage"] as string;
+
+                await this.ShowMessageAsync(localizedHeader, localizedMessage, MessageDialogStyle.Affirmative);
+            }
         }
         #endregion
     }
