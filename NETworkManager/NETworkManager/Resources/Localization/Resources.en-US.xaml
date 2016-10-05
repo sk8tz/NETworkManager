@@ -3,7 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
            
     <system:String x:Key="LocalizedString_ToolTip_Settings">Settings</system:String>
-    <system:String x:Key="LocalizedString_ToolTip_GitHub">Show project on GitHub</system:String>
+    <system:String x:Key="LocalizedString_ToolTip_GitHub">Project on GitHub</system:String>
     <system:String x:Key="LocalizedString_Application">Application</system:String>
     <system:String x:Key="LocalizedString_About">About</system:String>
     <system:String x:Key="LocalizedString_General">General</system:String>
@@ -13,7 +13,7 @@
     <system:String x:Key="LocalizedString_Theme">Theme</system:String>
     <system:String x:Key="LocalizedString_Accent">Accent</system:String>
     <system:String x:Key="LocalizedString_RestartRequired">Restart Required</system:String>
-    
+    <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Some settings are applied only after restarting the application!</system:String>
     
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Light</system:String>

@@ -3,7 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <system:String x:Key="LocalizedString_ToolTip_Settings">Einstellungen</system:String>
-    <system:String x:Key="LocalizedString_ToolTip_GitHub">Öffne GitHub-Projektseite</system:String>
+    <system:String x:Key="LocalizedString_ToolTip_GitHub">Projekt auf GitHub</system:String>
     <system:String x:Key="LocalizedString_Application">Anwendung</system:String>
     <system:String x:Key="LocalizedString_About">Über</system:String>
     <system:String x:Key="LocalizedString_General">Allgemein</system:String>
@@ -13,7 +13,7 @@
     <system:String x:Key="LocalizedString_Theme">Thema</system:String>
     <system:String x:Key="LocalizedString_Accent">Akzent</system:String>
     <system:String x:Key="LocalizedString_RestartRequired">Neustart Erforderlich</system:String>
-    <system:String x:Key="LocalizedString_RestartRequiredMessage">Einge Einstellungen werden erst nach einem Neustart angewendet!</system:String>
+    <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Einige Einstellungen werden erst nach einem Neustart der Anwendung angewendet!</system:String>
     
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Hell</system:String>

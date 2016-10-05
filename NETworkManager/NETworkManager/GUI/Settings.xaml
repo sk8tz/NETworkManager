@@ -12,7 +12,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Padding="0">
+        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="660" ResizeMode="CanResizeWithGrip" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Padding="0">
     <Controls:MetroWindow.Resources>
         <brushConverter:ConvertAppThemeToBrush x:Key="ConvertAppThemeToBrush" />
         <brushConverter:ConvertAccentToBrush x:Key="ConvertAccentToBrush" />
@@ -27,7 +27,7 @@
         <Style x:Key="GridTabItem" TargetType="Grid">
             <Setter Property="Margin" Value="10" />
         </Style>
-        
+
         <Style x:Key="StackPanelTabItem" TargetType="StackPanel">
             <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
@@ -78,7 +78,7 @@
                                 <ListView x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" SelectionChanged="listViewAppTheme_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <Rectangle Width="48" Height="48" Margin="2" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}"/>                                                
+                                            <Rectangle Width="48" Height="48" Margin="2" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}"/>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <ListView.ItemsPanel>
@@ -137,7 +137,7 @@
             <!-- About -->
             <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_About}">
                 <Grid Style="{StaticResource GridTabItem}">
-                    
+
                 </Grid>
             </TabItem>
         </TabControl>

@@ -64,7 +64,5 @@ namespace NETworkManager.Core.Localization
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo(info.Code);
         }
-
-
     }
 }

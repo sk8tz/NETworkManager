@@ -63,6 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="GUI\IPScanner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +88,9 @@
     <Compile Include="Core\Localization\Translator\TranslateAppThemeName.cs" />
     <Compile Include="Core\Settings\SettingsController.cs" />
     <Compile Include="GUI\Behaviors\TextBlockBehavior.cs" />
+    <Compile Include="GUI\IPScanner.xaml.cs">
+      <DependentUpon>IPScanner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>

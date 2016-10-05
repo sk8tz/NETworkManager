@@ -75,7 +75,7 @@ namespace NETworkManager
             if (window.RestartRequiered)
             {
                 string localizedHeader = Application.Current.Resources["LocalizedString_RestartRequired"] as string;
-                string localizedMessage = Application.Current.Resources["LocalizedString_RestartRequiredMessage"] as string;
+                string localizedMessage = Application.Current.Resources["LocalizedString_RestartRequiredAfterSettingsChanged"] as string;
 
                 await this.ShowMessageAsync(localizedHeader, localizedMessage, MessageDialogStyle.Affirmative);
             }
