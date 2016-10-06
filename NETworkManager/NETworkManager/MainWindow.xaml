@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title=".NETworkManager" Height="450" Width="600" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowMain_Loaded">
+        Title=".NETworkManager" Height="600" Width="500" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowMain_Loaded">
+    <Controls:MetroWindow.Resources>
+        <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+            <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
+        </Style>
+    </Controls:MetroWindow.Resources>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Name="btnGithub" Click="btnGithub_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_GitHub}">
@@ -35,8 +41,10 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
-    
-    <Grid>
-        
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBox FontSize="16" mah:TextBoxHelper.Watermark="Search..." />
+            
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>
