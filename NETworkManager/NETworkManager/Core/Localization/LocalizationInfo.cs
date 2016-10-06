@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 
@@ -20,22 +19,6 @@ namespace NETworkManager.Core.Localization
         [XmlIgnore]
         public string Translator { get; set; }
         public string Code { get; set; }
-
-        public void Load(IEnumerable<LocalizationInfo> list)
-        {
-            foreach (LocalizationInfo info in list)
-            {
-                if (info.Code == Code)
-                {
-                    Name = info.Name;
-                    Path = info.Path;
-                    Icon = info.Icon;
-                    Translator = info.Translator;
-                    return;
-                }
-            }
-            throw new ArgumentException(string.Format("The current code {0} isn't in the list", Code));
-        }
 
         public LocalizationInfo()
         {
