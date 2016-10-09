@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager"
+        xmlns:appLauncher="clr-namespace:NETworkManager.Core.AppLauncher"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title=".NETworkManager" Height="600" Width="500" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowMain_Loaded" WindowStartupLocation="CenterScreen">
+        Title=".NETworkManager" Height="550" Width="800" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowMain_Loaded" WindowStartupLocation="CenterScreen">
     <Controls:MetroWindow.Resources>
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
@@ -16,24 +17,14 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Name="btnGithub" Click="btnGithub_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_GitHub}">
-                <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="20"
-                   Height="20"
-                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_github}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
-                    <TextBlock Margin="4,0,0,0" 
-                               VerticalAlignment="Center" 
-                               Text="GitHub.com/BornToBeRoot" />
-                </StackPanel>
             </Button>
-
             <Button Name="btnSettings" Click="btnSettings_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_Settings}">
-                <Rectangle Width="20"
-                   Height="20"
-                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                     <Rectangle.OpacityMask>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
                     </Rectangle.OpacityMask>
@@ -43,8 +34,33 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid Margin="10">
         <StackPanel>
-            <TextBox FontSize="16" mah:TextBoxHelper.Watermark="Search..." />
-            
+            <TextBox FontSize="16" mah:TextBoxHelper.Watermark="Search..." Width="250" HorizontalAlignment="Left" BorderBrush="{DynamicResource AccentColorBrush}" mah:TextBoxHelper.UseFloatingWatermark="True" BorderThickness="0,0,0,1"/>
+            <ListView x:Name="listViewApps" Background="Transparent" Margin="0,20,0,0" ItemsSource="{Binding Source={x:Static appLauncher:AppLauncher.AppList}}" BorderThickness="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="128" Width="128">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Rectangle Width="48" Height="48" Fill="Black">
+                                <Rectangle.OpacityMask>
+                                    <VisualBrush Stretch="Fill"  Visual="{Binding Icon}" />
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                            <TextBlock Grid.Row="1" Text="{Binding Name}" FontSize="16" TextAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                                       ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                       MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                                                       ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

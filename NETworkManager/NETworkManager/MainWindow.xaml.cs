@@ -50,29 +50,22 @@ namespace NETworkManager
             }
             catch (Exception ex)
             {
-                MetroDialogSettings dialogSettings = new MetroDialogSettings()
-                {
-                    AffirmativeButtonText = "OK",
-                    AnimateShow = true,
-                    AnimateHide = false
-                };
-
                 string dialogMessage = string.Format("Fehler beim öffnen der Github Project Seite.\n\nException:\n{0}", ex.Message);
 
-                await this.ShowMessageAsync("Error", dialogMessage, MessageDialogStyle.Affirmative, dialogSettings);
+                await this.ShowMessageAsync("Error", dialogMessage, MessageDialogStyle.Affirmative);
             }
         }
 
         private async void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            Settings window = new Settings()
+            Settings settingsWindow = new Settings()
             {
                 Owner = this
             };
 
-            window.ShowDialog();
+            settingsWindow.ShowDialog();
 
-            if (window.RestartRequiered)
+            if (settingsWindow.RestartRequiered)
             {
                 string localizedHeader = Application.Current.Resources["LocalizedString_RestartRequired"] as string;
                 string localizedMessage = Application.Current.Resources["LocalizedString_RestartRequiredAfterSettingsChanged"] as string;

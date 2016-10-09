@@ -117,7 +117,7 @@
                                         <DataTemplate>
                                             <Grid Margin="4">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="40" />
+                                                    <ColumnDefinition Width="48" />
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
                                                 <Image Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding Icon}" />
