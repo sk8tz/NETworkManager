@@ -17,11 +17,11 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Name="btnGithub" Click="btnGithub_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_GitHub}">
-                    <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_github}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
+                <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_github}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
             </Button>
             <Button Name="btnSettings" Click="btnSettings_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_Settings}">
                 <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
@@ -33,9 +33,9 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid Margin="10">
-        <StackPanel>
-            <TextBox FontSize="16" mah:TextBoxHelper.Watermark="Search..." Width="250" HorizontalAlignment="Left" BorderBrush="{DynamicResource AccentColorBrush}" mah:TextBoxHelper.UseFloatingWatermark="True" BorderThickness="0,0,0,1"/>
-            <ListView x:Name="listViewApps" Background="Transparent" Margin="0,20,0,0" ItemsSource="{Binding Source={x:Static appLauncher:AppLauncher.AppList}}" BorderThickness="0">
+        <StackPanel>           
+                <TextBox x:Name="txtSearch" FontSize="16"  mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Left" BorderBrush="{DynamicResource AccentColorBrush}" mah:TextBoxHelper.UseFloatingWatermark="True" BorderThickness="0,0,0,1" TextChanged="txtSearch_TextChanged"/>
+            <ListView x:Name="lvApps" Background="Transparent" Margin="0,20,0,0" ItemsSource="{Binding Source={x:Static appLauncher:AppLauncher.AppList}}" BorderThickness="0" MouseDoubleClick="listViewApps_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="128" Width="128">

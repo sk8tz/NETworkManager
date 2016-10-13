@@ -15,6 +15,14 @@
     <system:String x:Key="LocalizedString_RestartRequired">Neustart Erforderlich</system:String>
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Einige Einstellungen werden erst nach einem Neustart der Anwendung angewendet!</system:String>
     
+    <!-- Watermark -->
+    <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>
+    
+    <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
+    <system:String x:Key="LocalizedString_AppLauncherTranslatedName_IPScanner">IP-Scanner</system:String>
+    <system:String x:Key="LocalizedString_AppLauncherTranslatedName_SubnetCalculator">Subnetz Rechner</system:String>
+    <system:String x:Key="LocalizedString_AppLauncherTranslatedName_PortScanner">Port-Scanner</system:String>
+    
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Hell</system:String>
     <system:String x:Key="LocalizedString_AppTheme_BaseDark">Dunkel</system:String>

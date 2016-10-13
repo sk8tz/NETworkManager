@@ -12,7 +12,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="660" ResizeMode="CanResizeWithGrip" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Padding="0">
+        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="660" ResizeMode="CanResizeWithGrip" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Padding="0" WindowStartupLocation="CenterOwner">
     <Controls:MetroWindow.Resources>
         <brushConverter:ConvertAppThemeToBrush x:Key="ConvertAppThemeToBrush" />
         <brushConverter:ConvertAccentToBrush x:Key="ConvertAccentToBrush" />

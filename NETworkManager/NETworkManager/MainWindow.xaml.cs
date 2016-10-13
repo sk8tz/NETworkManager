@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using NETworkManager.Core.Appearance;
+using NETworkManager.Core.AppLauncher;
 using NETworkManager.Core.Localization;
 using NETworkManager.Core.Settings;
 using NETworkManager.GUI;
@@ -27,19 +28,27 @@ namespace NETworkManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        #region Load
         public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
         {
             // Load localization
             LocalizationController.LoadLocalization();
 
             // Load appearance
             AppearanceController.LoadAppearance();
+            
+            InitializeComponent();
+
+            // Set filter for ListView Apps 
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
+            view.Filter = SearchFilter;
         }
+
+        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        #endregion
 
         #region RightWindowCommands
         private async void btnGithub_Click(object sender, RoutedEventArgs e)
@@ -72,6 +81,28 @@ namespace NETworkManager
 
                 await this.ShowMessageAsync(localizedHeader, localizedMessage, MessageDialogStyle.Affirmative);
             }
+        }
+        #endregion
+
+        #region Events
+        private void listViewApps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            AppLauncher.StartApp(lvApps.SelectedItem as AppInfo);
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvApps.ItemsSource).Refresh();
+        }
+        #endregion
+
+        #region ListView Apps Filter
+        private bool SearchFilter(object item)
+        {
+            if (string.IsNullOrEmpty(txtSearch.Text))
+                return true;
+            else
+                return ((item as AppInfo).Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
         #endregion
     }
