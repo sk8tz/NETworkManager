@@ -8,7 +8,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title=".NETworkManager" Height="550" Width="800" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowMain_Loaded" WindowStartupLocation="CenterScreen">
+        Title=".NETworkManager" Height="500" Width="750" MinHeight="450" MinWidth="650" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowMain_Loaded" WindowStartupLocation="CenterScreen">
     <Controls:MetroWindow.Resources>
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
@@ -33,9 +33,9 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid Margin="10">
-        <StackPanel>           
-                <TextBox x:Name="txtSearch" FontSize="16"  mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Left" BorderBrush="{DynamicResource AccentColorBrush}" mah:TextBoxHelper.UseFloatingWatermark="True" BorderThickness="0,0,0,1" TextChanged="txtSearch_TextChanged"/>
-            <ListView x:Name="lvApps" Background="Transparent" Margin="0,20,0,0" ItemsSource="{Binding Source={x:Static appLauncher:AppLauncher.AppList}}" BorderThickness="0" MouseDoubleClick="listViewApps_MouseDoubleClick">
+        <StackPanel>
+            <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Right" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush3}" mah:TextBoxHelper.UseFloatingWatermark="True" BorderThickness="1" TextChanged="txtSearch_TextChanged"/>
+            <ListView x:Name="lvApps" Background="Transparent" ItemsSource="{Binding Source={x:Static appLauncher:AppLauncher.AppList}}" BorderThickness="0" MouseDoubleClick="listViewApps_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="128" Width="128">
@@ -48,7 +48,7 @@
                                     <VisualBrush Stretch="Fill"  Visual="{Binding Icon}" />
                                 </Rectangle.OpacityMask>
                             </Rectangle>
-                            <TextBlock Grid.Row="1" Text="{Binding Name}" FontSize="16" TextAlignment="Center" />
+                            <TextBlock Grid.Row="1" Margin="0,0,0,10" Text="{Binding Name}" FontSize="14" TextAlignment="Center"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -20,9 +20,10 @@ namespace NETworkManager.Core.AppLauncher
             {
                 return new List<AppInfo>
                 {
-                    new AppInfo(Application.Current.Resources["LocalizedString_AppLauncherTranslatedName_IPScanner"] as string, 1, Application.Current.Resources["appbar_acorn"] as Canvas),
-                    new AppInfo(Application.Current.Resources["LocalizedString_AppLauncherTranslatedName_SubnetCalculator"] as string, 2, Application.Current.Resources["appbar_acorn"] as Canvas),
-                    new AppInfo(Application.Current.Resources["LocalizedString_AppLauncherTranslatedName_PortScanner"] as string, 3, Application.Current.Resources["appbar_acorn"] as Canvas)
+                    new AppInfo(Application.Current.Resources["LocalizedString_AppName_IPScanner"] as string, 1, Application.Current.Resources["appbar_diagram"] as Canvas),
+                    new AppInfo(Application.Current.Resources["LocalizedString_AppName_SubnetCalculator"] as string, 2, Application.Current.Resources["appbar_calculator"] as Canvas),
+                    new AppInfo(Application.Current.Resources["LocalizedString_AppName_PortScanner"] as string, 3, Application.Current.Resources["appbar_acorn"] as Canvas),
+                    new AppInfo(Application.Current.Resources["LocalizedString_AppName_WakeOnLan"] as string, 4, Application.Current.Resources["appbar_control_play"] as Canvas)
                 };
             }
         }
@@ -32,8 +33,16 @@ namespace NETworkManager.Core.AppLauncher
             switch (appInfo.ID)
             {
                 case 1:
-                    IPScanner window = new IPScanner();
-                    window.Show();
+                    IPScanner ipScanner = new IPScanner();
+                    ipScanner.Show();
+                    break;
+                case 2:
+                    SubnetCalculator subnetCalculator = new SubnetCalculator();
+                    subnetCalculator.Show();
+                    break;
+                case 4:
+                    WakeOnLAN wakeOnLAN = new WakeOnLAN();
+                    wakeOnLAN.Show();
                     break;
                 default:
                     break;

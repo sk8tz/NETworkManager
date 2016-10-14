@@ -19,9 +19,10 @@
     <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>
     
     <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
-    <system:String x:Key="LocalizedString_AppLauncherTranslatedName_IPScanner">IP-Scanner</system:String>
-    <system:String x:Key="LocalizedString_AppLauncherTranslatedName_SubnetCalculator">Subnetz Rechner</system:String>
-    <system:String x:Key="LocalizedString_AppLauncherTranslatedName_PortScanner">Port-Scanner</system:String>
+    <system:String x:Key="LocalizedString_AppName_IPScanner">IP-Scanner</system:String>
+    <system:String x:Key="LocalizedString_AppName_SubnetCalculator">Subnetz Rechner</system:String>
+    <system:String x:Key="LocalizedString_AppName_PortScanner">Port-Scanner</system:String>
+    <system:String x:Key="LocalizedString_AppName_WakeOnLan">Wake on LAN</system:String>
     
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Hell</system:String>

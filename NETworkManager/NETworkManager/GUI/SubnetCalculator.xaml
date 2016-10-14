@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="NETworkManager.GUI.IPScanner"
+﻿<Controls:MetroWindow x:Name="MetroWindowSubnetCalculator" x:Class="NETworkManager.GUI.SubnetCalculator"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NETworkManager.GUI"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_AppName_IPScanner}" Height="300" Width="300">
+        Title="{DynamicResource LocalizedString_AppName_SubnetCalculator}" Height="350" Width="500">
     <Grid>
         
     </Grid>
