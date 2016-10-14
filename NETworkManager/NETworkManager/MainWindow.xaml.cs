@@ -7,6 +7,7 @@ using NETworkManager.Core.Settings;
 using NETworkManager.GUI;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -39,8 +40,9 @@ namespace NETworkManager
             
             InitializeComponent();
 
-            // Set filter for ListView Apps 
+            // Set a filter for ListView Apps and sort them
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
+            view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             view.Filter = SearchFilter;
         }
 
