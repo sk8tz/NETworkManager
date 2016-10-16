@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Sockets;
 
 namespace NETworkManager.Core.Network
 {
@@ -12,8 +8,8 @@ namespace NETworkManager.Core.Network
         /// <summary>
         /// Create a Magic Packet from a given MAC-Address
         /// </summary>
-        /// <param name="MAC">MAC-Address like AB01CD23EF45 without "-" or ":"</param>
-        /// <returns>Magic Packet</returns>
+        /// <param name="MAC">MAC-Address without "-" or ":"</param>
+        /// <returns>Magic Packet as byte array</returns>
         public static byte[] Create(byte[] mac)
         {
             byte[] packet = new byte[17 * 6];
@@ -34,9 +30,19 @@ namespace NETworkManager.Core.Network
             return packet;
         }
 
+        /// <summary>
+        /// Send a Magic Packet
+        /// </summary>
+        /// <param name="packet">Magic Packet as byte array</param>
+        /// <param name="broadcast">Broadcast-Address</param>
+        /// <param name="port">Port-Number</param>
         public static void Send(byte[] packet, IPAddress broadcast, int port)
         {
+            UdpClient udpClient = new UdpClient();
 
+            udpClient.Connect(broadcast, port);
+
+            udpClient.Send(packet, packet.Length);
         }
     }
 }
