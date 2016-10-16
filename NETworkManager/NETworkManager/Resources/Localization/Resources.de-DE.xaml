@@ -14,15 +14,20 @@
     <system:String x:Key="LocalizedString_Accent">Akzent</system:String>
     <system:String x:Key="LocalizedString_RestartRequired">Neustart Erforderlich</system:String>
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Einige Einstellungen werden erst nach einem Neustart der Anwendung angewendet!</system:String>
+    <system:String x:Key="LocalizedString_Templates">Tempaltes</system:String>
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>
     
+    <!-- Validate (User Input in GUI) -->
+    <system:String x:Key="LocalizedString_Validate_EmptyMACAddress">MAC-Addresse darf nicht leer sein</system:String>
+    <system:String x:Key="LocalizedString_Validate_WrongMACAddressFormat">Geben Sie eine gültige MAC-Addresse ein</system:String>
+    
     <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
-    <system:String x:Key="LocalizedString_AppName_IPScanner">IP-Scanner</system:String>
-    <system:String x:Key="LocalizedString_AppName_SubnetCalculator">Subnetz Rechner</system:String>
-    <system:String x:Key="LocalizedString_AppName_PortScanner">Port-Scanner</system:String>
-    <system:String x:Key="LocalizedString_AppName_WakeOnLan">Wake on LAN</system:String>
+    <system:String x:Key="LocalizedString_ApplicationName_IPScanner">IP-Scanner</system:String>
+    <system:String x:Key="LocalizedString_ApplicationName_SubnetCalculator">Subnetz Rechner</system:String>
+    <system:String x:Key="LocalizedString_ApplicationName_PortScanner">Port-Scanner</system:String>
+    <system:String x:Key="LocalizedString_ApplicationName_WakeOnLan">Wake on LAN</system:String>
     
     <!-- AppTheme.Name -->
     <system:String x:Key="LocalizedString_AppTheme_BaseLight">Hell</system:String>

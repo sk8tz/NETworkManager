@@ -4,14 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
+        xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_AppName_WakeOnLan}" Height="350" Width="500">
+        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="350" Width="500" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+    <Controls:MetroWindow.Resources>
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <DockPanel>
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal" DockPanel.Dock="Bottom">
+                    <Grid Width="14" Height="14">
+                        <Rectangle Width="14" Height="14" Fill="Red" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Foreground="White" FontWeight="Heavy" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
+                    </Grid>
+                    <TextBlock Foreground="Red" FontSize="14" Margin="5,0,0,0" Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                </StackPanel>
+                <AdornedElementPlaceholder x:Name="ErrorAdorner" ></AdornedElementPlaceholder>
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+            <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
+        </Style>
+        <Style x:Key="GridTabItem" TargetType="Grid">
+            <Setter Property="Margin" Value="0,10,0,0" />
+        </Style>
+    </Controls:MetroWindow.Resources>
     <Grid Margin="10">
-        <StackPanel>
-        <ComboBox IsEditable="True" mah:TextBoxHelper.Watermark="Enter MAC-Address..."></ComboBox>
-        </StackPanel>
+        <TabControl>
+            <!-- Application -->
+            <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
+                <Grid Style="{StaticResource GridTabItem}">
+                    <StackPanel>
+                        <ComboBox x:Name="comboBoxMACAddress" IsEditable="True" mah:TextBoxHelper.Watermark="Enter MAC-Address..." Margin="0,0,0,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                            <ComboBox.Text>
+                                <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <Validator:ValidateMACAddress ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.Text>
+                        </ComboBox>
+                        <Button x:Name="btnWakeUp" Style="{DynamicResource MetroFlatButton}" Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Click="btnWakeUp_Click" IsDefault="True">Wake Up</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <!-- Tempates -->
+            <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
+                <Grid Style="{StaticResource GridTabItem}">
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Controls:MetroWindow>

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager"
-        xmlns:appLauncher="clr-namespace:NETworkManager.Core.AppLauncher"
+        xmlns:GUI="clr-namespace:NETworkManager.GUI"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
@@ -34,8 +34,8 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid Margin="10">
         <StackPanel>
-            <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Right" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush3}" mah:TextBoxHelper.UseFloatingWatermark="True" BorderThickness="1" TextChanged="txtSearch_TextChanged"/>
-            <ListView x:Name="lvApps" Background="Transparent" ItemsSource="{Binding Source={x:Static appLauncher:AppLauncher.AppList}}" BorderThickness="0" MouseDoubleClick="listViewApps_MouseDoubleClick">
+            <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Right" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush3}" BorderThickness="1" TextChanged="txtSearch_TextChanged"/>
+            <ListView x:Name="lvApps" Background="Transparent" ItemsSource="{Binding Source={x:Static GUI:ApplicationController.ApplicationList}}" BorderThickness="0" MouseDoubleClick="listViewApps_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="128" Width="128">

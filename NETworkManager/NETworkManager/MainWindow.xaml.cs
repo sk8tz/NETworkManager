@@ -1,7 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using NETworkManager.Core.Appearance;
-using NETworkManager.Core.AppLauncher;
 using NETworkManager.Core.Localization;
 using NETworkManager.GUI;
 using System;
@@ -78,8 +77,8 @@ namespace NETworkManager
 
         #region Events
         private void listViewApps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            AppLauncher.StartApp(lvApps.SelectedItem as AppInfo);
+        {            
+            ApplicationController.OpenApplication(lvApps.SelectedItem as ApplicationInfo);
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -94,7 +93,7 @@ namespace NETworkManager
             if (string.IsNullOrEmpty(txtSearch.Text))
                 return true;
             else
-                return ((item as AppInfo).Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                return ((item as ApplicationInfo).Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
         #endregion
     }

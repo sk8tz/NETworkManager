@@ -2,10 +2,10 @@
 using System.Windows.Controls;
 using System.Xml.Serialization;
 
-namespace NETworkManager.Core.AppLauncher
+namespace NETworkManager.GUI
 {
     [Serializable]
-    public class AppInfo
+    public class ApplicationInfo
     {
         [XmlIgnore]
         public string Name { get; set; }
@@ -16,17 +16,17 @@ namespace NETworkManager.Core.AppLauncher
         [XmlIgnore]
         public Canvas Icon { get; set; }
 
-        public AppInfo()
+        public ApplicationInfo()
         {
 
         }
 
-        public AppInfo(int id)
+        public ApplicationInfo(int id)
         {
             ID = id;
         }
 
-        public AppInfo(string name, int id, Canvas icon)
+        public ApplicationInfo(string name, int id, Canvas icon)
         {
             Name = name;
             ID = id;

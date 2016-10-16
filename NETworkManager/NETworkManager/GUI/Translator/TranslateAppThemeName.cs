@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace NETworkManager.Core.Localization.Translator
+namespace NETworkManager.GUI.Translator
 {
     public sealed class TranslateAppThemeName : IValueConverter
     {

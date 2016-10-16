@@ -95,13 +95,14 @@
     <Compile Include="Core\Appearance\AppearanceController.cs" />
     <Compile Include="Core\Appearance\BrushConverter\ConvertAccentToBrush.cs" />
     <Compile Include="Core\Appearance\BrushConverter\ConvertAppThemeToBrush.cs" />
-    <Compile Include="Core\AppLauncher\AppInfo.cs" />
+    <Compile Include="Core\Network\MagicPacket.cs" />
+    <Compile Include="GUI\ApplicationInfo.cs" />
     <Compile Include="Core\Localization\LocalizationController.cs" />
     <Compile Include="Core\Localization\LocalizationInfo.cs" />
-    <Compile Include="Core\Localization\Translator\TranslateAccentName.cs" />
-    <Compile Include="Core\Localization\Translator\TranslateAppThemeName.cs" />
+    <Compile Include="GUI\Translator\TranslateAccentName.cs" />
+    <Compile Include="GUI\Translator\TranslateAppThemeName.cs" />
     <Compile Include="Core\Settings\SettingsController.cs" />
-    <Compile Include="Core\AppLauncher\AppLauncher.cs" />
+    <Compile Include="GUI\ApplicationController.cs" />
     <Compile Include="GUI\Behaviors\TextBlockBehavior.cs" />
     <Compile Include="GUI\IPScanner.xaml.cs">
       <DependentUpon>IPScanner.xaml</DependentUpon>
@@ -109,6 +110,7 @@
     <Compile Include="GUI\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Validator\ValidateMACAddress.cs" />
     <Compile Include="GUI\WakeOnLAN.xaml.cs">
       <DependentUpon>WakeOnLAN.xaml</DependentUpon>
     </Compile>
