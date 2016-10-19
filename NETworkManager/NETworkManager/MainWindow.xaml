@@ -34,7 +34,7 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid Margin="10">
         <StackPanel>
-            <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Right" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush3}" BorderThickness="1" TextChanged="txtSearch_TextChanged"/>
+            <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Left" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush3}" BorderThickness="0,0,0,1" TextChanged="txtSearch_TextChanged" mah:TextBoxHelper.UseFloatingWatermark="True"/>
             <ListView x:Name="lvApps" Background="Transparent" ItemsSource="{Binding Source={x:Static GUI:ApplicationController.ApplicationList}}" BorderThickness="0" MouseDoubleClick="listViewApps_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>

@@ -25,7 +25,7 @@
         </Style>
 
         <Style x:Key="GridTabItem" TargetType="Grid">
-            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="Margin" Value="10" />
         </Style>
 
         <Style x:Key="StackPanelTabItem" TargetType="StackPanel">
@@ -39,7 +39,7 @@
             <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
         </Style>
     </Controls:MetroWindow.Resources>
-    <Grid Margin="10">
+    <Grid>
         <TabControl>
             <!-- Application -->
             <TabItem  Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">

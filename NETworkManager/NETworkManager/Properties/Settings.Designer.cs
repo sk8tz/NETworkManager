@@ -58,5 +58,17 @@ namespace NETworkManager.Properties {
                 this["Localization_CultureCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int WakeOnLan_Port {
+            get {
+                return ((int)(this["WakeOnLan_Port"]));
+            }
+            set {
+                this["WakeOnLan_Port"] = value;
+            }
+        }
     }
 }

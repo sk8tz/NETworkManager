@@ -15,13 +15,16 @@
     <system:String x:Key="LocalizedString_RestartRequired">Restart Required</system:String>
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Some settings are applied only after restarting the application!</system:String>
     <system:String x:Key="LocalizedString_Templates">Tempaltes</system:String>
-
+    <system:String x:Key="LocalizedString_EnterMACAddress">Enter MAC-Address...</system:String>
+    <system:String x:Key="LocalizedString_WakeUp">Wake Up</system:String>
+    
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
     
     <!-- Validate (User Input in GUI) -->
-    <system:String x:Key="LocalizedString_Validate_EmptyMACAddress">MAC-Address cannot be empty</system:String>
-    <system:String x:Key="LocalizedString_Validate_WrongMACAddressFormat">Enter a valid MAC-Address</system:String>
+    <system:String x:Key="LocalizedString_Validate_FieldEmpty">Field cannot be empty</system:String>
+    <system:String x:Key="LocalizedString_Validate_EnterValidMACAddress">Enter a valid MAC-Address</system:String>
+    <system:String x:Key="LocalizedString_Validate_EnterValidPort">Enter a valid port (1 - 65536)</system:String>
     
     <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
     <system:String x:Key="LocalizedString_ApplicationName_IPScanner">IP-Scanner</system:String>

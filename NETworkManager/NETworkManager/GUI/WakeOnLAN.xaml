@@ -4,57 +4,108 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
+        xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
         xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="350" Width="500" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" IsMaxRestoreButtonEnabled="False" TitleCaps="False" Height="350" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" ResizeMode="CanMinimize" Loaded="MetroWindowWakeOnLAN_Loaded">
     <Controls:MetroWindow.Resources>
-        <ControlTemplate x:Key="ValidationErrorTemplate">
-            <DockPanel>
-                <StackPanel Margin="0,5,0,0" Orientation="Horizontal" DockPanel.Dock="Bottom">
-                    <Grid Width="14" Height="14">
-                        <Rectangle Width="14" Height="14" Fill="Red" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Foreground="White" FontWeight="Heavy" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">X</TextBlock>
-                    </Grid>
-                    <TextBlock Foreground="Red" FontSize="14" Margin="5,0,0,0" Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
-                </StackPanel>
-                <AdornedElementPlaceholder x:Name="ErrorAdorner" ></AdornedElementPlaceholder>
-            </DockPanel>
-        </ControlTemplate>
+        <Style x:Key="TextBlockHeader" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel>
+                            <Border BorderBrush="Red" BorderThickness="2">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
         <Style x:Key="GridTabItem" TargetType="Grid">
-            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="FontSize" Value="14" />
         </Style>
     </Controls:MetroWindow.Resources>
-    <Grid Margin="10">
+    <Grid>
         <TabControl>
             <!-- Application -->
-            <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
+            <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
-                        <ComboBox x:Name="comboBoxMACAddress" IsEditable="True" mah:TextBoxHelper.Watermark="Enter MAC-Address..." Margin="0,0,0,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                        <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="Wake Up" />
+                        <ComboBox x:Name="comboBoxMACAddress" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" Margin="0,0,0,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" mah:TextBoxHelper.UseFloatingWatermark="True">
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
-                                        <Validator:ValidateMACAddress ValidatesOnTargetUpdated="True" />
+                                        <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                                        <Validator:ValidateMACAddress ValidatesOnTargetUpdated="True"/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.Text>
                         </ComboBox>
-                        <Button x:Name="btnWakeUp" Style="{DynamicResource MetroFlatButton}" Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Click="btnWakeUp_Click" IsDefault="True">Wake Up</Button>
+                        <Button x:Name="btnWakeUp" Style="{StaticResource MetroFlatButton}" Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Click="btnWakeUp_Click" IsDefault="True" Content="{DynamicResource LocalizedString_WakeUp}" />
+                        <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Settings}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Broadcast" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
+                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" HorizontalAlignment="Stretch" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="BroadcastAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                                            <Validator:ValidateIPv4Address ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock Text="Port" Style="{StaticResource TextBlockGrid}" Grid.Row="2" Grid.Column="0" />
+                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="100" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                                            <Validator:ValidatePort ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </TabItem>
             <!-- Tempates -->
-            <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
+            <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
 
                 </Grid>

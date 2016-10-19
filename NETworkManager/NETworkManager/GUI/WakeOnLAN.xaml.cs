@@ -23,13 +23,25 @@ namespace NETworkManager.GUI
     /// </summary>
     public partial class WakeOnLAN : MetroWindow, INotifyPropertyChanged
     {
+        public string MACAddress { get; set; }
+        public string BroadcastAddress { get; set; }
+        public string Port { get; set; }
+
         public WakeOnLAN()
         {
             InitializeComponent();
             DataContext = this;
         }
 
-        public string MACAddress { get; set; }
+        private void MetroWindowWakeOnLAN_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+            txtPort.Text = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
