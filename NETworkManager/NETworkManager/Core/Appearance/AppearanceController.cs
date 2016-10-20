@@ -12,14 +12,18 @@ namespace NETworkManager.Core.Appearance
     {
         public static void LoadAppearance()
         {
+            // Change the AppTheme
             string appThemeName = Properties.Settings.Default.Appearance_AppTheme;
+            string defaultAppThemeName = Properties.Resources.Appearance_DefaultAppTheme;
 
-            if (appThemeName != Properties.Resources.Appearance_DefaultAppTheme)
+            if (!string.IsNullOrEmpty(appThemeName) && appThemeName != defaultAppThemeName)
                 ChangeAppTheme(appThemeName);
 
+            // Change the Accent
             string accentName = Properties.Settings.Default.Appearance_Accent;
+            string defaultAccentName = Properties.Resources.Appearance_DefaultAccent;
 
-            if (accentName != Properties.Resources.Appearance_DefaultAccent)
+            if (!string.IsNullOrEmpty(accentName) && accentName != defaultAccentName)
                 ChangeAccent(accentName);
         }
 
