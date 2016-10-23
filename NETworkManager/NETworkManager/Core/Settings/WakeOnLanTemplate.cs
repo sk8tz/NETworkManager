@@ -5,8 +5,8 @@ namespace NETworkManager.Core.Settings
     [Serializable]
     public class WakeOnLanTemplate
     {
-        public string MAC;
-        public string Description;
+        public string MAC { get; set; }
+        public string Description { get; set; }
 
         public WakeOnLanTemplate()
         {

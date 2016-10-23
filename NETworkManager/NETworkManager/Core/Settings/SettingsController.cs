@@ -14,15 +14,15 @@ namespace NETworkManager.Core.Settings
 
         }
 
-        public static List<WakeOnLanTemplate> GetWakeOnLanTempaltes()
+        public static List<WakeOnLanTemplate> LoadWakeOnLanTempaltes()
         {
             List<WakeOnLanTemplate> wakeOnLanTemplates = new List<WakeOnLanTemplate>();
 
-            XmlSerializer serializer = new XmlSerializer(typeof(WakeOnLanTemplate));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanTemplate>));
 
             if (File.Exists("WakeOnLanTemplates.xml"))
             {
-                using (FileStream stream = new FileStream("WakeOnLanTempaltes.xml", FileMode.Open))
+                using (FileStream stream = new FileStream("WakeOnLanTemplates.xml", FileMode.Open))
                 {
                     IEnumerable<WakeOnLanTemplate> wakeOnLanTemplateData = (IEnumerable<WakeOnLanTemplate>)serializer.Deserialize(stream);
 
@@ -38,9 +38,9 @@ namespace NETworkManager.Core.Settings
 
         public static void SaveWakeOnLanTemplates(List<WakeOnLanTemplate> wakeOnLanTemplates)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(WakeOnLanTemplate));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanTemplate>));
 
-            using (FileStream stream = new FileStream("WakeOnLanTempaltes.xml", FileMode.Create))
+            using (FileStream stream = new FileStream("WakeOnLanTemplates.xml", FileMode.Create))
             {
                 serializer.Serialize(stream, wakeOnLanTemplates);
             }

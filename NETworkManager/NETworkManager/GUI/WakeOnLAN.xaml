@@ -107,7 +107,15 @@
             <!-- Tempates -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
-                   
+                    <StackPanel>
+                    <DataGrid x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,0,10" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="MAC" Binding="{Binding MAC}" />
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                        <Button x:Name="btnSaveTemplates" Width="150" Content="Save"  HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>
