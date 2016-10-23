@@ -17,6 +17,7 @@
     <system:String x:Key="LocalizedString_Templates">Tempaltes</system:String>
     <system:String x:Key="LocalizedString_EnterMACAddress">Enter MAC-Address...</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Wake Up</system:String>
+    <system:String x:Key="LocalizedString_Error">Error</system:String>
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
@@ -25,6 +26,8 @@
     <system:String x:Key="LocalizedString_Validate_FieldEmpty">Field cannot be empty</system:String>
     <system:String x:Key="LocalizedString_Validate_EnterValidMACAddress">Enter a valid MAC-Address</system:String>
     <system:String x:Key="LocalizedString_Validate_EnterValidPort">Enter a valid port (1 - 65536)</system:String>
+    <system:String x:Key="LocalizedString_Validate_EnterValidIPv4Address">Enter a valid IPv4-Address</system:String>
+    <system:String x:Key="LocalizedString_Validate_IPv6NotSupported">IPv6-Address is not supported</system:String>
     
     <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
     <system:String x:Key="LocalizedString_ApplicationName_IPScanner">IP-Scanner</system:String>

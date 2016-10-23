@@ -70,5 +70,17 @@ namespace NETworkManager.Properties {
                 this["WakeOnLan_Port"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255.255.255.0")]
+        public string WakeOnLan_Broadcast {
+            get {
+                return ((string)(this["WakeOnLan_Broadcast"]));
+            }
+            set {
+                this["WakeOnLan_Broadcast"] = value;
+            }
+        }
     }
 }

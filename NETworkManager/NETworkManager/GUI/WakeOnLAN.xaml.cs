@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using NETworkManager.Core.Network;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Net;
+using System.Collections.ObjectModel;
+using NETworkManager.Core.Settings;
 
 namespace NETworkManager.GUI
 {
@@ -40,6 +34,7 @@ namespace NETworkManager.GUI
 
         private void LoadSettings()
         {
+            txtBroadcast.Text = Properties.Settings.Default.WakeOnLan_Broadcast;
             txtPort.Text = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
         }
 
@@ -56,21 +51,41 @@ namespace NETworkManager.GUI
             if (Validation.GetHasError(comboBoxMACAddress))
                 return;
 
-            WakeUp(comboBoxMACAddress.Text);
+            WakeUp(comboBoxMACAddress.Text, txtBroadcast.Text, txtPort.Text);
         }
 
-        private void WakeUp(string mac)
+        private void WakeUp(string mac, string broadcast, string port)
         {
-            // Regex to replace "-" and ":" in MAC-Address
-            Regex regex = new Regex("-|:");
+            try
+            {
+                // Regex to replace "-" and ":" in MAC-Address
+                Regex regex = new Regex("-|:");
 
-            // Convert string into byte array
-            byte[] macBytes = Encoding.ASCII.GetBytes(regex.Replace(mac, ""));
+                // Convert string into byte array
+                byte[] macBytes = Encoding.ASCII.GetBytes(regex.Replace(mac, ""));
 
-            // Create a magic packet
-            byte[] magicPacket = MagicPacket.Create(macBytes);
+                // Create a magic packet
+                byte[] magicPacket = MagicPacket.Create(macBytes);
 
-            // Send the magic packet
+                // Parse string into IP-Address
+                IPAddress broadcastAddr = IPAddress.Parse(broadcast);
+
+                // Convert the port from string to int
+                int portNum = int.Parse(port);
+
+                // Send the magic packet
+                MagicPacket.Send(magicPacket, broadcastAddr, portNum);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.Current.Resources["LocalizedString_Error"] as string, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="Core\Appearance\BrushConverter\ConvertAccentToBrush.cs" />
     <Compile Include="Core\Appearance\BrushConverter\ConvertAppThemeToBrush.cs" />
     <Compile Include="Core\Network\MagicPacket.cs" />
+    <Compile Include="Core\Settings\WakeOnLanTemplate.cs" />
     <Compile Include="GUI\ApplicationInfo.cs" />
     <Compile Include="Core\Localization\LocalizationController.cs" />
     <Compile Include="Core\Localization\LocalizationInfo.cs" />

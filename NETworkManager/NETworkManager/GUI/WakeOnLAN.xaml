@@ -107,7 +107,7 @@
             <!-- Tempates -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
-
+                   
                 </Grid>
             </TabItem>
         </TabControl>
