@@ -18,25 +18,6 @@
             <Setter Property="Margin" Value="0,0,0,10" />
             <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
         </Style>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Validation.ErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <DockPanel>
-                            <Border BorderBrush="Red" BorderThickness="2">
-                                <AdornedElementPlaceholder/>
-                            </Border>
-                        </DockPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
@@ -56,7 +37,7 @@
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="Wake Up" />
-                        <ComboBox x:Name="comboBoxMACAddress" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" Margin="0,0,0,10" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}" mah:TextBoxHelper.UseFloatingWatermark="True">
+                        <ComboBox  x:Name="comboBoxMACAddress" IsTextSearchEnabled="True" TextSearch.TextPath="{Binding MAC}" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" Margin="0,0,0,10" ItemsSource="{Binding WakeOnLanTemplates}" >
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -79,7 +60,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Broadcast" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
-                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" HorizontalAlignment="Stretch" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" HorizontalAlignment="Stretch">
                                 <TextBox.Text>
                                     <Binding Path="BroadcastAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -90,7 +71,7 @@
                                 </TextBox.Text>
                             </TextBox>
                             <TextBlock Text="Port" Style="{StaticResource TextBlockGrid}" Grid.Row="2" Grid.Column="0" />
-                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="100" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left" Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="100" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left">
                                 <TextBox.Text>
                                     <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -104,16 +85,16 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <!-- Tempates -->
+            <!-- Templates -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
-                    <DataGrid x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,0,10" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="MAC" Binding="{Binding MAC}" />
-                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                        <DataGrid x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,0,10" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="MAC" Binding="{Binding MAC}" />
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
                         <Button x:Name="btnSaveTemplates" Width="150" Content="Save"  HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
                     </StackPanel>
                 </Grid>

@@ -73,7 +73,7 @@ namespace NETworkManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("255.255.255.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string WakeOnLan_Broadcast {
             get {
                 return ((string)(this["WakeOnLan_Broadcast"]));

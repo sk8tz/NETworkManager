@@ -10,6 +10,7 @@ using System.Net;
 using System.Collections.ObjectModel;
 using NETworkManager.Core.Settings;
 using System.Collections.Generic;
+using System.IO;
 
 namespace NETworkManager.GUI
 {
@@ -18,9 +19,26 @@ namespace NETworkManager.GUI
     /// </summary>
     public partial class WakeOnLAN : MetroWindow, INotifyPropertyChanged
     {
-        public string MACAddress { get; set; }
-        public string BroadcastAddress { get; set; }
-        public string Port { get; set; }
+        string _MACAddress;
+        public string MACAddress
+        {
+            get { return _MACAddress; }
+            set { _MACAddress = value; }
+        }
+
+        string _broadcastAddress;
+        public string BroadcastAddress
+        {
+            get { return _broadcastAddress; }
+            set { _broadcastAddress = value; }
+        }
+
+        string _port;
+        public string Port
+        {
+            get { return _port; }
+            set { _port = value; }
+        }
 
         ObservableCollection<WakeOnLanTemplate> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanTemplate>();
         public ObservableCollection<WakeOnLanTemplate> WakeOnLanTemplates
@@ -31,12 +49,8 @@ namespace NETworkManager.GUI
 
         public WakeOnLAN()
         {
-            
-
             InitializeComponent();
             DataContext = this;
-
-            
         }
 
         private void MetroWindowWakeOnLAN_Loaded(object sender, RoutedEventArgs e)
@@ -52,17 +66,9 @@ namespace NETworkManager.GUI
             txtPort.Text = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
         }
 
-        private void LoadTemplates()
-        {
-            List<WakeOnLanTemplate> list = SettingsController.LoadWakeOnLanTempaltes();
+        string path = "WakeOnLanTemplates.xml";
 
-            foreach(WakeOnLanTemplate item in list)
-            {
-                MessageBox.Show(item.Description);
-            }
-
-            _wakeOnLanTemplates = new ObservableCollection<WakeOnLanTemplate>(list);
-        }
+    
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -78,7 +84,7 @@ namespace NETworkManager.GUI
             if (Validation.GetHasError(comboBoxMACAddress))
                 return;
 
-            WakeUp(comboBoxMACAddress.Text, txtBroadcast.Text, txtPort.Text);
+            WakeUp(_MACAddress, _broadcastAddress, _port);
         }
 
         private void btnSaveTemplates_Click(object sender, RoutedEventArgs e)
@@ -116,11 +122,24 @@ namespace NETworkManager.GUI
             }
         }
 
+        private void LoadTemplates()
+        {
+            if (File.Exists(path))
+            {
+                List<WakeOnLanTemplate> list = SettingsController.DeseializeWakeOnLanTempaltes(path);
+
+                foreach (WakeOnLanTemplate template in list)
+                {
+                    _wakeOnLanTemplates.Add(template);
+                }
+            }
+        }
+
         private void SaveTemplates()
         {
             List<WakeOnLanTemplate> list = new List<WakeOnLanTemplate>(_wakeOnLanTemplates);
 
-            SettingsController.SaveWakeOnLanTemplates(list);
+            SettingsController.SerializeWakeOnLanTemplates(list, path);
         }
     }
 }
