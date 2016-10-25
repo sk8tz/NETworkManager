@@ -10,7 +10,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" IsMaxRestoreButtonEnabled="False" TitleCaps="False" Height="350" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" ResizeMode="CanMinimize" Loaded="MetroWindowWakeOnLAN_Loaded">
+        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" IsMaxRestoreButtonEnabled="False" TitleCaps="False" Height="350" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" MinWidth="450" MinHeight="350" >
     <Controls:MetroWindow.Resources>
         <Style x:Key="TextBlockHeader" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold" />
@@ -37,7 +37,7 @@
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="Wake Up" />
-                        <ComboBox  x:Name="comboBoxMACAddress" IsTextSearchEnabled="True" TextSearch.TextPath="{Binding MAC}" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" Margin="0,0,0,10" ItemsSource="{Binding WakeOnLanTemplates}" >
+                        <ComboBox  x:Name="comboBoxMACAddress" IsTextSearchEnabled="True" TextSearch.TextPath="{Binding MAC}" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}" >
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -46,6 +46,18 @@
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.Text>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"  FontFamily="Consolas" Text="{Binding Path=MAC}" />
+                                        <TextBlock Grid.Column="1" Text="{Binding Path=Hostname,StringFormat='({0})'}" Opacity="0.5" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
                         </ComboBox>
                         <Button x:Name="btnWakeUp" Style="{StaticResource MetroFlatButton}" Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Click="btnWakeUp_Click" IsDefault="True" Content="{DynamicResource LocalizedString_WakeUp}" />
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Settings}" />
@@ -89,13 +101,14 @@
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
-                        <DataGrid x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,0,10" >
+                        <DataGrid FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,0,10" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="MAC" Binding="{Binding MAC}" />
-                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                                <DataGridTextColumn Header="Hostname" Binding="{Binding Hostname}" />
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button x:Name="btnSaveTemplates" Width="150" Content="Save"  HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
+                        <Button x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

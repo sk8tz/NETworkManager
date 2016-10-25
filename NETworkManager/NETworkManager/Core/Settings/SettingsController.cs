@@ -14,7 +14,7 @@ namespace NETworkManager.Core.Settings
 
         }
 
-        public static List<WakeOnLanTemplate> DeseializeWakeOnLanTempaltes(string path)
+        public static List<WakeOnLanTemplate> DeserializeWakeOnLanTempaltes(string path)
         {
             List<WakeOnLanTemplate> list = new List<WakeOnLanTemplate>();
 

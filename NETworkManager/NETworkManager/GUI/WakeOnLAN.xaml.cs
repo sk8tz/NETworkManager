@@ -68,7 +68,7 @@ namespace NETworkManager.GUI
 
         string path = "WakeOnLanTemplates.xml";
 
-    
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -81,20 +81,21 @@ namespace NETworkManager.GUI
         #region Buttons
         private void btnWakeUp_Click(object sender, RoutedEventArgs e)
         {
-            if (Validation.GetHasError(comboBoxMACAddress))
-                return;
-
-            WakeUp(_MACAddress, _broadcastAddress, _port);
+            WakeUp();
         }
 
         private void btnSaveTemplates_Click(object sender, RoutedEventArgs e)
         {
-            SaveTemplates();
+                SaveTemplates();
         }
         #endregion
 
-        private void WakeUp(string mac, string broadcast, string port)
+        private void WakeUp()
         {
+            string mac = _MACAddress;
+            string broadcast = _broadcastAddress;
+            string port = _port;
+
             try
             {
                 // Regex to replace "-" and ":" in MAC-Address
@@ -126,7 +127,7 @@ namespace NETworkManager.GUI
         {
             if (File.Exists(path))
             {
-                List<WakeOnLanTemplate> list = SettingsController.DeseializeWakeOnLanTempaltes(path);
+                List<WakeOnLanTemplate> list = SettingsController.DeserializeWakeOnLanTempaltes(path);
 
                 foreach (WakeOnLanTemplate template in list)
                 {

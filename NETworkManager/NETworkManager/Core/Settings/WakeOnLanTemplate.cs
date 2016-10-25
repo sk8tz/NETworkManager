@@ -6,6 +6,7 @@ namespace NETworkManager.Core.Settings
     public class WakeOnLanTemplate
     {
         public string MAC { get; set; }
+        public string Hostname { get; set; }
         public string Description { get; set; }
 
         public WakeOnLanTemplate()
@@ -17,6 +18,11 @@ namespace NETworkManager.Core.Settings
         {
             MAC = mac;
             Description = description;
+        }
+
+        public override string ToString()
+        {
+            return MAC;
         }
     }
 }
