@@ -2,20 +2,23 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NETworkManager.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Appearance_Accent" Type="System.String" Scope="User">
+    <Setting Name="Appearance_Accent" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Appearance_AppTheme" Type="System.String" Scope="User">
+    <Setting Name="Appearance_AppTheme" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Localization_CultureCode" Type="System.String" Scope="User">
+    <Setting Name="Localization_CultureCode" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="WakeOnLan_Port" Type="System.Int32" Scope="User">
+    <Setting Name="WakeOnLan_Port" Roaming="true" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
-    <Setting Name="WakeOnLan_Broadcast" Type="System.String" Scope="User">
+    <Setting Name="WakeOnLan_Broadcast" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Settings_Location" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">X:\Temp</Value>
     </Setting>
   </Settings>
 </SettingsFile>
