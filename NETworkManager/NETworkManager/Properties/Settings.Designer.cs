@@ -26,6 +26,7 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string Appearance_Accent {
             get {
                 return ((string)(this["Appearance_Accent"]));
@@ -38,6 +39,7 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string Appearance_AppTheme {
             get {
                 return ((string)(this["Appearance_AppTheme"]));
@@ -50,6 +52,7 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string Localization_CultureCode {
             get {
                 return ((string)(this["Localization_CultureCode"]));
@@ -62,6 +65,7 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public int WakeOnLan_Port {
             get {
                 return ((int)(this["WakeOnLan_Port"]));
@@ -74,12 +78,26 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string WakeOnLan_Broadcast {
             get {
                 return ((string)(this["WakeOnLan_Broadcast"]));
             }
             set {
                 this["WakeOnLan_Broadcast"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("X:\\Temp")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string Settings_Location {
+            get {
+                return ((string)(this["Settings_Location"]));
+            }
+            set {
+                this["Settings_Location"] = value;
             }
         }
     }
