@@ -14,6 +14,37 @@ namespace NETworkManager.Core.Settings
 
         }
 
+        public static void VerifySettings()
+        {
+            string settingsLocation = GetSettingsLocation();
+
+            if (settingsLocation == DefaultSettingsLocation())
+            {
+                if (!Directory.Exists(settingsLocation))
+                    Directory.CreateDirectory(settingsLocation);
+            }
+            else
+            {
+                if (!Directory.Exists(settingsLocation))
+                    throw new DirectoryNotFoundException(string.Format("Cannot find application settings folder:\n{0}", settingsLocation));
+            }
+        }
+
+        public static string GetSettingsLocation()
+        {
+            string customLocation = Properties.Settings.Default.Settings_Location;
+
+            if (!string.IsNullOrEmpty(customLocation))
+                return customLocation;
+
+            return DefaultSettingsLocation();
+        }
+
+        private static string DefaultSettingsLocation()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"NETworkManager\Settings");
+        }
+
         public static List<WakeOnLanTemplate> DeserializeWakeOnLanTempaltes(string path)
         {
             List<WakeOnLanTemplate> list = new List<WakeOnLanTemplate>();

@@ -29,6 +29,9 @@
             <Setter Property="Margin" Value="20,0,0,0" />
             <Setter Property="FontSize" Value="14" />
         </Style>
+        <Style x:Key="DataGridColumnHeaderNormal" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Controls:ControlsHelper.ContentCharacterCasing" Value="Normal" />
+        </Style>
     </Controls:MetroWindow.Resources>
     <Grid>
         <TabControl>
@@ -37,7 +40,7 @@
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="Wake Up" />
-                        <ComboBox  x:Name="comboBoxMACAddress" IsTextSearchEnabled="True" TextSearch.TextPath="{Binding MAC}" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}" >
+                        <ComboBox  x:Name="cbMACAddress" IsTextSearchEnabled="True" TextSearch.TextPath="{Binding MAC}" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}" >
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -66,7 +69,7 @@
                                     <Style.Triggers>
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=comboBoxMACAddress}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=cbMACAddress}" Value="False"/>
                                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtBroadcast}" Value="False"/>
                                                 <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPort}" Value="False"/>
                                             </MultiDataTrigger.Conditions>
@@ -116,16 +119,41 @@
             <!-- Templates -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
-                    <StackPanel>
-                        <DataGrid FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,0,0,10" >
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="MAC" Binding="{Binding MAC}" />
-                                <DataGridTextColumn Header="Hostname" Binding="{Binding Hostname}" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" />
                                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
                             </DataGrid.Columns>
+                            <DataGrid.RowValidationErrorTemplate>
+                                <ControlTemplate>
+                                    <Grid Margin="0,0,0,0"
+      ToolTip="{Binding RelativeSource={RelativeSource
+      FindAncestor, AncestorType={x:Type DataGridRow}},
+      Path=(Validation.Errors)[0].ErrorContent}">
+                                        <Ellipse StrokeThickness="0" Fill="Red" 
+        Width="{TemplateBinding FontSize}" 
+        Height="{TemplateBinding FontSize}" />
+                                        <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" 
+        FontWeight="Bold" Foreground="White" 
+        HorizontalAlignment="Center"  />
+                                    </Grid>
+                                </ControlTemplate>
+                            </DataGrid.RowValidationErrorTemplate>
+                            <DataGrid.RowValidationRules>
+                                <Validator:ValidateWakeOnLanTemplate ValidationStep="UpdatedValue" />
+                            </DataGrid.RowValidationRules>
                         </DataGrid>
-                        <Button x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
-                    </StackPanel>
+                        <Button Grid.Row="2" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>

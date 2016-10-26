@@ -90,7 +90,7 @@ namespace NETworkManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("X:\\Temp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string Settings_Location {
             get {
@@ -98,6 +98,15 @@ namespace NETworkManager.Properties {
             }
             set {
                 this["Settings_Location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("WakeOnLanTemplates.xml")]
+        public string WakeOnLan_TemplatesFileName {
+            get {
+                return ((string)(this["WakeOnLan_TemplatesFileName"]));
             }
         }
     }

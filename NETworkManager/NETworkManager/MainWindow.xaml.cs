@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using NETworkManager.Core.Settings;
 
 namespace NETworkManager
 {
@@ -27,7 +28,17 @@ namespace NETworkManager
             // Load appearance
             AppearanceController.LoadAppearance();
             
-            InitializeComponent();
+            // Check Settings
+            try
+            {
+                SettingsController.VerifySettings();
+            }
+            catch (Exception ex)
+            {                
+                MessageBox.Show(ex.Message);
+            }
+
+            InitializeComponent();           
 
             // Set a filter for ListView Apps and sort them
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
@@ -37,7 +48,7 @@ namespace NETworkManager
 
         private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
         #endregion
 
@@ -77,7 +88,7 @@ namespace NETworkManager
 
         #region Events
         private void listViewApps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {            
+        {
             ApplicationController.OpenApplication(lvApps.SelectedItem as ApplicationInfo);
         }
 

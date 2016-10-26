@@ -14,21 +14,31 @@
     <system:String x:Key="LocalizedString_Accent">Accent</system:String>
     <system:String x:Key="LocalizedString_RestartRequired">Restart Required</system:String>
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Some settings are applied only after restarting the application!</system:String>
-    <system:String x:Key="LocalizedString_Templates">Tempaltes</system:String>
+    <system:String x:Key="LocalizedString_Templates">Templates</system:String>
     <system:String x:Key="LocalizedString_EnterMACAddress">Enter MAC-Address...</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Wake Up</system:String>
     <system:String x:Key="LocalizedString_Error">Error</system:String>
+    <system:String x:Key="LocalizedString_Location">Location</system:String>
+    <system:String x:Key="LocalizedString_Import">Import</system:String>
+    <system:String x:Key="LocalizedString_Export">Export</system:String>
+    <system:String x:Key="LocalizedString_Change">Change</system:String>
+    <system:String x:Key="LocalizedString_MACAddress">MAC-Address</system:String>
+    <system:String x:Key="LocalizedString_Hostname">Hostname</system:String>
+    <system:String x:Key="LocalizedString_Description">Description</system:String>
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
-    
+    <system:String x:Key="LocalizedString_Watermark_EnterLocation">Enter location...</system:String>
+
     <!-- Validate (User Input in GUI) -->
     <system:String x:Key="LocalizedString_Validate_FieldEmpty">Field cannot be empty</system:String>
     <system:String x:Key="LocalizedString_Validate_EnterValidMACAddress">Enter a valid MAC-Address</system:String>
     <system:String x:Key="LocalizedString_Validate_EnterValidPort">Enter a valid port (1 - 65536)</system:String>
     <system:String x:Key="LocalizedString_Validate_EnterValidIPv4Address">Enter a valid IPv4-Address</system:String>
     <system:String x:Key="LocalizedString_Validate_IPv6NotSupported">IPv6-Address is not supported</system:String>
-    
+    <system:String x:Key="LocalizedString_Validate_MACAddressEmpty">MAC-Address cannot be empty</system:String>
+    <system:String x:Key="LocalizedString_Validate_HostnameEmpty">Hostname cannot be empty</system:String>
+
     <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
     <system:String x:Key="LocalizedString_ApplicationName_IPScanner">IP-Scanner</system:String>
     <system:String x:Key="LocalizedString_ApplicationName_SubnetCalculator">Subnetz Rechner</system:String>

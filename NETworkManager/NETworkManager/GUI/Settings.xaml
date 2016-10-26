@@ -12,7 +12,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="650" ResizeMode="CanResizeWithGrip" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Padding="0" WindowStartupLocation="CenterOwner" IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False">
+        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="650" ResizeMode="CanResize" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Padding="0" WindowStartupLocation="CenterOwner" IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False">
     <Controls:MetroWindow.Resources>
         <brushConverter:ConvertAppThemeToBrush x:Key="ConvertAppThemeToBrush" />
         <brushConverter:ConvertAccentToBrush x:Key="ConvertAccentToBrush" />
@@ -45,7 +45,7 @@
             <TabItem  Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush3}" Padding="0,0,10,0" Margin="0" >
@@ -58,6 +58,7 @@
                         <ListBoxItem Content="{DynamicResource LocalizedString_General}" />
                         <ListBoxItem Content="{DynamicResource LocalizedString_Appearance}" />
                         <ListBoxItem Content="{DynamicResource LocalizedString_Language}" />
+                        <ListBoxItem Content="{DynamicResource LocalizedString_Settings}" />
                     </ListBox>
                     <TabControl SelectedIndex="{Binding ElementName=listBoxSettings, Path=SelectedIndex}" Grid.Column="1">
                         <TabControl.Resources>
@@ -129,6 +130,26 @@
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
+                            </StackPanel>
+                        </TabItem>
+                        <!-- Settings -->
+                        <TabItem>
+                            <StackPanel Style="{StaticResource StackPanelTabItem}">
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="25" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" FontSize="14" x:Name="txtSettingsLocation" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation }" />
+                                    <Button Grid.Column="1" Style="{StaticResource MetroFlatButton}" x:Name="btnChooseSettingsLocation" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Change}" Width="150" HorizontalAlignment="Right" FontSize="14" Margin="0,0,0,20"/>
+
+
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />
+
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />
                             </StackPanel>
                         </TabItem>
                     </TabControl>
