@@ -59,7 +59,23 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button x:Name="btnWakeUp" Style="{StaticResource MetroFlatButton}" Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Click="btnWakeUp_Click" IsDefault="True" Content="{DynamicResource LocalizedString_WakeUp}" />
+                        <Button x:Name="btnWakeUp"  Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Click="btnWakeUp_Click" IsDefault="True" Content="{DynamicResource LocalizedString_WakeUp}" >
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}" >
+                                    <Setter Property="IsEnabled" Value="False" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=comboBoxMACAddress}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtBroadcast}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPort}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="IsEnabled" Value="True" />
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Settings}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
