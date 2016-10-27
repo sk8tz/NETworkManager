@@ -12,7 +12,7 @@ namespace NETworkManager.GUI.Validator
             if (Regex.IsMatch(value as string, "^[A-Fa-f0-9]{12}$|^[A-Fa-f0-9]{2}(:|-){1}[A-Fa-f0-9]{2}(:|-){1}[A-Fa-f0-9]{2}(:|-){1}[A-Fa-f0-9]{2}(:|-){1}[A-Fa-f0-9]{2}(:|-){1}[A-Fa-f0-9]{2}$"))
                 return ValidationResult.ValidResult;
 
-            return new ValidationResult(false, Application.Current.Resources["LocalizedString_Validate_EnterValidMACAddress"] as string);
+            return new ValidationResult(false, Application.Current.Resources["LocalizedString_ValidateError_EnterValidMACAddress"] as string);
         }
     }
 }

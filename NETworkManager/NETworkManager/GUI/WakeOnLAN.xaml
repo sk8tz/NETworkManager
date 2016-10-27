@@ -122,7 +122,6 @@
             <!-- Templates -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
-
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -138,7 +137,7 @@
                             </DataGrid.Columns>
                             <DataGrid.RowValidationErrorTemplate>
                                 <ControlTemplate>
-                                    <Grid Margin="0,0,0,0"
+                                    <Grid Margin="0,0,0,0" 
       ToolTip="{Binding RelativeSource={RelativeSource
       FindAncestor, AncestorType={x:Type DataGridRow}},
       Path=(Validation.Errors)[0].ErrorContent}">

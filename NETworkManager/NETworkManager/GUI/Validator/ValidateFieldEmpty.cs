@@ -11,7 +11,7 @@ namespace NETworkManager.GUI.Validator
             string text = value as string;
 
             if (string.IsNullOrEmpty(text))
-                return new ValidationResult(false, Application.Current.Resources["LocalizedString_Validate_FieldEmpty"] as string);
+                return new ValidationResult(false, Application.Current.Resources["LocalizedString_ValidateError_FieldEmpty"] as string);
 
             return ValidationResult.ValidResult;
         }

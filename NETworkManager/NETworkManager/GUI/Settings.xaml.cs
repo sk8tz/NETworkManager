@@ -3,27 +3,16 @@ using MahApps.Metro.Controls;
 using NETworkManager.Core.Appearance;
 using NETworkManager.Core.Localization;
 using NETworkManager.Core.Settings;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace NETworkManager.GUI
 {
     /// <summary>
     /// Interaktionslogik für Settings.xaml
     /// </summary>
-    public partial class Settings : MetroWindow
+    public partial class Settings : MetroWindow, INotifyPropertyChanged
     {
         // Prevent execution of event while loading the window
         private bool _isLoading = true;
@@ -36,12 +25,43 @@ namespace NETworkManager.GUI
         public bool RestartRequiered
         {
             get { return _restartRequiered; }
-            set { _restartRequiered = value; }
+            set
+            {
+                if (value != _restartRequiered)
+                {
+                    _restartRequiered = value;
+                    OnPropertyChanged("RestartRequired");
+                }
+            }
+        }
+
+        // Path to the folder, where the settings are stored
+        private string _settingsLocationFolder;
+        public string SettingsLocationFolder
+        {
+            get { return _settingsLocationFolder; }
+            set
+            {
+                if (value != _settingsLocationFolder)
+                {
+                    _settingsLocationFolder = value;
+                    OnPropertyChanged("SettingsLocationFolder");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
         public Settings()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -59,8 +79,10 @@ namespace NETworkManager.GUI
             listViewAppTheme.SelectedItem = ThemeManager.DetectAppStyle().Item1;
             listViewAccent.SelectedItem = ThemeManager.DetectAppStyle().Item2;
 
-            // Language 
+            // Localization 
             listBoxLanguage.SelectedIndex = LocalizationController.LocalizationList.FindIndex(a => a.Code == LocalizationController.CurrentLocalization.Code);
+
+            SettingsLocationFolder = SettingsController.GetSettingsLocation();
         }
 
         private void MetroWindow_Closing(object sender, CancelEventArgs e)

@@ -22,21 +22,42 @@ namespace NETworkManager.GUI
         public string MACAddress
         {
             get { return _MACAddress; }
-            set { _MACAddress = value; }
+            set
+            {
+                if (value != _MACAddress)
+                {
+                    _MACAddress = value;
+                    OnPropertyChanged("MACAddress");
+                }
+            }
         }
 
-        string _broadcastAddress;
+        private string _broadcastAddress;
         public string BroadcastAddress
         {
             get { return _broadcastAddress; }
-            set { _broadcastAddress = value; }
+            set
+            {
+                if (value != _broadcastAddress)
+                {
+                    _broadcastAddress = value;
+                    OnPropertyChanged("BroadcastAddress");
+                }
+            }
         }
 
         string _port;
         public string Port
         {
             get { return _port; }
-            set { _port = value; }
+            set
+            {
+                if (value != _port)
+                {
+                    _port = value;
+                    OnPropertyChanged("Port");
+                }
+            }
         }
 
         ObservableCollection<WakeOnLanTemplate> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanTemplate>();
@@ -44,6 +65,14 @@ namespace NETworkManager.GUI
         {
             get { return _wakeOnLanTemplates; }
             set { _wakeOnLanTemplates = value; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
         public WakeOnLAN()
@@ -61,22 +90,12 @@ namespace NETworkManager.GUI
 
         private void LoadSettings()
         {
-            txtBroadcast.Text = Properties.Settings.Default.WakeOnLan_Broadcast;
-            txtPort.Text = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
+            BroadcastAddress = Properties.Settings.Default.WakeOnLan_Broadcast;
+            Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
         }
 
         string path = "WakeOnLanTemplates.xml";
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
+               
         #region Buttons
         private void btnWakeUp_Click(object sender, RoutedEventArgs e)
         {
@@ -85,15 +104,15 @@ namespace NETworkManager.GUI
 
         private void btnSaveTemplates_Click(object sender, RoutedEventArgs e)
         {
-                SaveTemplates();
+            SaveTemplates();
         }
         #endregion
 
         private void WakeUp()
         {
-            string mac = _MACAddress;
-            string broadcast = _broadcastAddress;
-            string port = _port;
+            string mac = MACAddress;
+            string broadcast = BroadcastAddress;
+            string port = Port;
 
             try
             {

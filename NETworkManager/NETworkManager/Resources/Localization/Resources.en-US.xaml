@@ -31,13 +31,14 @@
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Enter location...</system:String>
 
     <!-- Validate (User Input in GUI) -->
-    <system:String x:Key="LocalizedString_Validate_FieldEmpty">Field cannot be empty</system:String>
-    <system:String x:Key="LocalizedString_Validate_EnterValidMACAddress">Enter a valid MAC-Address</system:String>
-    <system:String x:Key="LocalizedString_Validate_EnterValidPort">Enter a valid port (1 - 65536)</system:String>
-    <system:String x:Key="LocalizedString_Validate_EnterValidIPv4Address">Enter a valid IPv4-Address</system:String>
-    <system:String x:Key="LocalizedString_Validate_IPv6NotSupported">IPv6-Address is not supported</system:String>
-    <system:String x:Key="LocalizedString_Validate_MACAddressEmpty">MAC-Address cannot be empty</system:String>
-    <system:String x:Key="LocalizedString_Validate_HostnameEmpty">Hostname cannot be empty</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_FieldEmpty">Field cannot be empty</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_EnterValidMACAddress">Enter a valid MAC-Address</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_EnterValidPort">Enter a valid port (1 - 65536)</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_EnterValidIPv4Address">Enter a valid IPv4-Address</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_IPv6NotSupported">IPv6-Address is not supported</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_MACAddressEmpty">MAC-Address cannot be empty</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_HostnameEmpty">Hostname cannot be empty</system:String>
+    <system:String x:Key="LocalizedString_ValidateError_FolderDoesNotExist">Folder does not exists</system:String>
 
     <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
     <system:String x:Key="LocalizedString_ApplicationName_IPScanner">IP-Scanner</system:String>

@@ -111,6 +111,7 @@
     <Compile Include="GUI\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Validator\ValidateFolderExists.cs" />
     <Compile Include="GUI\Validator\ValidateIPv4Address.cs" />
     <Compile Include="GUI\Validator\ValidateFieldEmpty.cs" />
     <Compile Include="GUI\Validator\ValidatePort.cs" />

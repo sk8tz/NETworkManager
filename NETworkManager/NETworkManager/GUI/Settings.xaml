@@ -8,6 +8,7 @@
         xmlns:localization="clr-namespace:NETworkManager.Core.Localization"
         xmlns:brushConverter="clr-namespace:NETworkManager.Core.Appearance.BrushConverter"
         xmlns:translator="clr-namespace:NETworkManager.GUI.Translator"
+        xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
@@ -17,24 +18,22 @@
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
     <Controls:MetroWindow.Resources>
+        <!-- Brush Converter -->
         <brushConverter:ConvertAppThemeToBrush x:Key="ConvertAppThemeToBrush" />
         <brushConverter:ConvertAccentToBrush x:Key="ConvertAccentToBrush" />
-
+        <!-- Transltor / Localization -->
         <translator:TranslateAccentName x:Key="TranslateAccentName" />
         <translator:TranslateAppThemeName x:Key="TranslateAppThemeName" />
-
+        <!-- Styles -->
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
-
         <Style x:Key="GridTabItem" TargetType="Grid">
             <Setter Property="Margin" Value="10" />
         </Style>
-
         <Style x:Key="StackPanelTabItem" TargetType="StackPanel">
             <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
-
         <Style x:Key="TextBlockHeader" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="14" />
@@ -82,7 +81,6 @@
                                 <ListView x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionChanged="listViewAppTheme_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <Rectangle Width="48" Height="48" Margin="2" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}"/>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <ListView.ItemsPanel>
@@ -98,8 +96,7 @@
                                 <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionChanged="listViewAccent_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <Rectangle Width="48" Height="48" Margin="2" Fill="{Binding Converter={StaticResource ConvertAccentToBrush}, ConverterParameter='Name'}"
-                                                       ToolTip="{Binding Converter={StaticResource TranslateAccentName}, ConverterParameter='Name'}" />
+                                                       ToolTip="{Binding Converter={StaticResource TranslateAccentName}, ConverterParameter='Name'}"  />
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <ListView.ItemsPanel>
@@ -144,7 +141,16 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="25" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" FontSize="14" x:Name="txtSettingsLocation" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation }" />
+                                    <TextBox Grid.Column="0" FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation }">
+                                        <TextBox.Text>
+                                            <Binding Path="SettingsLocationFolder" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                                                    <Validator:ValidateFolderExists ValidatesOnTargetUpdated="True" />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
                                     <Button Grid.Column="1" Style="{StaticResource MetroFlatButton}" x:Name="btnChooseSettingsLocation" HorizontalAlignment="Right"/>
                                 </Grid>
                                 <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Change}" Width="150" HorizontalAlignment="Right" FontSize="14" Margin="0,0,0,20"/>

@@ -18,11 +18,11 @@ namespace NETworkManager.GUI.Validator
                     case System.Net.Sockets.AddressFamily.InterNetwork:
                         return ValidationResult.ValidResult;
                     case System.Net.Sockets.AddressFamily.InterNetworkV6:
-                        return new ValidationResult(false, Application.Current.Resources["LocalizedString_Validate_IPv6NotSupported"] as string);
+                        return new ValidationResult(false, Application.Current.Resources["LocalizedString_ValidateError_IPv6NotSupported"] as string);
                 }
             }
 
-            return new ValidationResult(false, Application.Current.Resources["LocalizedString_Validate_EnterValidIPv4Address"] as string);
+            return new ValidationResult(false, Application.Current.Resources["LocalizedString_ValidateError_EnterValidIPv4Address"] as string);
         }
     }
 }
