@@ -81,6 +81,7 @@
                                 <ListView x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionChanged="listViewAppTheme_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
+                                            <Rectangle Width="48" Height="48" Margin="-2,2" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}"/>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <ListView.ItemsPanel>
@@ -96,6 +97,7 @@
                                 <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionChanged="listViewAccent_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
+                                            <Rectangle Width="48" Height="48" Margin="-2,2" Fill="{Binding Converter={StaticResource ConvertAccentToBrush}, ConverterParameter='Name'}"
                                                        ToolTip="{Binding Converter={StaticResource TranslateAccentName}, ConverterParameter='Name'}"  />
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
