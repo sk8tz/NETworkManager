@@ -1,11 +1,14 @@
 ﻿using MahApps.Metro;
 using MahApps.Metro.Controls;
+using Microsoft.Win32;
 using NETworkManager.Core.Appearance;
 using NETworkManager.Core.Localization;
 using NETworkManager.Core.Settings;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace NETworkManager.GUI
 {

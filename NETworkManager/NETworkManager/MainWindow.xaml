@@ -16,7 +16,7 @@
         <Controls:WindowCommands>
             <Button Name="btnGithub" Click="btnGithub_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_GitHub}">
                 <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
-                    <Rectangle.OpacityMask>
+                    <Rectangle.OpacityMask >
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_github}" />
                     </Rectangle.OpacityMask>
                 </Rectangle>
