@@ -61,24 +61,6 @@ namespace NETworkManager.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Emerald ähnelt.
-        /// </summary>
-        internal static string Appearance_DefaultAccent {
-            get {
-                return ResourceManager.GetString("Appearance_DefaultAccent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die BaseLight ähnelt.
-        /// </summary>
-        internal static string Appearance_DefaultAppTheme {
-            get {
-                return ResourceManager.GetString("Appearance_DefaultAppTheme", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die https://github.com/BornToBeRoot/NETworkManager ähnelt.
         /// </summary>
         internal static string GitHubProjectURL {

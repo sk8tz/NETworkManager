@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Appearance_DefaultAccent" xml:space="preserve">
-    <value>Emerald</value>
-  </data>
-  <data name="Appearance_DefaultAppTheme" xml:space="preserve">
-    <value>BaseLight</value>
-  </data>
   <data name="GitHubProjectURL" xml:space="preserve">
     <value>https://github.com/BornToBeRoot/NETworkManager</value>
     <comment>URL of the GitHub project page</comment>
