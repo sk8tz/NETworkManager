@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:NETworkManager.GUI"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_AppName_SubnetCalculator}" Height="350" Width="500" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+        Title="{DynamicResource LocalizedString_ApplicationName_SubnetCalculator}" Height="350" Width="500" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+    <Controls:MetroWindow.WindowButtonCommands>
+        <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
+    </Controls:MetroWindow.WindowButtonCommands>
     <Grid>
         
     </Grid>

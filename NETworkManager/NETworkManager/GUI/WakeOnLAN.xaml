@@ -11,6 +11,9 @@
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" IsMaxRestoreButtonEnabled="False" TitleCaps="False" Height="350" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" MinWidth="450" MinHeight="350" >
+    <Controls:MetroWindow.WindowButtonCommands>
+        <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
+    </Controls:MetroWindow.WindowButtonCommands>
     <Controls:MetroWindow.Resources>
         <Style x:Key="TextBlockHeader" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold" />
