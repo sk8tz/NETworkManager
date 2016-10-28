@@ -35,7 +35,6 @@
     <system:String x:Key="LocalizedString_ValidateError_EnterValidMACAddress">Geben Sie eine gültige MAC-Addresse ein</system:String>
     <system:String x:Key="LocalizedString_ValidateError_EnterValidPort">Geben Sie einen gültigen Port ein (1 - 65536)</system:String>
     <system:String x:Key="LocalizedString_ValidateError_EnterValidIPv4Address">Geben Sie eine gültige IPv4-Adresse ein</system:String>
-    <system:String x:Key="LocalizedString_ValidateError_IPv6NotSupported">IPv6-Adressen werden nicht unterstützt</system:String>
     <system:String x:Key="LocalizedString_ValidateError_MACAddressEmpty">MAC-Adresse darf nicht leer sein</system:String>
     <system:String x:Key="LocalizedString_ValidateError_HostnameEmpty">Hostname darf nicht leer sein</system:String>
     <system:String x:Key="LocalizedString_ValidateError_FolderDoesNotExist">Ordner existiert nicht</system:String>
