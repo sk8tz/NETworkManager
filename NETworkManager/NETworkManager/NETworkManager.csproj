@@ -117,6 +117,8 @@
     <Compile Include="GUI\Validator\ValidatePort.cs" />
     <Compile Include="GUI\Validator\ValidateMACAddress.cs" />
     <Compile Include="GUI\Validator\ValidateWakeOnLanTemplate.cs" />
+    <Compile Include="GUI\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="GUI\ViewModels\WakeOnLanViewModel.cs" />
     <Compile Include="GUI\WakeOnLAN.xaml.cs">
       <DependentUpon>WakeOnLAN.xaml</DependentUpon>
     </Compile>
@@ -188,6 +190,7 @@
   <ItemGroup>
     <Resource Include="ToDo.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

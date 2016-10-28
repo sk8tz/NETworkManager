@@ -3,98 +3,37 @@ using System.Text;
 using System.Windows;
 using MahApps.Metro.Controls;
 using NETworkManager.Core.Network;
-using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Net;
-using System.Collections.ObjectModel;
-using NETworkManager.Core.Settings;
-using System.Collections.Generic;
-using System.IO;
+using NETworkManager.GUI.ViewModels;
 
 namespace NETworkManager.GUI
 {
     /// <summary>
     /// Interaktionslogik für WakeOnLAN.xaml
     /// </summary>
-    public partial class WakeOnLAN : MetroWindow, INotifyPropertyChanged
+    public partial class WakeOnLAN : MetroWindow
     {
-        string _MACAddress;
-        public string MACAddress
-        {
-            get { return _MACAddress; }
-            set
-            {
-                if (value != _MACAddress)
-                {
-                    _MACAddress = value;
-                    OnPropertyChanged("MACAddress");
-                }
-            }
-        }
-
-        private string _broadcastAddress;
-        public string BroadcastAddress
-        {
-            get { return _broadcastAddress; }
-            set
-            {
-                if (value != _broadcastAddress)
-                {
-                    _broadcastAddress = value;
-                    OnPropertyChanged("BroadcastAddress");
-                }
-            }
-        }
-
-        string _port;
-        public string Port
-        {
-            get { return _port; }
-            set
-            {
-                if (value != _port)
-                {
-                    _port = value;
-                    OnPropertyChanged("Port");
-                }
-            }
-        }
-
-        ObservableCollection<WakeOnLanTemplate> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanTemplate>();
-        public ObservableCollection<WakeOnLanTemplate> WakeOnLanTemplates
-        {
-            get { return _wakeOnLanTemplates; }
-            set { _wakeOnLanTemplates = value; }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
+        private WakeOnLanViewModel viewModel = new WakeOnLanViewModel();
 
         public WakeOnLAN()
         {
             InitializeComponent();
-            DataContext = this;
+            DataContext = viewModel;
+
+            viewModel.LoadTemplates();
         }
 
         private void MetroWindowWakeOnLAN_Loaded(object sender, RoutedEventArgs e)
         {
             LoadSettings();
-
-            LoadTemplates();
         }
 
         private void LoadSettings()
         {
-            BroadcastAddress = Properties.Settings.Default.WakeOnLan_Broadcast;
-            Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
+            viewModel.BroadcastAddress = Properties.Settings.Default.WakeOnLan_Broadcast;
+            viewModel.Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
         }
-
-        string path = "WakeOnLanTemplates.xml";
                
         #region Buttons
         private void btnWakeUp_Click(object sender, RoutedEventArgs e)
@@ -104,15 +43,15 @@ namespace NETworkManager.GUI
 
         private void btnSaveTemplates_Click(object sender, RoutedEventArgs e)
         {
-            SaveTemplates();
+            viewModel.SaveTemplates();
         }
         #endregion
 
         private void WakeUp()
         {
-            string mac = MACAddress;
-            string broadcast = BroadcastAddress;
-            string port = Port;
+            string mac = viewModel.MACAddress;
+            string broadcast = viewModel.BroadcastAddress;
+            string port = viewModel.Port;
 
             try
             {
@@ -139,26 +78,6 @@ namespace NETworkManager.GUI
             {
                 MessageBox.Show(ex.Message, Application.Current.Resources["LocalizedString_Error"] as string, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void LoadTemplates()
-        {
-            if (File.Exists(path))
-            {
-                List<WakeOnLanTemplate> list = SettingsController.DeserializeWakeOnLanTempaltes(path);
-
-                foreach (WakeOnLanTemplate template in list)
-                {
-                    _wakeOnLanTemplates.Add(template);
-                }
-            }
-        }
-
-        private void SaveTemplates()
-        {
-            List<WakeOnLanTemplate> list = new List<WakeOnLanTemplate>(_wakeOnLanTemplates);
-
-            SettingsController.SerializeWakeOnLanTemplates(list, path);
         }
     }
 }

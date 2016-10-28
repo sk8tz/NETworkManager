@@ -1,28 +1,26 @@
 ﻿using MahApps.Metro;
 using MahApps.Metro.Controls;
-using Microsoft.Win32;
 using NETworkManager.Core.Appearance;
 using NETworkManager.Core.Localization;
 using NETworkManager.Core.Settings;
-using System;
+using NETworkManager.GUI.ViewModels;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace NETworkManager.GUI
 {
     /// <summary>
     /// Interaktionslogik für Settings.xaml
     /// </summary>
-    public partial class Settings : MetroWindow, INotifyPropertyChanged
+    public partial class Settings : MetroWindow
     {
         // Prevent execution of event while loading the window
         private bool _isLoading = true;
 
         // Indicates whether the settings have been changed
         private bool _settingsChanged;
-
+        
         // Some settings need a restarts of the application to apply them
         private bool _restartRequiered;
         public bool RestartRequiered
@@ -33,43 +31,21 @@ namespace NETworkManager.GUI
                 if (value != _restartRequiered)
                 {
                     _restartRequiered = value;
-                    OnPropertyChanged("RestartRequired");
+        
                 }
             }
         }
 
-        // Path to the folder, where the settings are stored
-        private string _settingsLocationFolder;
-        public string SettingsLocationFolder
-        {
-            get { return _settingsLocationFolder; }
-            set
-            {
-                if (value != _settingsLocationFolder)
-                {
-                    _settingsLocationFolder = value;
-                    OnPropertyChanged("SettingsLocationFolder");
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
+        private SettingsViewModel viewModel = new SettingsViewModel();
 
         public Settings()
         {
             InitializeComponent();
-            DataContext = this;
+            DataContext = viewModel;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
             LoadSettings();
 
             // Enable executing of events, when loading is finished
@@ -85,7 +61,7 @@ namespace NETworkManager.GUI
             // Localization 
             listBoxLanguage.SelectedIndex = LocalizationController.LocalizationList.FindIndex(a => a.Code == LocalizationController.CurrentLocalization.Code);
 
-            SettingsLocationFolder = SettingsController.GetSettingsLocation();
+            viewModel.SettingsLocationFolder = SettingsController.GetSettingsLocation();
         }
 
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
@@ -131,7 +107,7 @@ namespace NETworkManager.GUI
 
             // Indicates that the settings are saved when closing the settings dialog
             _settingsChanged = true;
-            _restartRequiered = true;
+            RestartRequiered = true;
 
             // Get selected localization and apply it
             LocalizationInfo info = listBoxLanguage.SelectedItem as LocalizationInfo;
@@ -139,6 +115,11 @@ namespace NETworkManager.GUI
 
             // Save selected culture code in settings
             Properties.Settings.Default.Localization_CultureCode = info.Code;
+        }
+
+        private void btnChangeSettingsLocation_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
