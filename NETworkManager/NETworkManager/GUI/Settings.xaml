@@ -55,10 +55,10 @@
                             </Grid>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True"> 
+                            <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="contentPresenter" Property="Opacity" Value="1" />
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="False"> 
+                            <Trigger Property="IsMouseOver" Value="False">
                                 <Setter TargetName="contentPresenter" Property="Opacity" Value="0.5" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -107,7 +107,7 @@
                                 <ListView x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionChanged="listViewAppTheme_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <Rectangle Width="48" Height="48" Margin="-2,1" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}"/>
+                                            <Rectangle Width="48" Height="48" Margin="0,2" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}"/>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <ListView.ItemsPanel>
@@ -122,8 +122,8 @@
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
                                 <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionChanged="listViewAccent_SelectionChanged">
                                     <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Rectangle Width="48" Height="48" Margin="-2,1" Fill="{Binding Converter={StaticResource ConvertAccentToBrush}, ConverterParameter='Name'}"
+                                        <DataTemplate >
+                                            <Rectangle Width="48" Height="48" Margin="0,2" Fill="{Binding Converter={StaticResource ConvertAccentToBrush}, ConverterParameter='Name'}"
                                                        ToolTip="{Binding Converter={StaticResource TranslateAccentName}, ConverterParameter='Name'}"  />
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -164,16 +164,16 @@
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
-                                    <TextBox Grid.Column="0" FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation }" Style="{StaticResource OpenFolderMetroTextBox}" Margin="0,0,0,10">
-                                        <TextBox.Text>
-                                            <Binding Path="SettingsLocationFolder" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
-                                                    <Validator:ValidateFolderExists ValidatesOnTargetUpdated="True" />
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
+                                <TextBox Grid.Column="0" FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation }" Style="{StaticResource OpenFolderMetroTextBox}" Margin="0,0,0,10">
+                                    <TextBox.Text>
+                                        <Binding Path="SettingsLocationFolder" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                                                <Validator:ValidateFolderExists ValidatesOnTargetUpdated="True" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                                 <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Change}" Width="150" HorizontalAlignment="Right" FontSize="14" Margin="0,0,0,20"/>
 
 
