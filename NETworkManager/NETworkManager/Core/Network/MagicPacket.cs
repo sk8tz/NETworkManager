@@ -6,11 +6,11 @@ namespace NETworkManager.Core.Network
     public static class MagicPacket
     {
         /// <summary>
-        /// Create a Magic Packet from a given MAC-Address
+        /// Create a Magic Packet from MAC-Address
         /// </summary>
-        /// <param name="MAC">MAC-Address without "-" or ":"</param>
+        /// <param name="MAC">MAC-Address as byte[]</param>
         /// <returns>Magic Packet as byte array</returns>
-        public static byte[] Create(byte[] mac)
+        public static byte[] CreateFromBytes(byte[] mac)
         {
             byte[] packet = new byte[17 * 6];
 

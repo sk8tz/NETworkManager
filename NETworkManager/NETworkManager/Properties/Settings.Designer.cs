@@ -104,9 +104,9 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("WakeOnLanTemplates.xml")]
-        public string WakeOnLan_TemplatesFileName {
+        public string FileName_WakeOnLanTemplates {
             get {
-                return ((string)(this["WakeOnLan_TemplatesFileName"]));
+                return ((string)(this["FileName_WakeOnLanTemplates"]));
             }
         }
     }

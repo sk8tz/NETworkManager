@@ -117,8 +117,8 @@
     <Compile Include="GUI\Validator\ValidatePort.cs" />
     <Compile Include="GUI\Validator\ValidateMACAddress.cs" />
     <Compile Include="GUI\Validator\ValidateWakeOnLanTemplate.cs" />
-    <Compile Include="GUI\ViewModels\SettingsViewModel.cs" />
-    <Compile Include="GUI\ViewModels\WakeOnLanViewModel.cs" />
+    <Compile Include="GUI\ViewModels\ViewModelSettings.cs" />
+    <Compile Include="GUI\ViewModels\ViewModelWakeOnLan.cs" />
     <Compile Include="GUI\WakeOnLAN.xaml.cs">
       <DependentUpon>WakeOnLAN.xaml</DependentUpon>
     </Compile>

@@ -45,13 +45,13 @@ namespace NETworkManager.Core.Settings
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"NETworkManager\Settings");
         }
 
-        public static List<WakeOnLanTemplate> DeserializeWakeOnLanTempaltes(string path)
+        private static List<WakeOnLanTemplate> DeserializeWakeOnLanTempaltes(string filePath)
         {
             List<WakeOnLanTemplate> list = new List<WakeOnLanTemplate>();
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanTemplate>));
 
-            using (FileStream stream = new FileStream(path, FileMode.Open))
+            using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
                 var test = (List<WakeOnLanTemplate>)(serializer.Deserialize(stream));
                 list.AddRange(test);
@@ -60,7 +60,17 @@ namespace NETworkManager.Core.Settings
             return list;
         }
 
-        public static void SerializeWakeOnLanTemplates(List<WakeOnLanTemplate> list, string path)
+        public static List<WakeOnLanTemplate> GetWakeOnLanTemplates()
+        {
+            string filePath = Path.Combine(GetSettingsLocation(), Properties.Settings.Default.FileName_WakeOnLanTemplates);
+
+            if (File.Exists(filePath))
+                return DeserializeWakeOnLanTempaltes(filePath);
+
+            return new List<WakeOnLanTemplate>();
+        }
+         
+        private static void SerializeWakeOnLanTemplates(List<WakeOnLanTemplate> list, string path)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanTemplate>));
 
@@ -68,6 +78,13 @@ namespace NETworkManager.Core.Settings
             {
                 serializer.Serialize(stream, list);
             }
+        }
+
+        public static void SaveWakeOnLanTemplates(List<WakeOnLanTemplate> list)
+        {
+            string filePath = Path.Combine(GetSettingsLocation(), Properties.Settings.Default.FileName_WakeOnLanTemplates);
+
+            SerializeWakeOnLanTemplates(list, filePath);
         }
     }
 }

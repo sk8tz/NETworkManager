@@ -1,12 +1,15 @@
-﻿using NETworkManager.Core.Settings;
+﻿using NETworkManager.Core.Network;
+using NETworkManager.Core.Settings;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NETworkManager.GUI.ViewModels
 {
-    class WakeOnLanViewModel : INotifyPropertyChanged
+    class ViewModelWakeOnLan : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -65,26 +68,43 @@ namespace NETworkManager.GUI.ViewModels
             set { _wakeOnLanTemplates = value; }
         }
 
-        string path = "WakeOnLanTemplates.xml";
+        public ViewModelWakeOnLan()
+        {
+            LoadTemplates();
+        }
 
         public void LoadTemplates()
         {
-            if (File.Exists(path))
+            foreach (WakeOnLanTemplate template in SettingsController.GetWakeOnLanTemplates())
             {
-                List<WakeOnLanTemplate> list = SettingsController.DeserializeWakeOnLanTempaltes(path);
-
-                foreach (WakeOnLanTemplate template in list)
-                {
-                    WakeOnLanTemplates.Add(template);
-                }
+                WakeOnLanTemplates.Add(template);
             }
         }
 
         public void SaveTemplates()
         {
-            List<WakeOnLanTemplate> list = new List<WakeOnLanTemplate>(WakeOnLanTemplates);
+            SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanTemplate>(WakeOnLanTemplates));
+        }
 
-            SettingsController.SerializeWakeOnLanTemplates(list, path);
+        public void WakeUp()
+        {
+            // Regex to replace "-" and ":" in MAC-Address
+            Regex regex = new Regex("-|:");
+
+            // Convert string into byte array
+            byte[] macBytes = Encoding.ASCII.GetBytes(regex.Replace(MACAddress, ""));
+
+            // Create a magic packet
+            byte[] magicPacket = MagicPacket.CreateFromBytes(macBytes);
+
+            // Parse string into IP-Address
+            IPAddress broadcastAddr = IPAddress.Parse(BroadcastAddress);
+
+            // Convert the port from string to int
+            int portNum = int.Parse(Port);
+
+            // Send the magic packet
+            MagicPacket.Send(magicPacket, broadcastAddr, portNum);
         }
     }
 }
