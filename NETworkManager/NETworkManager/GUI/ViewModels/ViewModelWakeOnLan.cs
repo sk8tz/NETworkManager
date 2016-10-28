@@ -65,7 +65,14 @@ namespace NETworkManager.GUI.ViewModels
         public ObservableCollection<WakeOnLanTemplate> WakeOnLanTemplates
         {
             get { return _wakeOnLanTemplates; }
-            set { _wakeOnLanTemplates = value; }
+            set
+            {
+                if (value != _wakeOnLanTemplates)
+                {
+                    _wakeOnLanTemplates = value;
+                    OnPropertyChanged("WakeOnLanTemplates");
+                }
+            }
         }
 
         public ViewModelWakeOnLan()
