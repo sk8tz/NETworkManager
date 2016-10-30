@@ -7,6 +7,7 @@ using NETworkManager.GUI.ViewModels;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace NETworkManager.GUI
 {
@@ -120,6 +121,12 @@ namespace NETworkManager.GUI
         private void btnChangeSettingsLocation_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void MetroWindowSettings_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
     }
 }

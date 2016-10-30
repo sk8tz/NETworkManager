@@ -7,6 +7,8 @@ namespace NETworkManager.Core.Settings
     {
         public string MAC { get; set; }
         public string Hostname { get; set; }
+        public string Port { get; set; }
+        public string Broadcast { get; set; }
         public string Description { get; set; }
 
         public WakeOnLanTemplate()
@@ -14,9 +16,12 @@ namespace NETworkManager.Core.Settings
 
         }
 
-        public WakeOnLanTemplate(string mac, string description)
+        public WakeOnLanTemplate(string mac, string hostname, string broadcast, string port, string description)
         {
             MAC = mac;
+            Hostname = hostname;
+            Broadcast = broadcast;
+            Port = port;
             Description = description;
         }
 

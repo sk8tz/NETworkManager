@@ -1,6 +1,12 @@
-﻿* Escape can close apps like WakeOnLan
-* Allow only 1 instance by default
-* Close all Apps befor Launcher is closed
-* User settings to another location (custom settings controller?)
-* Import / Export von Settings
+﻿## General
+* Design Flyout... 
+* TrayIcon / Global Hotkey
 * Global Hotkey ?? To open launcher
+
+## Settings
+* Import / Export von Settings
+* Custom Settings Provider
+
+## WakeOnLan
+* Validate Template Row
+* Remove {NewItemPlaceHolder} in ComboBox

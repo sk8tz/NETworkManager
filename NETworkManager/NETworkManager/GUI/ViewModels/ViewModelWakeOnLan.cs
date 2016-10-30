@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Data;
 
 namespace NETworkManager.GUI.ViewModels
 {
@@ -61,7 +63,7 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        ObservableCollection<WakeOnLanTemplate> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanTemplate>();
+        private ObservableCollection<WakeOnLanTemplate> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanTemplate>();
         public ObservableCollection<WakeOnLanTemplate> WakeOnLanTemplates
         {
             get { return _wakeOnLanTemplates; }

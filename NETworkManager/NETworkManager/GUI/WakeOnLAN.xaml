@@ -10,7 +10,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" IsMaxRestoreButtonEnabled="False" TitleCaps="False" Height="350" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" MinWidth="450" MinHeight="350" >
+        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="350" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" PreviewKeyDown="MetroWindowWakeOnLAN_PreviewKeyDown" >
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
@@ -37,13 +37,13 @@
         </Style>
     </Controls:MetroWindow.Resources>
     <Grid>
-        <TabControl>
+        <TabControl x:Name="tabControlTemplate" SelectionChanged="TabControl_SelectionChanged">
             <!-- Application -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="Wake Up" />
-                        <ComboBox  x:Name="cbMACAddress" IsTextSearchEnabled="True" TextSearch.TextPath="{Binding MAC}" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}" >
+                        <ComboBox x:Name="cbMACAddress"  IsEditable="False" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}"  SelectionChanged="cbMACAddress_SelectionChanged" >
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -93,7 +93,7 @@
                                 <RowDefinition Height="10" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Broadcast" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
+                            <TextBlock Text="{DynamicResource LocalizedString_Broadcast}" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
                             <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" HorizontalAlignment="Stretch">
                                 <TextBox.Text>
                                     <Binding Path="BroadcastAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -104,7 +104,7 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <TextBlock Text="Port" Style="{StaticResource TextBlockGrid}" Grid.Row="2" Grid.Column="0" />
+                            <TextBlock Text="{DynamicResource LocalizedString_Port}" Style="{StaticResource TextBlockGrid}" Grid.Row="2" Grid.Column="0" />
                             <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="100" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left">
                                 <TextBox.Text>
                                     <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -128,30 +128,16 @@
                             <RowDefinition Height="10" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-
-                        <DataGrid Grid.Row="0" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}">
+                        <DataGrid Grid.Row="0" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" />
-                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Broadcast}" Binding="{Binding Broadcast}" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Port}" Binding="{Binding Port}" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Description}" Binding="{Binding Description}" Width="*" />
                             </DataGrid.Columns>
-                            <DataGrid.RowValidationErrorTemplate>
-                                <ControlTemplate>
-                                    <Grid Margin="0,0,0,0" 
-      ToolTip="{Binding RelativeSource={RelativeSource
-      FindAncestor, AncestorType={x:Type DataGridRow}},
-      Path=(Validation.Errors)[0].ErrorContent}">
-                                        <Ellipse StrokeThickness="0" Fill="Red" 
-        Width="{TemplateBinding FontSize}" 
-        Height="{TemplateBinding FontSize}" />
-                                        <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" 
-        FontWeight="Bold" Foreground="White" 
-        HorizontalAlignment="Center"  />
-                                    </Grid>
-                                </ControlTemplate>
-                            </DataGrid.RowValidationErrorTemplate>
                             <DataGrid.RowValidationRules>
-                                <Validator:ValidateWakeOnLanTemplate ValidationStep="UpdatedValue" />
+                                <Validator:ValidateWakeOnLanDataGridRow ValidationStep="UpdatedValue" />
                             </DataGrid.RowValidationRules>
                         </DataGrid>
                         <Button Grid.Row="2" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>

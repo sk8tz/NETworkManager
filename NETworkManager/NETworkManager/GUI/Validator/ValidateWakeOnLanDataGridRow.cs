@@ -4,10 +4,11 @@ using System.Windows;
 using System.Windows.Data;
 using NETworkManager.Core.Settings;
 using System.Text.RegularExpressions;
+using System;
 
 namespace NETworkManager.GUI.Validator
 {
-    public class ValidateWakeOnLanTemplate : ValidationRule
+    public class ValidateWakeOnLanDataGridRow : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

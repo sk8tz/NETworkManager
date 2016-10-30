@@ -25,6 +25,8 @@
     <system:String x:Key="LocalizedString_MACAddress">MAC-Address</system:String>
     <system:String x:Key="LocalizedString_Hostname">Hostname</system:String>
     <system:String x:Key="LocalizedString_Description">Description</system:String>
+    <system:String x:Key="LocalizedString_Broadcast">Broadcast</system:String>
+    <system:String x:Key="LocalizedString_Port">Port</system:String>
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>

@@ -78,6 +78,7 @@ namespace NETworkManager
 
             if (settingsWindow.RestartRequiered)
             {
+                TestFlyout.IsOpen = true;
                 string localizedHeader = Application.Current.Resources["LocalizedString_RestartRequired"] as string;
                 string localizedMessage = Application.Current.Resources["LocalizedString_RestartRequiredAfterSettingsChanged"] as string;
 
