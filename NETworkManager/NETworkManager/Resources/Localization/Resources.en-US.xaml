@@ -27,6 +27,10 @@
     <system:String x:Key="LocalizedString_Description">Description</system:String>
     <system:String x:Key="LocalizedString_Broadcast">Broadcast</system:String>
     <system:String x:Key="LocalizedString_Port">Port</system:String>
+    <system:String x:Key="LocalizedString_IPAddress">IP-Address</system:String>
+    <system:String x:Key="LocalizedString_Input">Input</system:String>
+    <system:String x:Key="LocalizedString_Output">Output</system:String>
+    <system:String x:Key="LocalizedString_SubnetmaskCDIR">Subnetmask / CDIR</system:String>
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>

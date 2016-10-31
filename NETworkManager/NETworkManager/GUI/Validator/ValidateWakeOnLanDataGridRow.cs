@@ -2,9 +2,8 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using NETworkManager.Core.Settings;
+using NETworkManager.Core.Network;
 using System.Text.RegularExpressions;
-using System;
 
 namespace NETworkManager.GUI.Validator
 {
@@ -12,7 +11,7 @@ namespace NETworkManager.GUI.Validator
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            WakeOnLanTemplate template = (value as BindingGroup).Items[0] as WakeOnLanTemplate;
+            WakeOnLanInfo template = (value as BindingGroup).Items[0] as WakeOnLanInfo;
 
             if (string.IsNullOrEmpty(template.MAC))
                 return new ValidationResult(false, Application.Current.Resources["LocalizedString_ValidateError_MACAddressEmpty"] as string);

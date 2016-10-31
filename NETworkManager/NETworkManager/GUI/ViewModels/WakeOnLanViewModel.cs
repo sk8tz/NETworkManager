@@ -6,12 +6,10 @@ using System.ComponentModel;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Data;
 
 namespace NETworkManager.GUI.ViewModels
 {
-    class ViewModelWakeOnLan : INotifyPropertyChanged
+    class WakeOnLanViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,7 +19,7 @@ namespace NETworkManager.GUI.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
-        string _MACAddress;
+        private string _MACAddress;
         public string MACAddress
         {
             get { return _MACAddress; }
@@ -49,7 +47,7 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        string _port;
+        private string _port;
         public string Port
         {
             get { return _port; }
@@ -63,8 +61,8 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        private ObservableCollection<WakeOnLanTemplate> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanTemplate>();
-        public ObservableCollection<WakeOnLanTemplate> WakeOnLanTemplates
+        private ObservableCollection<WakeOnLanInfo> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanInfo>();
+        public ObservableCollection<WakeOnLanInfo> WakeOnLanTemplates
         {
             get { return _wakeOnLanTemplates; }
             set
@@ -77,14 +75,14 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        public ViewModelWakeOnLan()
+        public WakeOnLanViewModel()
         {
             LoadTemplates();
         }
 
         public void LoadTemplates()
         {
-            foreach (WakeOnLanTemplate template in SettingsController.GetWakeOnLanTemplates())
+            foreach (WakeOnLanInfo template in SettingsController.GetWakeOnLanTemplates())
             {
                 WakeOnLanTemplates.Add(template);
             }
@@ -92,7 +90,7 @@ namespace NETworkManager.GUI.ViewModels
 
         public void SaveTemplates()
         {
-            SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanTemplate>(WakeOnLanTemplates));
+            SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanInfo>(WakeOnLanTemplates));
         }
 
         public void WakeUp()

@@ -3,7 +3,7 @@ using System.Windows;
 using MahApps.Metro.Controls;
 using NETworkManager.GUI.ViewModels;
 using System.Windows.Controls;
-using NETworkManager.Core.Settings;
+using NETworkManager.Core.Network;
 using System.Windows.Input;
 
 namespace NETworkManager.GUI
@@ -13,7 +13,7 @@ namespace NETworkManager.GUI
     /// </summary>
     public partial class WakeOnLAN : MetroWindow
     {
-        private ViewModelWakeOnLan viewModel = new ViewModelWakeOnLan();
+        private WakeOnLanViewModel viewModel = new WakeOnLanViewModel();
 
         private double savedWidth;
         private double savedHeight;
@@ -104,7 +104,7 @@ namespace NETworkManager.GUI
 
         private void cbMACAddress_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            WakeOnLanTemplate template = cbMACAddress.SelectedItem as WakeOnLanTemplate;
+            WakeOnLanInfo template = cbMACAddress.SelectedItem as WakeOnLanInfo;
 
             if (template == null)
                 return;

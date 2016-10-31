@@ -4,13 +4,69 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
+        xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
+        xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="{DynamicResource LocalizedString_ApplicationName_SubnetCalculator}" Height="350" Width="500" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
-    <Grid>
-        
+        <Controls:MetroWindow.Resources>
+        <Style x:Key="TextBlockHeader" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
+        </Style>
+        <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Controls:MetroWindow.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Input}" Style="{StaticResource TextBlockHeader}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{DynamicResource LocalizedString_IPAddress}" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBlockGrid}" />
+                <TextBox x:Name="txtIPAddress" Grid.Column="1" Grid.Row="0" FontSize="14" HorizontalAlignment="Stretch">
+                    <TextBox.Text>
+                        <Binding Path="IPAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                                <Validator:ValidateIPv4Address ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBlock Text="{DynamicResource LocalizedString_SubnetmaskCDIR}"  Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBlockGrid}" />
+                <TextBox x:Name="txtSubnetmaskCDIR" Grid.Column="1" Grid.Row="2" FontSize="14" HorizontalAlignment="Stretch">
+                    <TextBox.Text>
+                        <Binding Path="SubnetmaskCDIR" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Output}" Style="{StaticResource TextBlockHeader}"/>
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>

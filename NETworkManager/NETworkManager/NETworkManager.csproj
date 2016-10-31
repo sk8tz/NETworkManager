@@ -96,7 +96,8 @@
     <Compile Include="Core\Appearance\BrushConverter\ConvertAccentToBrush.cs" />
     <Compile Include="Core\Appearance\BrushConverter\ConvertAppThemeToBrush.cs" />
     <Compile Include="Core\Network\MagicPacket.cs" />
-    <Compile Include="Core\Settings\WakeOnLanTemplate.cs" />
+    <Compile Include="Core\Network\SubnetInfo.cs" />
+    <Compile Include="Core\Network\WakeOnLanInfo.cs" />
     <Compile Include="GUI\ApplicationInfo.cs" />
     <Compile Include="Core\Localization\LocalizationController.cs" />
     <Compile Include="Core\Localization\LocalizationInfo.cs" />
@@ -117,8 +118,9 @@
     <Compile Include="GUI\Validator\ValidatePort.cs" />
     <Compile Include="GUI\Validator\ValidateMACAddress.cs" />
     <Compile Include="GUI\Validator\ValidateWakeOnLanDataGridRow.cs" />
-    <Compile Include="GUI\ViewModels\ViewModelSettings.cs" />
-    <Compile Include="GUI\ViewModels\ViewModelWakeOnLan.cs" />
+    <Compile Include="GUI\ViewModels\SubnetCalculatorViewModel.cs" />
+    <Compile Include="GUI\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="GUI\ViewModels\WakeOnLanViewModel.cs" />
     <Compile Include="GUI\WakeOnLAN.xaml.cs">
       <DependentUpon>WakeOnLAN.xaml</DependentUpon>
     </Compile>

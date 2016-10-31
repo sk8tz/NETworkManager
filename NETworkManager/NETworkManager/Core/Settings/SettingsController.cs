@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Xml.Serialization;
+using NETworkManager.Core.Network;
 
 namespace NETworkManager.Core.Settings
 {
@@ -45,34 +46,34 @@ namespace NETworkManager.Core.Settings
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"NETworkManager\Settings");
         }
 
-        private static List<WakeOnLanTemplate> DeserializeWakeOnLanTempaltes(string filePath)
+        private static List<WakeOnLanInfo> DeserializeWakeOnLanTempaltes(string filePath)
         {
-            List<WakeOnLanTemplate> list = new List<WakeOnLanTemplate>();
+            List<WakeOnLanInfo> list = new List<WakeOnLanInfo>();
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanTemplate>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanInfo>));
 
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
-                var test = (List<WakeOnLanTemplate>)(serializer.Deserialize(stream));
+                var test = (List<WakeOnLanInfo>)(serializer.Deserialize(stream));
                 list.AddRange(test);
             }
 
             return list;
         }
 
-        public static List<WakeOnLanTemplate> GetWakeOnLanTemplates()
+        public static List<WakeOnLanInfo> GetWakeOnLanTemplates()
         {
             string filePath = Path.Combine(GetSettingsLocation(), Properties.Settings.Default.FileName_WakeOnLanTemplates);
 
             if (File.Exists(filePath))
                 return DeserializeWakeOnLanTempaltes(filePath);
 
-            return new List<WakeOnLanTemplate>();
+            return new List<WakeOnLanInfo>();
         }
          
-        private static void SerializeWakeOnLanTemplates(List<WakeOnLanTemplate> list, string path)
+        private static void SerializeWakeOnLanTemplates(List<WakeOnLanInfo> list, string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanTemplate>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanInfo>));
 
             using (FileStream stream = new FileStream(path, FileMode.Create))
             {
@@ -80,7 +81,7 @@ namespace NETworkManager.Core.Settings
             }
         }
 
-        public static void SaveWakeOnLanTemplates(List<WakeOnLanTemplate> list)
+        public static void SaveWakeOnLanTemplates(List<WakeOnLanInfo> list)
         {
             string filePath = Path.Combine(GetSettingsLocation(), Properties.Settings.Default.FileName_WakeOnLanTemplates);
 

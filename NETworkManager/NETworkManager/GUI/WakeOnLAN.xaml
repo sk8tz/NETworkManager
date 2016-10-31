@@ -42,8 +42,8 @@
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
-                        <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="Wake Up" />
-                        <ComboBox x:Name="cbMACAddress"  IsEditable="False" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}"  SelectionChanged="cbMACAddress_SelectionChanged" >
+                        <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />
+                        <ComboBox x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}"  SelectionChanged="cbMACAddress_SelectionChanged">
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>

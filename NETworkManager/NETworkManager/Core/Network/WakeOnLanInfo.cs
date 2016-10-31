@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace NETworkManager.Core.Settings
+namespace NETworkManager.Core.Network
 {
     [Serializable]
-    public class WakeOnLanTemplate
+    public class WakeOnLanInfo
     {
         public string MAC { get; set; }
         public string Hostname { get; set; }
@@ -11,12 +11,12 @@ namespace NETworkManager.Core.Settings
         public string Broadcast { get; set; }
         public string Description { get; set; }
 
-        public WakeOnLanTemplate()
+        public WakeOnLanInfo()
         {
 
         }
 
-        public WakeOnLanTemplate(string mac, string hostname, string broadcast, string port, string description)
+        public WakeOnLanInfo(string mac, string hostname, string broadcast, string port, string description)
         {
             MAC = mac;
             Hostname = hostname;

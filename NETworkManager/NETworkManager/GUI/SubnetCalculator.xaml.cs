@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using NETworkManager.GUI.ViewModels;
 
 namespace NETworkManager.GUI
 {
@@ -20,9 +21,14 @@ namespace NETworkManager.GUI
     /// </summary>
     public partial class SubnetCalculator : MetroWindow
     {
+        private SubnetCalculatorViewModel viewModel = new SubnetCalculatorViewModel();
+
+        public string IPAddress { get; set; }
+
         public SubnetCalculator()
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

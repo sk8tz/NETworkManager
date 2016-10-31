@@ -37,7 +37,7 @@ namespace NETworkManager.GUI
             }
         }
 
-        private ViewModelSettings viewModel = new ViewModelSettings();
+        private SettingsViewModel viewModel = new SettingsViewModel();
 
         public Settings()
         {

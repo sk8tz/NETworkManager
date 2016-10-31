@@ -2,7 +2,7 @@
 
 namespace NETworkManager.GUI.ViewModels
 {
-    class ViewModelSettings : INotifyPropertyChanged
+    class SettingsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
