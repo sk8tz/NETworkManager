@@ -10,7 +10,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="350" Width="450" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" PreviewKeyDown="MetroWindowWakeOnLAN_PreviewKeyDown" >
+        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="325" Width="350" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" PreviewKeyDown="MetroWindowWakeOnLAN_PreviewKeyDown" >
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
@@ -29,7 +29,7 @@
         </Style>
         <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="Margin" Value="20,0" />
             <Setter Property="FontSize" Value="14" />
         </Style>
         <Style x:Key="DataGridColumnHeaderNormal" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
@@ -85,8 +85,8 @@
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Settings}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
@@ -94,7 +94,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <TextBlock Text="{DynamicResource LocalizedString_Broadcast}" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
-                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" HorizontalAlignment="Stretch">
+                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch">
                                 <TextBox.Text>
                                     <Binding Path="BroadcastAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -105,7 +105,7 @@
                                 </TextBox.Text>
                             </TextBox>
                             <TextBlock Text="{DynamicResource LocalizedString_Port}" Style="{StaticResource TextBlockGrid}" Grid.Row="2" Grid.Column="0" />
-                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="100" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left">
+                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="80" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left">
                                 <TextBox.Text>
                                     <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>

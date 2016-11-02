@@ -15,9 +15,6 @@ namespace NETworkManager.GUI
     {
         private WakeOnLanViewModel viewModel = new WakeOnLanViewModel();
 
-        private double savedWidth;
-        private double savedHeight;
-
         private bool _isLoading = true;
 
         public WakeOnLAN()
@@ -83,17 +80,11 @@ namespace NETworkManager.GUI
             // Resize the window for better template view/edit
             if (tabControlTemplate.SelectedIndex == 0)
             {
-                if (savedWidth != 0)
-                    Width = savedWidth;
-
-                if (savedHeight != 0)
-                    Height = savedHeight;
+                Width = 350;
+                Height = 325;
             }
             else if (tabControlTemplate.SelectedIndex == 1)
             {
-                savedWidth = Width;
-                savedHeight = Height;
-
                 if (Width < 700)
                     Width = 700;
 

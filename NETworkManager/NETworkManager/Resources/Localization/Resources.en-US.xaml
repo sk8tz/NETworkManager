@@ -31,6 +31,7 @@
     <system:String x:Key="LocalizedString_Input">Input</system:String>
     <system:String x:Key="LocalizedString_Output">Output</system:String>
     <system:String x:Key="LocalizedString_SubnetmaskCDIR">Subnetmask / CDIR</system:String>
+    <system:String x:Key="LocalizedString_Calculate">Calculate</system:String>
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>

@@ -8,9 +8,7 @@ namespace NETworkManager.GUI.Validator
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string text = value as string;
-
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(value as string))
                 return new ValidationResult(false, Application.Current.Resources["LocalizedString_ValidateError_FieldEmpty"] as string);
 
             return ValidationResult.ValidResult;
