@@ -93,16 +93,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Appearance\AppearanceController.cs" />
-    <Compile Include="Core\Appearance\BrushConverter\ConvertAccentToBrush.cs" />
-    <Compile Include="Core\Appearance\BrushConverter\ConvertAppThemeToBrush.cs" />
+    <Compile Include="GUI\BrushConverter\AccentToBrushConverter.cs" />
+    <Compile Include="GUI\BrushConverter\AppThemeToBrushConverter.cs" />
+    <Compile Include="Core\Network\ConvertMACAddress.cs" />
     <Compile Include="Core\Network\MagicPacket.cs" />
     <Compile Include="Core\Network\SubnetInfo.cs" />
     <Compile Include="Core\Network\WakeOnLanInfo.cs" />
     <Compile Include="GUI\ApplicationInfo.cs" />
     <Compile Include="Core\Localization\LocalizationController.cs" />
     <Compile Include="Core\Localization\LocalizationInfo.cs" />
-    <Compile Include="GUI\Translator\TranslateAccentName.cs" />
-    <Compile Include="GUI\Translator\TranslateAppThemeName.cs" />
+    <Compile Include="GUI\Translator\AccentNameTranslator.cs" />
+    <Compile Include="GUI\Translator\AppThemeNameTranslator.cs" />
     <Compile Include="Core\Settings\SettingsController.cs" />
     <Compile Include="GUI\ApplicationController.cs" />
     <Compile Include="GUI\Behaviors\TextBlockBehavior.cs" />
@@ -112,12 +113,11 @@
     <Compile Include="GUI\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Validator\ValidateFolderExists.cs" />
-    <Compile Include="GUI\Validator\ValidateIPv4Address.cs" />
-    <Compile Include="GUI\Validator\ValidateFieldEmpty.cs" />
-    <Compile Include="GUI\Validator\ValidatePort.cs" />
-    <Compile Include="GUI\Validator\ValidateMACAddress.cs" />
-    <Compile Include="GUI\Validator\ValidateWakeOnLanDataGridRow.cs" />
+    <Compile Include="GUI\Validator\FolderExistsValidator.cs" />
+    <Compile Include="GUI\Validator\IPv4AddressValidator.cs" />
+    <Compile Include="GUI\Validator\EmptyFieldValidator.cs" />
+    <Compile Include="GUI\Validator\PortValidator.cs" />
+    <Compile Include="GUI\Validator\MACAddressValidator.cs" />
     <Compile Include="GUI\ViewModels\SubnetCalculatorViewModel.cs" />
     <Compile Include="GUI\ViewModels\SettingsViewModel.cs" />
     <Compile Include="GUI\ViewModels\WakeOnLanViewModel.cs" />

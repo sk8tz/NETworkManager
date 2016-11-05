@@ -35,9 +35,10 @@
         <Style x:Key="DataGridColumnHeaderNormal" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Controls:ControlsHelper.ContentCharacterCasing" Value="Normal" />
         </Style>
+
     </Controls:MetroWindow.Resources>
     <Grid>
-        <TabControl x:Name="tabControlTemplate" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
             <!-- Application -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
@@ -47,8 +48,8 @@
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
-                                        <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
-                                        <Validator:ValidateMACAddress ValidatesOnTargetUpdated="True"/>
+                                        <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                        <Validator:MACAddressValidator ValidatesOnTargetUpdated="True"/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.Text>
@@ -98,8 +99,8 @@
                                 <TextBox.Text>
                                     <Binding Path="BroadcastAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
-                                            <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
-                                            <Validator:ValidateIPv4Address ValidatesOnTargetUpdated="True" />
+                                            <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                            <Validator:IPv4AddressValidator ValidatesOnTargetUpdated="True" />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
@@ -109,8 +110,8 @@
                                 <TextBox.Text>
                                     <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
-                                            <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
-                                            <Validator:ValidatePort ValidatesOnTargetUpdated="True" />
+                                            <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                            <Validator:PortValidator ValidatesOnTargetUpdated="True" />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
@@ -130,15 +131,12 @@
                         </Grid.RowDefinitions>
                         <DataGrid Grid.Row="0" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}"  Binding="{Binding MAC}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Broadcast}" Binding="{Binding Broadcast}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Port}" Binding="{Binding Port}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Description}" Binding="{Binding Description}" Width="*" />
                             </DataGrid.Columns>
-                            <DataGrid.RowValidationRules>
-                                <Validator:ValidateWakeOnLanDataGridRow ValidationStep="UpdatedValue" />
-                            </DataGrid.RowValidationRules>
                         </DataGrid>
                         <Button Grid.Row="2" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
                     </Grid>
