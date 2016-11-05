@@ -94,11 +94,8 @@ namespace NETworkManager.GUI.ViewModels
 
         public void WakeUp()
         {
-            // Regex to replace "-" and ":" in MAC-Address
-            Regex regex = new Regex("-|:");
-
             // Convert string into byte array
-            byte[] macBytes = Encoding.ASCII.GetBytes(regex.Replace(MACAddress, ""));
+            byte[] macBytes = ConvertMACAddress.ToByteArray(MACAddress);
 
             // Create a magic packet
             byte[] magicPacket = MagicPacket.CreateFromBytes(macBytes);

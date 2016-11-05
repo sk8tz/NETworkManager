@@ -6,17 +6,17 @@ using System.Windows.Data;
 
 namespace NETworkManager.GUI.Translator
 {
-    public sealed class TranslateAppThemeName : IValueConverter
+    public sealed class AccentNameTranslator : IValueConverter
     {
-        /* Translate the name of the app theme */
+        /* Translate the name of the accent */
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            AppTheme theme = value as AppTheme;
+            Accent accent = value as Accent;
 
-            string name = Application.Current.Resources["LocalizedString_AppTheme_" + theme.Name] as string;
+            string name = Application.Current.Resources["LocalizedString_Accent_" + accent.Name] as string;
 
             if (string.IsNullOrEmpty(name))
-                name = theme.Name;
+                name = accent.Name;
 
             return name;
         }

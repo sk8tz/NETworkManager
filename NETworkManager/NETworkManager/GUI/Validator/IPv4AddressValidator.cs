@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace NETworkManager.GUI.Validator
 {
-    public class ValidateIPv4Address : ValidationRule
+    public class IPv4AddressValidator : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

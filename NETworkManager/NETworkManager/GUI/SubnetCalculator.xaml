@@ -51,8 +51,8 @@
                     <TextBox.Text>
                         <Binding Path="IPAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
-                                <Validator:ValidateIPv4Address ValidatesOnTargetUpdated="True"/>
+                                <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                <Validator:IPv4AddressValidator ValidatesOnTargetUpdated="True"/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -62,7 +62,7 @@
                     <TextBox.Text>
                         <Binding Path="SubnetmaskCDIR" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
+                                <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace NETworkManager.GUI.Validator
 {
-    public class ValidateFolderExists : ValidationRule
+    public class FolderExistsValidator : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

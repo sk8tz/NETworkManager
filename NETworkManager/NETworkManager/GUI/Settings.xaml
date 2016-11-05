@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NETworkManager.GUI"
         xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
         xmlns:localization="clr-namespace:NETworkManager.Core.Localization"
-        xmlns:brushConverter="clr-namespace:NETworkManager.Core.Appearance.BrushConverter"
+        xmlns:brushConverter="clr-namespace:NETworkManager.GUI.BrushConverter"
         xmlns:translator="clr-namespace:NETworkManager.GUI.Translator"
         xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -19,11 +19,11 @@
     </Controls:MetroWindow.WindowButtonCommands>
     <Controls:MetroWindow.Resources>
         <!-- Brush Converter -->
-        <brushConverter:ConvertAppThemeToBrush x:Key="ConvertAppThemeToBrush" />
-        <brushConverter:ConvertAccentToBrush x:Key="ConvertAccentToBrush" />
+        <brushConverter:AppThemeToBrushConverter x:Key="AppThemeToBrushConverter" />
+        <brushConverter:AccentToBrushConverter x:Key="AccentToBrushConverter" />
         <!-- Transltor / Localization -->
-        <translator:TranslateAccentName x:Key="TranslateAccentName" />
-        <translator:TranslateAppThemeName x:Key="TranslateAppThemeName" />
+        <translator:AccentNameTranslator x:Key="AccentNameTranslator" />
+        <translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
         <!-- Styles -->
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
@@ -106,7 +106,7 @@
                                 <ListView x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionChanged="listViewAppTheme_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource ConvertAppThemeToBrush}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource TranslateAppThemeName}, ConverterParameter='Name'}"/>
+                                            <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AppThemeToBrushConverter}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource AppThemeNameTranslator}, ConverterParameter='Name'}"/>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <ListView.ItemsPanel>
@@ -122,8 +122,8 @@
                                 <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionChanged="listViewAccent_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate >
-                                            <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource ConvertAccentToBrush}, ConverterParameter='Name'}"
-                                                       ToolTip="{Binding Converter={StaticResource TranslateAccentName}, ConverterParameter='Name'}"  />
+                                            <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AccentToBrushConverter}, ConverterParameter='Name'}"
+                                                       ToolTip="{Binding Converter={StaticResource AccentNameTranslator}, ConverterParameter='Name'}"  />
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                     <ListView.ItemsPanel>
@@ -167,8 +167,8 @@
                                     <TextBox.Text>
                                         <Binding Path="SettingsLocationFolder" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
-                                                <Validator:ValidateFieldEmpty ValidatesOnTargetUpdated="True" />
-                                                <Validator:ValidateFolderExists ValidatesOnTargetUpdated="True" />
+                                                <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                                <Validator:FolderExistsValidator ValidatesOnTargetUpdated="True" />
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>

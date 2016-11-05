@@ -10,4 +10,3 @@
 ## WakeOnLan
 * Validate Template Row
 * Remove {NewItemPlaceHolder} in ComboBox
-* Don't close window with escape on "Template"

@@ -78,12 +78,12 @@ namespace NETworkManager.GUI
                 return;
 
             // Resize the window for better template view/edit
-            if (tabControlTemplate.SelectedIndex == 0)
+            if (tabControl.SelectedIndex == 0)
             {
                 Width = 350;
                 Height = 325;
             }
-            else if (tabControlTemplate.SelectedIndex == 1)
+            else if (tabControl.SelectedIndex == 1)
             {
                 if (Width < 700)
                     Width = 700;
@@ -109,7 +109,7 @@ namespace NETworkManager.GUI
 
         private void MetroWindowWakeOnLAN_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            if (e.Key == Key.Escape && tabControl.SelectedIndex != 1)
                 Close();
         }
     }

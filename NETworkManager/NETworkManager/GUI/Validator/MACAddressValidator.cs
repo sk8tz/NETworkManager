@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace NETworkManager.GUI.Validator
 {
-    public class ValidateMACAddress : ValidationRule
+    public class MACAddressValidator : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {            
