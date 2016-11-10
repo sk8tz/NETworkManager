@@ -8,8 +8,7 @@ namespace NETworkManager.GUI.ViewModels
 
         private void OnPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         // Path to the folder, where the settings are stored
