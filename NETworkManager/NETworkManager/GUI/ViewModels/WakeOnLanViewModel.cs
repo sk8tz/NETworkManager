@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace NETworkManager.GUI.ViewModels
 {
@@ -94,20 +92,7 @@ namespace NETworkManager.GUI.ViewModels
 
         public void WakeUp()
         {
-            // Convert string into byte array
-            byte[] macBytes = ConvertMACAddress.ToByteArray(MACAddress);
-
-            // Create a magic packet
-            byte[] magicPacket = MagicPacket.CreateFromBytes(macBytes);
-
-            // Parse string into IP-Address
-            IPAddress broadcastAddr = IPAddress.Parse(BroadcastAddress);
-
-            // Convert the port from string to int
-            int portNum = int.Parse(Port);
-
-            // Send the magic packet
-            MagicPacket.Send(magicPacket, broadcastAddr, portNum);
+            MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(BroadcastAddress), int.Parse(Port));
         }
     }
 }

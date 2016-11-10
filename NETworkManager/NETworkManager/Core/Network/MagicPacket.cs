@@ -10,7 +10,7 @@ namespace NETworkManager.Core.Network
         /// </summary>
         /// <param name="MAC">MAC-Address as byte[]</param>
         /// <returns>Magic Packet as byte array</returns>
-        public static byte[] CreateFromBytes(byte[] mac)
+        public static byte[] Create(byte[] mac)
         {
             byte[] packet = new byte[17 * 6];
 
@@ -30,6 +30,13 @@ namespace NETworkManager.Core.Network
             return packet;
         }
 
+        public static byte[] Create(string mac)
+        {
+            byte[] macBytes = ConvertMACAddress.ToByteArray(mac);
+
+            return Create(macBytes);
+        }
+
         /// <summary>
         /// Send a Magic Packet
         /// </summary>
@@ -39,7 +46,7 @@ namespace NETworkManager.Core.Network
         public static void Send(byte[] packet, IPAddress broadcast, int port)
         {
             UdpClient udpClient = new UdpClient();
-
+            
             udpClient.Connect(broadcast, port);
 
             udpClient.Send(packet, packet.Length);
