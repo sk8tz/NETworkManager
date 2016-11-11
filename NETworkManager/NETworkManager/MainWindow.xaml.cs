@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using NETworkManager.Core.Settings;
+//using System.Reflection;
 
 namespace NETworkManager
 {
@@ -48,7 +49,7 @@ namespace NETworkManager
 
         private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
         {
-
+       //     MessageBox.Show(Assembly.GetEntryAssembly().GetName().Name);
         }
         #endregion
 

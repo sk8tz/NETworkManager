@@ -43,7 +43,7 @@ namespace NETworkManager.Core.Settings
 
         private static string DefaultSettingsLocation()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"NETworkManager\Settings");
+            return @"Settings";
         }
 
         private static List<WakeOnLanInfo> DeserializeWakeOnLanTempaltes(string filePath)
