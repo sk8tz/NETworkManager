@@ -4,8 +4,9 @@
 * Global Hotkey ?? To open launcher
 
 ## Settings
+* SelectedItem -localization- not shown on startup
+* MoveSettings / CustomSettingsProvider
 * Import / Export von Settings
-* Custom Settings Provider
 
 ## WakeOnLan
 * Validate Template Row

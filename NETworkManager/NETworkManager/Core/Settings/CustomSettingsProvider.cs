@@ -20,10 +20,7 @@ public class CustomSettingsProvider : SettingsProvider
 
     public override string ApplicationName
     {
-        get
-        {
-            return Assembly.GetEntryAssembly().GetName().Name;
-        }
+        get { return Assembly.GetEntryAssembly().GetName().Name; }
         set { }
     }
 
@@ -53,7 +50,7 @@ public class CustomSettingsProvider : SettingsProvider
 
         try
         {
-            SettingsXML.Save(Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
+            SettingsXMLDocument.Save(Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
         }
         catch (Exception ex)
         {
@@ -70,7 +67,6 @@ public class CustomSettingsProvider : SettingsProvider
         //Iterate through the settings to be retrieved
         foreach (SettingsProperty setting in settings)
         {
-
             SettingsPropertyValue value = new SettingsPropertyValue(setting);
             value.IsDirty = false;
             value.SerializedValue = GetValue(setting);
@@ -79,51 +75,51 @@ public class CustomSettingsProvider : SettingsProvider
         return values;
     }
 
-    private XmlDocument _settingsXML = null;
+    private XmlDocument _settingsXMLDocument = null;
 
-    private XmlDocument SettingsXML
+    private XmlDocument SettingsXMLDocument
     {
         get
         {
             //If we dont hold an xml document, try opening one.  
             //If it doesnt exist then create a new one ready.
-            if (_settingsXML == null)
+            if (_settingsXMLDocument == null)
             {
-                _settingsXML = new XmlDocument();
+                _settingsXMLDocument = new XmlDocument();
 
                 try
                 {
-                    _settingsXML.Load(Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
+                    _settingsXMLDocument.Load(Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
                 }
                 catch (Exception ex)
                 {
                     //Create new document
-                    XmlDeclaration dec = _settingsXML.CreateXmlDeclaration("1.0", "utf-8", string.Empty);
-                    _settingsXML.AppendChild(dec);
+                    XmlDeclaration declaration = _settingsXMLDocument.CreateXmlDeclaration("1.0", "utf-8", string.Empty);
+                    _settingsXMLDocument.AppendChild(declaration);
 
                     XmlNode nodeRoot = default(XmlNode);
 
-                    nodeRoot = _settingsXML.CreateNode(XmlNodeType.Element, XmlSettingsRoot, "");
-                    _settingsXML.AppendChild(nodeRoot);
+                    nodeRoot = _settingsXMLDocument.CreateNode(XmlNodeType.Element, XmlSettingsRoot, "");
+                    _settingsXMLDocument.AppendChild(nodeRoot);
                 }
             }
 
-            return _settingsXML;
+            return _settingsXMLDocument;
         }
     }
 
     private string GetValue(SettingsProperty setting)
     {
-        string ret = "";
+        string result = "";
 
         try
         {
             if (IsRoaming(setting))
             {
-                ret = SettingsXML.SelectSingleNode(XmlSettingsRoot + "/" + setting.Name).InnerText;
+                result = SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot + "/" + setting.Name).InnerText;
             }
             else {
-                ret = SettingsXML.SelectSingleNode(XmlSettingsRoot + "/" + Environment.MachineName + "/" + setting.Name).InnerText;
+                result = SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot + "/" + Environment.MachineName + "/" + setting.Name).InnerText;
             }
         }
 
@@ -131,17 +127,17 @@ public class CustomSettingsProvider : SettingsProvider
         {
             if ((setting.DefaultValue != null))
             {
-                ret = setting.DefaultValue.ToString();
+                result = setting.DefaultValue.ToString();
             }
             else {
-                ret = "";
+                result = "";
             }
         }
 
-        return ret;
+        return result;
     }
 
-    private void SetValue(SettingsPropertyValue propVal)
+    private void SetValue(SettingsPropertyValue value)
     {
 
         XmlElement MachineNode = default(XmlElement);
@@ -152,12 +148,12 @@ public class CustomSettingsProvider : SettingsProvider
         //Otherwise it is stored under a machine name node 
         try
         {
-            if (IsRoaming(propVal.Property))
+            if (IsRoaming(value.Property))
             {
-                SettingNode = (XmlElement)SettingsXML.SelectSingleNode(XmlSettingsRoot + "/" + propVal.Name);
+                SettingNode = (XmlElement)SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot + "/" + value.Name);
             }
             else {
-                SettingNode = (XmlElement)SettingsXML.SelectSingleNode(XmlSettingsRoot + "/" + Environment.MachineName + "/" + propVal.Name);
+                SettingNode = (XmlElement)SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot + "/" + Environment.MachineName + "/" + value.Name);
             }
         }
         catch (Exception ex)
@@ -168,15 +164,15 @@ public class CustomSettingsProvider : SettingsProvider
         //Check to see if the node exists, if so then set its new value
         if ((SettingNode != null))
         {
-            SettingNode.InnerText = propVal.SerializedValue.ToString();
+            SettingNode.InnerText = value.SerializedValue.ToString();
         }
         else {
-            if (IsRoaming(propVal.Property))
+            if (IsRoaming(value.Property))
             {
                 //Store the value as an element of the Settings Root Node
-                SettingNode = SettingsXML.CreateElement(propVal.Name);
-                SettingNode.InnerText = propVal.SerializedValue.ToString();
-                SettingsXML.SelectSingleNode(XmlSettingsRoot).AppendChild(SettingNode);
+                SettingNode = SettingsXMLDocument.CreateElement(value.Name);
+                SettingNode.InnerText = value.SerializedValue.ToString();
+                SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot).AppendChild(SettingNode);
             }
             else {
                 //Its machine specific, store as an element of the machine name node,
@@ -184,38 +180,39 @@ public class CustomSettingsProvider : SettingsProvider
                 try
                 {
 
-                    MachineNode = (XmlElement)SettingsXML.SelectSingleNode(XmlSettingsRoot + "/" + Environment.MachineName);
+                    MachineNode = (XmlElement)SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot + "/" + Environment.MachineName);
                 }
                 catch (Exception ex)
                 {
-                    MachineNode = SettingsXML.CreateElement(Environment.MachineName);
-                    SettingsXML.SelectSingleNode(XmlSettingsRoot).AppendChild(MachineNode);
+                    MachineNode = SettingsXMLDocument.CreateElement(Environment.MachineName);
+                    SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot).AppendChild(MachineNode);
                 }
 
                 if (MachineNode == null)
                 {
-                    MachineNode = SettingsXML.CreateElement(Environment.MachineName);
-                    SettingsXML.SelectSingleNode(XmlSettingsRoot).AppendChild(MachineNode);
+                    MachineNode = SettingsXMLDocument.CreateElement(Environment.MachineName);
+                    SettingsXMLDocument.SelectSingleNode(XmlSettingsRoot).AppendChild(MachineNode);
                 }
 
-                SettingNode = SettingsXML.CreateElement(propVal.Name);
-                SettingNode.InnerText = propVal.SerializedValue.ToString();
+                SettingNode = SettingsXMLDocument.CreateElement(value.Name);
+                SettingNode.InnerText = value.SerializedValue.ToString();
                 MachineNode.AppendChild(SettingNode);
             }
         }
     }
 
-    private bool IsRoaming(SettingsProperty prop)
+    private bool IsRoaming(SettingsProperty properties)
     {
         //Determine if the setting is marked as Roaming
-        foreach (DictionaryEntry d in prop.Attributes)
+        foreach (DictionaryEntry entry in properties.Attributes)
         {
-            Attribute a = (Attribute)d.Value;
-            if (a is System.Configuration.SettingsManageabilityAttribute)
+            Attribute attribute = (Attribute)entry.Value;
+            if (attribute is SettingsManageabilityAttribute)
             {
                 return true;
             }
         }
+
         return false;
     }
 }

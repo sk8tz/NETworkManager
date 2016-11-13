@@ -40,6 +40,11 @@
             <Setter Property="Margin" Value="0,0,0,10" />
             <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
         </Style>
+        <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
         <Style TargetType="{x:Type TextBox}" x:Key="OpenFolderMetroTextBox" BasedOn="{StaticResource ButtonCommandMetroTextBox}">
             <Setter Property="mah:TextBoxHelper.ButtonTemplate">
                 <Setter.Value>
@@ -72,8 +77,8 @@
             <TabItem  Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
                     <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush3}" Padding="0,0,10,0" Margin="0" >
                         <ListBox.Resources>
@@ -87,7 +92,7 @@
                         <ListBoxItem Content="{DynamicResource LocalizedString_Language}" />
                         <ListBoxItem Content="{DynamicResource LocalizedString_Settings}" />
                     </ListBox>
-                    <TabControl SelectedIndex="{Binding ElementName=listBoxSettings, Path=SelectedIndex}" Grid.Column="1">
+                    <TabControl SelectedIndex="{Binding ElementName=listBoxSettings, Path=SelectedIndex}" Grid.Column="1" >
                         <TabControl.Resources>
                             <Style TargetType="TabItem">
                                 <Setter Property="Visibility" Value="Collapsed" />
@@ -103,7 +108,7 @@
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
-                                <ListView x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionChanged="listViewAppTheme_SelectionChanged">
+                                <ListView  x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AppThemeToBrushConverter}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource AppThemeNameTranslator}, ConverterParameter='Name'}"/>
@@ -117,9 +122,12 @@
                                                        ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
                                         </ItemsPanelTemplate>
                                     </ListView.ItemsPanel>
+                                    <ListView.SelectedItem>
+                                        <Binding Path="SelectedAppTheme" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                    </ListView.SelectedItem>
                                 </ListView>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
-                                <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionChanged="listViewAccent_SelectionChanged">
+                                <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate >
                                             <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AccentToBrushConverter}, ConverterParameter='Name'}"
@@ -134,13 +142,16 @@
                                                        ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
                                         </ItemsPanelTemplate>
                                     </ListView.ItemsPanel>
+                                    <ListView.SelectedItem>
+                                        <Binding Path="SelectedAccent" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                    </ListView.SelectedItem>
                                 </ListView>
                             </StackPanel>
                         </TabItem>
                         <!-- Language -->
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
-                                <ListView x:Name="listBoxLanguage" Background="Transparent" ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}" BorderThickness="0" SelectionChanged="listBoxLanguage_SelectionChanged">
+                                <ListView x:Name="listBoxLanguage" Background="Transparent" ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="5">
@@ -156,6 +167,9 @@
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
+                                    <ListView.SelectedItem>
+                                        <Binding Path="SelectedLocalization" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                    </ListView.SelectedItem>
                                 </ListView>
                             </StackPanel>
                         </TabItem>
@@ -163,7 +177,7 @@
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
-                                <TextBox Grid.Column="0" FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation }" Style="{StaticResource OpenFolderMetroTextBox}" Margin="0,0,0,10">
+                                <TextBox FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" Margin="0,0,0,10">
                                     <TextBox.Text>
                                         <Binding Path="SettingsLocationFolder" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -172,12 +186,36 @@
                                             </Binding.ValidationRules>
                                         </Binding>
                                     </TextBox.Text>
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox" BasedOn="{StaticResource OpenFolderMetroTextBox}">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=toggleSwitchSettingsPortable,Path=IsChecked}" Value="True" >
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
                                 </TextBox>
-                                <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Change}" Width="150" HorizontalAlignment="Right" FontSize="14" Margin="0,0,0,20" Click="btnChangeSettingsLocation_Click"/>
-
-
+                                <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Change}" Width="150" HorizontalAlignment="Right" FontSize="14" Margin="0,0,0,20" Click="btnChangeSettingsLocation_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}">
+                                            <Setter Property="IsEnabled" Value="True" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=toggleSwitchSettingsPortable,Path=IsChecked}" Value="True" >
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Portable}" />
+                                <Controls:ToggleSwitch x:Name="toggleSwitchSettingsPortable" OffLabel="{DynamicResource LocalizedString_Disabled}" OnLabel="{DynamicResource LocalizedString_Enabled}" Margin="0,0,0,20" >
+                                    <Controls:ToggleSwitch.IsChecked>
+                                        <Binding Path="SettingsPortable" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                    </Controls:ToggleSwitch.IsChecked>
+                                </Controls:ToggleSwitch>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />
-
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />
                             </StackPanel>
                         </TabItem>

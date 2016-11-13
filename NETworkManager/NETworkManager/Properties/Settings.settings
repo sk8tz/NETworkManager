@@ -17,7 +17,7 @@
     <Setting Name="WakeOnLan_Broadcast" Provider="CustomSettingsProvider" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Settings_Location" Provider="CustomSettingsProvider" Roaming="true" Type="System.String" Scope="User">
+    <Setting Name="Settings_Location" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="FileName_WakeOnLanTemplates" Type="System.String" Scope="Application">

@@ -11,6 +11,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using NETworkManager.Core.Settings;
+using System.Reflection;
+using System.IO;
 //using System.Reflection;
 
 namespace NETworkManager
@@ -28,16 +30,6 @@ namespace NETworkManager
 
             // Load appearance
             AppearanceController.LoadAppearance();
-            
-            // Check Settings
-            try
-            {
-                SettingsController.VerifySettings();
-            }
-            catch (Exception ex)
-            {                
-                MessageBox.Show(ex.Message);
-            }
 
             InitializeComponent();           
 
@@ -49,7 +41,7 @@ namespace NETworkManager
 
         private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
         {
-       //     MessageBox.Show(Assembly.GetEntryAssembly().GetName().Name);
+       
         }
         #endregion
 
@@ -68,7 +60,7 @@ namespace NETworkManager
             }
         }
 
-        private async void btnSettings_Click(object sender, RoutedEventArgs e)
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             Settings settingsWindow = new Settings()
             {
@@ -76,14 +68,6 @@ namespace NETworkManager
             };
 
             settingsWindow.ShowDialog();
-
-            if (settingsWindow.RestartRequiered)
-            {
-                string localizedHeader = Application.Current.Resources["LocalizedString_RestartRequired"] as string;
-                string localizedMessage = Application.Current.Resources["LocalizedString_RestartRequiredAfterSettingsChanged"] as string;
-
-                await this.ShowMessageAsync(localizedHeader, localizedMessage, MessageDialogStyle.Affirmative);
-            }
         }
         #endregion
 

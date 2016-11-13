@@ -32,6 +32,9 @@
     <system:String x:Key="LocalizedString_Output">Output</system:String>
     <system:String x:Key="LocalizedString_SubnetmaskCDIR">Subnetmask / CDIR</system:String>
     <system:String x:Key="LocalizedString_Calculate">Calculate</system:String>
+    <system:String x:Key="LocalizedString_Portable">Portable</system:String>
+    <system:String x:Key="LocalizedString_Enabled">Enabled</system:String>
+    <system:String x:Key="LocalizedString_Disabled">Disabled</system:String> 
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>

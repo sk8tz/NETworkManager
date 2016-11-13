@@ -4,48 +4,99 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Xml.Serialization;
+using System.Reflection;
 using NETworkManager.Core.Network;
 
 namespace NETworkManager.Core.Settings
 {
     public static class SettingsController
     {
-        public static void LoadSettings()
-        {
+        private const string SettingsFolderName = "Settings";
+        private const string IsPortableFileName = "IsPortable.settings";
 
+        private static string ApplicationName
+        {
+            get { return Assembly.GetEntryAssembly().GetName().Name; }
         }
 
-        public static void VerifySettings()
+        // Default settings location ("%AppData%\PRODUCTNAME\Settings")
+        private static string DefaultSettingsLocation
         {
-            string settingsLocation = GetSettingsLocation();
+            get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName, SettingsFolderName); }
+        }
 
-            if (settingsLocation == DefaultSettingsLocation())
-            {
-                if (!Directory.Exists(settingsLocation))
-                    Directory.CreateDirectory(settingsLocation);
-            }
-            else
-            {
-                if (!Directory.Exists(settingsLocation))
-                    throw new DirectoryNotFoundException(string.Format("Cannot find application settings folder:\n{0}", settingsLocation));
-            }
+        // Portable settings location (PROGRAMFOLDER\Settings)
+        private static string PortableSettingsLocation
+        {
+            get { return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SettingsFolderName); }
+        }
+
+        // Custom location (wherever the use want to store the files)
+        private static string CustomSettingsLocation
+        {
+            get { return Properties.Settings.Default.Settings_Location; }
+        }
+
+        // Path to the file which indicates that the application is portable
+        private static string IsPortableFilePath
+        {
+            get { return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), IsPortableFileName); }
         }
 
         public static string GetSettingsLocation()
         {
-            string customLocation = Properties.Settings.Default.Settings_Location;
+            if (IsPortable())
+                return PortableSettingsLocation;
 
-            if (!string.IsNullOrEmpty(customLocation))
-                return customLocation;
+            if (!string.IsNullOrEmpty(CustomSettingsLocation))
+                return CustomSettingsLocation;
 
-            return DefaultSettingsLocation();
+            return DefaultSettingsLocation;
         }
 
-        private static string DefaultSettingsLocation()
+        public static void MoveSettings(string sourceLocation, string targedLocation)
         {
-            return @"Settings";
+            if (!Directory.Exists(targedLocation))
+                Directory.CreateDirectory(targedLocation);
+
+            if (Directory.Exists(sourceLocation))
+            {
+                string[] files = Directory.GetFiles(sourceLocation);
+
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+
+                    File.Move(file, Path.Combine(targedLocation, fileName));
+                }
+            }
         }
 
+        #region Portable Settings
+        public static bool IsPortable()
+        {
+            return File.Exists(IsPortableFilePath);
+        }
+
+        public static void MakeSettingsPortable()
+        {
+            string oldLocation = GetSettingsLocation();
+
+            if (!File.Exists(IsPortableFilePath))
+                File.Create(IsPortableFilePath);
+
+            MoveSettings(oldLocation, PortableSettingsLocation);
+        }
+
+        public static void RestoreSettingsDefault()
+        {
+                File.Delete(IsPortableFilePath);
+
+            MoveSettings(PortableSettingsLocation, DefaultSettingsLocation);
+        }
+        #endregion
+
+        #region WakeOnLan
         private static List<WakeOnLanInfo> DeserializeWakeOnLanTempaltes(string filePath)
         {
             List<WakeOnLanInfo> list = new List<WakeOnLanInfo>();
@@ -70,7 +121,7 @@ namespace NETworkManager.Core.Settings
 
             return new List<WakeOnLanInfo>();
         }
-         
+
         private static void SerializeWakeOnLanTemplates(List<WakeOnLanInfo> list, string path)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<WakeOnLanInfo>));
@@ -87,5 +138,6 @@ namespace NETworkManager.Core.Settings
 
             SerializeWakeOnLanTemplates(list, filePath);
         }
+        #endregion
     }
 }
