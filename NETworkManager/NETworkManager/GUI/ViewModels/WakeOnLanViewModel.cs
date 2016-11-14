@@ -22,11 +22,11 @@ namespace NETworkManager.GUI.ViewModels
             get { return _MACAddress; }
             set
             {
-                if (value != _MACAddress)
-                {
-                    _MACAddress = value;
-                    OnPropertyChanged("MACAddress");
-                }
+                if (value == _MACAddress)
+                    return;
+
+                _MACAddress = value;
+                OnPropertyChanged("MACAddress");
             }
         }
 
@@ -36,11 +36,11 @@ namespace NETworkManager.GUI.ViewModels
             get { return _broadcastAddress; }
             set
             {
-                if (value != _broadcastAddress)
-                {
-                    _broadcastAddress = value;
-                    OnPropertyChanged("BroadcastAddress");
-                }
+                if (value == _broadcastAddress)
+                    return;
+
+                _broadcastAddress = value;
+                OnPropertyChanged("BroadcastAddress");
             }
         }
 
@@ -50,11 +50,11 @@ namespace NETworkManager.GUI.ViewModels
             get { return _port; }
             set
             {
-                if (value != _port)
-                {
-                    _port = value;
-                    OnPropertyChanged("Port");
-                }
+                if (value == _port)
+                    return;
+
+                _port = value;
+                OnPropertyChanged("Port");
             }
         }
 
@@ -64,11 +64,11 @@ namespace NETworkManager.GUI.ViewModels
             get { return _wakeOnLanTemplates; }
             set
             {
-                if (value != _wakeOnLanTemplates)
-                {
-                    _wakeOnLanTemplates = value;
-                    OnPropertyChanged("WakeOnLanTemplates");
-                }
+                if (value == _wakeOnLanTemplates)
+                    return;
+
+                _wakeOnLanTemplates = value;
+                OnPropertyChanged("WakeOnLanTemplates");
             }
         }
 

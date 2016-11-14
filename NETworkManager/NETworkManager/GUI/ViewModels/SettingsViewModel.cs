@@ -3,13 +3,16 @@ using NETworkManager.Core.Appearance;
 using NETworkManager.Core.Localization;
 using NETworkManager.Core.Settings;
 using System.ComponentModel;
+using System.Windows.Input;
+using System.Windows.Forms;
+using NETworkManager.GUI.Interface;
 
 namespace NETworkManager.GUI.ViewModels
 {
     class SettingsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
         private void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
@@ -21,8 +24,10 @@ namespace NETworkManager.GUI.ViewModels
             get { return _settingsChanged; }
             set
             {
-                if (value != _settingsChanged)
-                    _settingsChanged = value;
+                if (value == _settingsChanged)
+                    return;
+
+                _settingsChanged = value;
             }
         }
 
@@ -32,86 +37,66 @@ namespace NETworkManager.GUI.ViewModels
             get { return _restartRequired; }
             set
             {
-                if (value != _restartRequired)
-                    _restartRequired = value;
+                if (value == _restartRequired)
+                    return;
+
+                _restartRequired = value;
             }
         }
 
-        #region Apperance 
-        private AppTheme _selectedAppTheme;
-        public AppTheme SelectedAppTheme
+        private AppTheme _appThemeSelectedItem;
+        public AppTheme AppThemeSelectedItem
         {
-            get { return _selectedAppTheme; }
+            get { return _appThemeSelectedItem; }
             set
             {
-                if (value != _selectedAppTheme)
-                {
-                    _selectedAppTheme = value;
+                if (value == _appThemeSelectedItem)
+                    return;
 
-                    AppearanceController.ChangeAppTheme(_selectedAppTheme.Name);
-                    Properties.Settings.Default.Appearance_AppTheme = _selectedAppTheme.Name;
-                    SettingsChanged = true;
-
-                    OnPropertyChanged("SelectedAppTheme");
-                }
+                _appThemeSelectedItem = value;
+                OnPropertyChanged("AppThemeSelectedItem");
             }
         }
 
-        private Accent _selectdAccent;
-        public Accent SelectedAccent
+        private Accent _accentSelectedItem;
+        public Accent AccentSelectedItem
         {
-            get { return _selectdAccent; }
+            get { return _accentSelectedItem; }
             set
             {
-                if (value != _selectdAccent)
-                {
-                    _selectdAccent = value;
+                if (value == _accentSelectedItem)
+                    return;
 
-                    AppearanceController.ChangeAccent(_selectdAccent.Name);
-                    Properties.Settings.Default.Appearance_Accent = _selectdAccent.Name;
-                    SettingsChanged = true;
-
-                    OnPropertyChanged("SelectedAccent");
-                }
+                _accentSelectedItem = value;
+                OnPropertyChanged("AccentSelectedItem");
             }
         }
 
-        #endregion
-
-        #region Localization
-        private LocalizationInfo _selectedLocalization;
-        public LocalizationInfo SelectedLocalization
+        private int _localizationSelectedIndex;
+        public int LocalizationSelectedIndex
         {
-            get { return _selectedLocalization; }
+            get { return _localizationSelectedIndex; }
             set
             {
-                if (value != _selectedLocalization)
-                {
-                    _selectedLocalization = value;
+                if (value == _localizationSelectedIndex)
+                    return;
 
-                    LocalizationController.ChangeLocalization(_selectedLocalization);
-                    Properties.Settings.Default.Localization_CultureCode = _selectedLocalization.Code;
-                    SettingsChanged = true;
-                    RestartRequired = true;
-
-                    OnPropertyChanged("SelectedLocalization");
-                }
+                _localizationSelectedIndex = value;
+                OnPropertyChanged("LocalizationSelectedIndex");
             }
         }
-        #endregion
 
-        #region Settings
-        private string _settingsLocationFolder;
-        public string SettingsLocationFolder
+        private string _settingsLocationSelectedPath;
+        public string SettingsLocationSelectedPath
         {
-            get { return _settingsLocationFolder; }
+            get { return _settingsLocationSelectedPath; }
             set
             {
-                if (value != _settingsLocationFolder)
-                {
-                    _settingsLocationFolder = value;
-                    OnPropertyChanged("SettingsLocationFolder");
-                }
+                if (value == _settingsLocationSelectedPath)
+                    return;
+
+                _settingsLocationSelectedPath = value;
+                OnPropertyChanged("SettingsLocationSelectedPath");
             }
         }
 
@@ -122,25 +107,24 @@ namespace NETworkManager.GUI.ViewModels
             set
             {
                 if (value != _settingsPortable)
-                {
-                    _settingsPortable = value;
-                    OnPropertyChanged("SettingsPortable");
-                }
+                    return;
+
+                _settingsPortable = value;
+                OnPropertyChanged("SettingsPortable");
             }
         }
-        #endregion
 
         public void LoadSettings()
         {
             // Apperance
-            SelectedAppTheme = ThemeManager.DetectAppStyle().Item1;
-            SelectedAccent = ThemeManager.DetectAppStyle().Item2;
+            AppThemeSelectedItem = ThemeManager.DetectAppStyle().Item1;
+            AccentSelectedItem = ThemeManager.DetectAppStyle().Item2;
 
             // Localization 
-            SelectedLocalization = LocalizationController.LocalizationList.Find(a => a.Code == LocalizationController.CurrentLocalization.Code);
+            LocalizationSelectedIndex = LocalizationController.LocalizationList.FindIndex(a => a.Code == LocalizationController.CurrentLocalization.Code);
 
             // Settings
-            SettingsLocationFolder = SettingsController.GetSettingsLocation();
+            SettingsLocationSelectedPath = SettingsController.GetSettingsLocation();
             SettingsPortable = SettingsController.IsPortable();
         }
 
@@ -149,5 +133,48 @@ namespace NETworkManager.GUI.ViewModels
             if (SettingsChanged)
                 Properties.Settings.Default.Save();
         }
+
+        public void ChangeAppThemeOnSelectionChanged()
+        {
+            AppearanceController.ChangeAppTheme(AppThemeSelectedItem.Name);
+
+            SettingsChanged = true;
+
+            Properties.Settings.Default.Appearance_AppTheme = AppThemeSelectedItem.Name;
+        }
+
+        public void ChangeAccentOnSelectionChanged()
+        {
+            AppearanceController.ChangeAccent(AccentSelectedItem.Name);
+
+            SettingsChanged = true;
+
+            Properties.Settings.Default.Appearance_Accent = AccentSelectedItem.Name;
+        }
+
+        public void ChangeLocalizationOnSelectionChanged()
+        {
+            LocalizationController.ChangeLocalization(LocalizationController.LocalizationList[LocalizationSelectedIndex]);
+
+            SettingsChanged = true;
+            RestartRequired = true;
+
+            Properties.Settings.Default.Localization_CultureCode = LocalizationController.CurrentLocalization.Code;
+        }
+
+        public ICommand BrowseFolderCommand
+        {
+            get { return new RelayCommand(p => BrowseFolderAction()); }
+        }
+
+        public void BrowseFolderAction()
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            DialogResult dialogResult = dialog.ShowDialog();
+
+            if (dialogResult == DialogResult.OK)
+                SettingsLocationSelectedPath = dialog.SelectedPath;
+        }       
     }
 }

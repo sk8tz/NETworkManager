@@ -7,7 +7,7 @@ using System.Xml;
 using System.IO;
 using NETworkManager.Core.Settings;
 
-// Found here: http://www.codeproject.com/Articles/20917/Creating-a-Custom-Settings-Provider?msg=2934144#xx2934144xx
+// Source: http://www.codeproject.com/Articles/20917/Creating-a-Custom-Settings-Provider?msg=2934144#xx2934144xx
 
 public class CustomSettingsProvider : SettingsProvider
 {

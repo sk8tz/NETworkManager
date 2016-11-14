@@ -17,25 +17,25 @@ namespace NETworkManager.GUI.ViewModels
             get { return _ipAddress; }
             set
             {
-                if(value != _ipAddress)
-                {
-                    _ipAddress = value;
-                    OnPropertyChanged("IPAddress");
-                }
+                if (value == _ipAddress)
+                    return;
+
+                _ipAddress = value;
+                OnPropertyChanged("IPAddress");
             }
         }
 
         private string _subnetmaskCDIR;
-            public string SubnetmaskCDIR
+        public string SubnetmaskCDIR
         {
             get { return _subnetmaskCDIR; }
             set
             {
-                if(value != _subnetmaskCDIR)
-                {
-                    _subnetmaskCDIR = value;
-                    OnPropertyChanged("SubnetmaskCDIR");
-                }
+                if (value == _subnetmaskCDIR)
+                    return;
+
+                _subnetmaskCDIR = value;
+                OnPropertyChanged("SubnetmaskCDIR");
             }
         }
     }

@@ -45,7 +45,7 @@
             <Setter Property="Margin" Value="20,0" />
             <Setter Property="FontSize" Value="14" />
         </Style>
-        <Style TargetType="{x:Type TextBox}" x:Key="OpenFolderMetroTextBox" BasedOn="{StaticResource ButtonCommandMetroTextBox}">
+        <Style TargetType="{x:Type TextBox}" x:Key="BrowseFolderButtonMetroTextBox" BasedOn="{StaticResource ButtonCommandMetroTextBox}">
             <Setter Property="mah:TextBoxHelper.ButtonTemplate">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -108,7 +108,7 @@
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
-                                <ListView  x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single">
+                                <ListView  x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single" SelectionChanged="listViewAppTheme_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AppThemeToBrushConverter}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource AppThemeNameTranslator}, ConverterParameter='Name'}"/>
@@ -123,11 +123,11 @@
                                         </ItemsPanelTemplate>
                                     </ListView.ItemsPanel>
                                     <ListView.SelectedItem>
-                                        <Binding Path="SelectedAppTheme" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                        <Binding Path="AppThemeSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
                                     </ListView.SelectedItem>
                                 </ListView>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
-                                <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionMode="Single">
+                                <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionMode="Single" SelectionChanged="listViewAccent_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate >
                                             <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AccentToBrushConverter}, ConverterParameter='Name'}"
@@ -143,7 +143,7 @@
                                         </ItemsPanelTemplate>
                                     </ListView.ItemsPanel>
                                     <ListView.SelectedItem>
-                                        <Binding Path="SelectedAccent" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                        <Binding Path="AccentSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
                                     </ListView.SelectedItem>
                                 </ListView>
                             </StackPanel>
@@ -151,7 +151,7 @@
                         <!-- Language -->
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
-                                <ListView x:Name="listBoxLanguage" Background="Transparent" ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}" BorderThickness="0" SelectionMode="Single">
+                                <ListView x:Name="listBoxLanguage" Background="Transparent" ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}" BorderThickness="0" SelectionMode="Single" SelectionChanged="listBoxLanguage_SelectionChanged">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="5">
@@ -167,9 +167,9 @@
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
-                                    <ListView.SelectedItem>
-                                        <Binding Path="SelectedLocalization" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
-                                    </ListView.SelectedItem>
+                                    <ListView.SelectedIndex>
+                                        <Binding Path="LocalizationSelectedIndex" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                    </ListView.SelectedIndex>
                                 </ListView>
                             </StackPanel>
                         </TabItem>
@@ -177,9 +177,9 @@
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
-                                <TextBox FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" Margin="0,0,0,10">
+                                <TextBox FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" mah:TextBoxHelper.ButtonCommand="{Binding BrowseFolderCommand}" Margin="0,0,0,10">
                                     <TextBox.Text>
-                                        <Binding Path="SettingsLocationFolder" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="SettingsLocationSelectedPath" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
                                                 <Validator:FolderExistsValidator ValidatesOnTargetUpdated="True" />
@@ -187,7 +187,7 @@
                                         </Binding>
                                     </TextBox.Text>
                                     <TextBox.Style>
-                                        <Style TargetType="TextBox" BasedOn="{StaticResource OpenFolderMetroTextBox}">
+                                        <Style TargetType="TextBox" BasedOn="{StaticResource BrowseFolderButtonMetroTextBox}">
                                             <Setter Property="IsEnabled" Value="True" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding ElementName=toggleSwitchSettingsPortable,Path=IsChecked}" Value="True" >

@@ -1,8 +1,4 @@
-﻿using MahApps.Metro;
-using MahApps.Metro.Controls;
-using NETworkManager.Core.Appearance;
-using NETworkManager.Core.Localization;
-using NETworkManager.Core.Settings;
+﻿using MahApps.Metro.Controls;
 using NETworkManager.GUI.ViewModels;
 using System.ComponentModel;
 using System.Windows;
@@ -16,6 +12,9 @@ namespace NETworkManager.GUI
     /// </summary>
     public partial class Settings : MetroWindow
     {
+        // Prevents the execution of events during loading
+        private bool _isLoading = true;
+
         private SettingsViewModel viewModel = new SettingsViewModel();
 
         public Settings()
@@ -27,14 +26,16 @@ namespace NETworkManager.GUI
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             viewModel.LoadSettings();
+
+            _isLoading = false;
         }
-      
+
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             viewModel.SaveSettings();
             // Dialog if changed...
         }
-        
+
 
         private void btnChangeSettingsLocation_Click(object sender, RoutedEventArgs e)
         {
@@ -46,5 +47,29 @@ namespace NETworkManager.GUI
             if (e.Key == Key.Escape)
                 Close();
         }
+
+        private void listViewAppTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isLoading)
+                return;
+
+            viewModel.ChangeAppThemeOnSelectionChanged();
+        }
+
+        private void listViewAccent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isLoading)
+                return;
+
+            viewModel.ChangeAccentOnSelectionChanged();
+        }
+
+        private void listBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isLoading)
+                return;
+
+            viewModel.ChangeLocalizationOnSelectionChanged();
+        }                
     }
 }

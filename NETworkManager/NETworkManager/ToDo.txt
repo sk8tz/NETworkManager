@@ -4,10 +4,10 @@
 * Global Hotkey ?? To open launcher
 
 ## Settings
-* SelectedItem -localization- not shown on startup
 * MoveSettings / CustomSettingsProvider
 * Import / Export von Settings
 
 ## WakeOnLan
-* Validate Template Row
+* Validate Template Row / Context Menu
 * Remove {NewItemPlaceHolder} in ComboBox
+* ICommand for Buttons...
