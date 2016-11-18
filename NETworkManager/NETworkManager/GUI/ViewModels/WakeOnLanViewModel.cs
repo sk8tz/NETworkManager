@@ -1,5 +1,6 @@
 ﻿using NETworkManager.Core.Network;
 using NETworkManager.Core.Settings;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -72,9 +73,48 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
+        private WakeOnLanInfo _wakeOnLanInfoSelectedItem;
+        public WakeOnLanInfo WakeOnLanInfoSelectedItem
+        {
+            get { return _wakeOnLanInfoSelectedItem; }
+            set
+            {
+                if (value == _wakeOnLanInfoSelectedItem)
+                    return;
+
+                _wakeOnLanInfoSelectedItem = value;
+                OnPropertyChanged("WakeOnLanInfoSelectedItem");
+            }
+        }
+
         public WakeOnLanViewModel()
         {
+            LoadSettings();
             LoadTemplates();
+        }
+
+        public void WakeOnLanInfoSelectedItemChanged()
+        {
+            if (WakeOnLanInfoSelectedItem == null)
+                return;
+
+            BroadcastAddress = WakeOnLanInfoSelectedItem.Broadcast;
+            Port = WakeOnLanInfoSelectedItem.Port;
+        }
+
+        public void LoadSettings()
+        {
+            MACAddress = Properties.Settings.Default.WakeOnLan_MAC;
+            BroadcastAddress = Properties.Settings.Default.WakeOnLan_Broadcast;
+            Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
+        }
+
+        public void SaveSettings()
+        {
+            Properties.Settings.Default.WakeOnLan_MAC = MACAddress;
+            Properties.Settings.Default.WakeOnLan_Broadcast = BroadcastAddress;
+            Properties.Settings.Default.WakeOnLan_Port = Convert.ToInt32(Port);
+            Properties.Settings.Default.Save();
         }
 
         public void LoadTemplates()

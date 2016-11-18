@@ -114,6 +114,11 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
+        public SettingsViewModel()
+        {
+            LoadSettings();
+        }
+
         public void LoadSettings()
         {
             // Apperance

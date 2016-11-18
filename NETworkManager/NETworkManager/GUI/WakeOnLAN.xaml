@@ -53,6 +53,9 @@
                                     </Binding.ValidationRules>
                                 </Binding>
                             </ComboBox.Text>
+                            <ComboBox.SelectedItem>
+                                <Binding Path="WakeOnLanInfoSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                            </ComboBox.SelectedItem>                                
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>

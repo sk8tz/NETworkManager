@@ -25,25 +25,8 @@ namespace NETworkManager.GUI
 
         private void MetroWindowWakeOnLAN_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadSettings();
-
             _isLoading = false;
         }
-
-        #region Load and save window specific settings
-        private void LoadSettings()
-        {
-            viewModel.BroadcastAddress = Properties.Settings.Default.WakeOnLan_Broadcast;
-            viewModel.Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
-        }
-
-        private void SaveSettings()
-        {
-            Properties.Settings.Default.WakeOnLan_Broadcast = viewModel.BroadcastAddress;
-            Properties.Settings.Default.WakeOnLan_Port = Convert.ToInt32(viewModel.Port);
-            Properties.Settings.Default.Save();
-        }
-        #endregion
 
         #region Buttons
         private void btnWakeUp_Click(object sender, RoutedEventArgs e)
@@ -51,7 +34,6 @@ namespace NETworkManager.GUI
             try
             {
                 viewModel.WakeUp();
-                SaveSettings();
             }
             catch (Exception ex)
             {
@@ -64,6 +46,7 @@ namespace NETworkManager.GUI
             try
             {
                 viewModel.SaveTemplates();
+                viewModel.SaveSettings();
             }
             catch (Exception ex)
             {
@@ -95,16 +78,7 @@ namespace NETworkManager.GUI
 
         private void cbMACAddress_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            WakeOnLanInfo template = cbMACAddress.SelectedItem as WakeOnLanInfo;
-
-            if (template == null)
-                return;
-
-            if (!string.IsNullOrEmpty(template.Broadcast))
-                viewModel.BroadcastAddress = template.Broadcast;
-
-            if (!string.IsNullOrEmpty(template.Port))
-                viewModel.Port = template.Port;
+            viewModel.WakeOnLanInfoSelectedItemChanged();
         }
 
         private void MetroWindowWakeOnLAN_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)

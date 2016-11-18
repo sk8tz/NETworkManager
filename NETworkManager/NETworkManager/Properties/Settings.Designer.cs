@@ -114,5 +114,17 @@ namespace NETworkManager.Properties {
                 return ((string)(this["FileName_WakeOnLanTemplates"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WakeOnLan_MAC {
+            get {
+                return ((string)(this["WakeOnLan_MAC"]));
+            }
+            set {
+                this["WakeOnLan_MAC"] = value;
+            }
+        }
     }
 }

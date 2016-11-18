@@ -25,8 +25,6 @@ namespace NETworkManager.GUI
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            viewModel.LoadSettings();
-
             _isLoading = false;
         }
 
