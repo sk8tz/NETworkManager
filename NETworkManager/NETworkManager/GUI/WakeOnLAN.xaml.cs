@@ -34,6 +34,7 @@ namespace NETworkManager.GUI
             try
             {
                 viewModel.WakeUp();
+                viewModel.SaveSettings();
             }
             catch (Exception ex)
             {
@@ -45,8 +46,7 @@ namespace NETworkManager.GUI
         {
             try
             {
-                viewModel.SaveTemplates();
-                viewModel.SaveSettings();
+                viewModel.SaveTemplates();                
             }
             catch (Exception ex)
             {
