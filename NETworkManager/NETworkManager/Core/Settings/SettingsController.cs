@@ -43,15 +43,18 @@ namespace NETworkManager.Core.Settings
             get { return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), IsPortableFileName); }
         }
 
-        public static string GetSettingsLocation()
+        public static string SettingsLocation
         {
-            if (IsPortable())
-                return PortableSettingsLocation;
+            get
+            {
+                if (IsPortable)
+                    return PortableSettingsLocation;
 
-            if (!string.IsNullOrEmpty(CustomSettingsLocation))
-                return CustomSettingsLocation;
+                if (!string.IsNullOrEmpty(CustomSettingsLocation))
+                    return CustomSettingsLocation;
 
-            return DefaultSettingsLocation;
+                return DefaultSettingsLocation;
+            }
         }
 
         public static void MoveSettings(string sourceLocation, string targedLocation)
@@ -72,10 +75,9 @@ namespace NETworkManager.Core.Settings
             }
         }
 
-        #region Portable Settings
-        public static bool IsPortable()
+        public static bool IsPortable
         {
-            return File.Exists(IsPortableFilePath);
+            get { return File.Exists(IsPortableFilePath); }
         }
 
         public static void MakeSettingsPortable()
@@ -90,11 +92,10 @@ namespace NETworkManager.Core.Settings
 
         public static void RestoreSettingsDefault()
         {
-                File.Delete(IsPortableFilePath);
+            File.Delete(IsPortableFilePath);
 
             MoveSettings(PortableSettingsLocation, DefaultSettingsLocation);
         }
-        #endregion
 
         #region WakeOnLan
         private static List<WakeOnLanInfo> DeserializeWakeOnLanTempaltes(string filePath)

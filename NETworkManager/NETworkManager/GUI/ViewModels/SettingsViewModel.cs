@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
+using System.IO;
 
 namespace NETworkManager.GUI.ViewModels
 {
@@ -130,7 +131,7 @@ namespace NETworkManager.GUI.ViewModels
 
             // Settings
             SettingsLocationSelectedPath = SettingsController.GetSettingsLocation();
-            SettingsPortable = SettingsController.IsPortable();
+            SettingsPortable = SettingsController.IsPortable;
         }
 
         public void SaveSettings()
@@ -176,10 +177,15 @@ namespace NETworkManager.GUI.ViewModels
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
 
+            if (Directory.Exists(SettingsLocationSelectedPath))
+                dialog.SelectedPath = SettingsLocationSelectedPath;
+
             DialogResult dialogResult = dialog.ShowDialog();
 
             if (dialogResult == DialogResult.OK)
                 SettingsLocationSelectedPath = dialog.SelectedPath;
-        }       
+        }
+        
+                       
     }
 }

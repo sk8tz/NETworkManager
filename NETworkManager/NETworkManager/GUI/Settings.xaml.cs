@@ -31,16 +31,20 @@ namespace NETworkManager.GUI
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             viewModel.SaveSettings();
-            // Dialog if changed...
+            
+            // Show Dialog if restart is required
+            if(viewModel.RestartRequired)
+            {
+                
+            }
         }
-
-
+        
         private void btnChangeSettingsLocation_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
-        private void MetroWindowSettings_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void MetroWindowSettings_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
                 Close();

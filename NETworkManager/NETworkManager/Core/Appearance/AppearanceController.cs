@@ -5,7 +5,7 @@ using System.Windows;
 namespace NETworkManager.Core.Appearance
 {
     public static class AppearanceController
-    {
+    {        
         /// <summary>
         /// Load Appearance (AppTheme and Accent) from the user settings.
         /// </summary>
@@ -25,7 +25,7 @@ namespace NETworkManager.Core.Appearance
         }
 
         /// <summary>
-        /// Changes the AppTheme
+        /// Change the AppTheme
         /// </summary>
         /// <param name="appThemeName">Name of the AppTheme</param>
         public static void ChangeAppTheme(string appThemeName)
@@ -33,6 +33,10 @@ namespace NETworkManager.Core.Appearance
             ThemeManager.ChangeAppTheme(Application.Current, appThemeName);
         }
 
+        /// <summary>
+        /// Change the Accent
+        /// </summary>
+        /// <param name="accentName">Name of the Accent</param>
         public static void ChangeAccent(string accentName)
         {
             Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);

@@ -9,7 +9,10 @@ namespace NETworkManager.Core.Localization
 {
     public static class LocalizationController
     {
-        // List of all available localizations
+        /// <summary>
+        /// List of all available localizations
+        /// Localizations are stored as .xaml-file in the resources
+        /// </summary>
         public static List<LocalizationInfo> LocalizationList
         {
             get
@@ -21,7 +24,9 @@ namespace NETworkManager.Core.Localization
             }
         }
 
-        // Current localization
+        /// <summary>
+        /// Get or set the current localization
+        /// </summary>
         private static LocalizationInfo _currentLocalization;
         public static LocalizationInfo CurrentLocalization
         {
@@ -29,7 +34,9 @@ namespace NETworkManager.Core.Localization
             set { _currentLocalization = value; }
         }
 
-        // Load localization from the settings
+        /// <summary>
+        /// Load the localization from the user settings
+        /// </summary>
         public static void LoadLocalization()
         {
             string cultureCode = Properties.Settings.Default.Localization_CultureCode;
@@ -47,22 +54,31 @@ namespace NETworkManager.Core.Localization
             else
                 CurrentLocalization = info;
         }
+        
 
         private static ResourceDictionary _localizationResourceDictionary;
 
-        // Change localization 
-        public static void ChangeLocalization(LocalizationInfo info)
+        /// <summary>
+        /// Change the localization
+        /// </summary>
+        /// <param name="info">LocalizationInfo</param>
+        public static void ChangeLocalization(LocalizationInfo localizationInfo)
         {
-            CurrentLocalization = info;
+            // Set the current localization
+            CurrentLocalization = localizationInfo;
 
+            // Remove dictionaries, which are no longer required
             if (_localizationResourceDictionary != null)
                 Application.Current.Resources.MergedDictionaries.Remove(_localizationResourceDictionary);
 
-            _localizationResourceDictionary = new ResourceDictionary { Source = new Uri(info.Path, UriKind.Relative) };
+            // Create/Initialize a new dictionary from the .xaml-file in the resource
+            _localizationResourceDictionary = new ResourceDictionary { Source = new Uri(localizationInfo.Path, UriKind.Relative) };
 
+            // Add the new dictionary
             Application.Current.Resources.MergedDictionaries.Add(_localizationResourceDictionary);
 
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(info.Code);
+            // Set the culture code
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(localizationInfo.Code);
         }
     }
 }
