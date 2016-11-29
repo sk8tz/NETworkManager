@@ -4,7 +4,8 @@
 * Global Hotkey ?? To open launcher
 
 ## Settings
-* MoveSettings / CustomSettingsProvider
+* Update SettingsLocation path when restore settings from portable and path does not exist... settings are copied right but the old path is shown in the textbox
+* Add Button restore default location if something else is shown in the textbox...
 * Import / Export von Settings
 
 ## WakeOnLan

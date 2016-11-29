@@ -13,7 +13,7 @@ namespace NETworkManager.GUI.ViewModels
     class SettingsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         private void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
@@ -107,7 +107,7 @@ namespace NETworkManager.GUI.ViewModels
             get { return _settingsPortable; }
             set
             {
-                if (value != _settingsPortable)
+                if (value == _settingsPortable)
                     return;
 
                 _settingsPortable = value;
@@ -130,7 +130,7 @@ namespace NETworkManager.GUI.ViewModels
             LocalizationSelectedIndex = LocalizationController.LocalizationList.FindIndex(a => a.Code == LocalizationController.CurrentLocalization.Code);
 
             // Settings
-            SettingsLocationSelectedPath = SettingsController.GetSettingsLocation();
+            SettingsLocationSelectedPath = SettingsController.SettingsLocation;
             SettingsPortable = SettingsController.IsPortable;
         }
 
@@ -145,7 +145,6 @@ namespace NETworkManager.GUI.ViewModels
             AppearanceController.ChangeAppTheme(AppThemeSelectedItem.Name);
 
             SettingsChanged = true;
-
             Properties.Settings.Default.Appearance_AppTheme = AppThemeSelectedItem.Name;
         }
 
@@ -154,7 +153,6 @@ namespace NETworkManager.GUI.ViewModels
             AppearanceController.ChangeAccent(AccentSelectedItem.Name);
 
             SettingsChanged = true;
-
             Properties.Settings.Default.Appearance_Accent = AccentSelectedItem.Name;
         }
 
@@ -185,7 +183,23 @@ namespace NETworkManager.GUI.ViewModels
             if (dialogResult == DialogResult.OK)
                 SettingsLocationSelectedPath = dialog.SelectedPath;
         }
-        
-                       
+
+        public ICommand ChangeSettingsCommand
+        {
+            get { return new RelayCommand(p => ChangeSettingsAction()); }
+        }
+
+        public void ChangeSettingsAction()
+        {
+            SettingsController.ChangeSettingsLocation(SettingsLocationSelectedPath);
+
+            SettingsChanged = true;
+            Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
+        }
+
+        public void SettingsPortableIsCheckedChanged()
+        {
+            SettingsController.MakeSettingsPortable(SettingsPortable);
+        }
     }
 }

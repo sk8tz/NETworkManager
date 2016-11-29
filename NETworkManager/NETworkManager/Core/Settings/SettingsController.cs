@@ -25,16 +25,29 @@ namespace NETworkManager.Core.Settings
             get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName, SettingsFolderName); }
         }
 
-        // Portable settings location (PROGRAMFOLDER\Settings)
-        private static string PortableSettingsLocation
-        {
-            get { return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SettingsFolderName); }
-        }
-
         // Custom location (wherever the use want to store the files)
         private static string CustomSettingsLocation
         {
             get { return Properties.Settings.Default.Settings_Location; }
+        }
+
+        public static string SettingsLocation
+        {
+            get
+            {
+                string settingsLocation = CustomSettingsLocation;
+
+                if (!string.IsNullOrEmpty(settingsLocation) && Directory.Exists(settingsLocation))
+                    return settingsLocation;
+
+                return DefaultSettingsLocation;
+            }
+        }
+
+        // Portable settings location (PROGRAMFOLDER\Settings)
+        public static string PortableSettingsLocation
+        {
+            get { return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SettingsFolderName); }
         }
 
         // Path to the file which indicates that the application is portable
@@ -43,18 +56,9 @@ namespace NETworkManager.Core.Settings
             get { return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), IsPortableFileName); }
         }
 
-        public static string SettingsLocation
+        public static bool IsPortable
         {
-            get
-            {
-                if (IsPortable)
-                    return PortableSettingsLocation;
-
-                if (!string.IsNullOrEmpty(CustomSettingsLocation))
-                    return CustomSettingsLocation;
-
-                return DefaultSettingsLocation;
-            }
+            get { return File.Exists(IsPortableFilePath); }
         }
 
         public static void MoveSettings(string sourceLocation, string targedLocation)
@@ -75,26 +79,35 @@ namespace NETworkManager.Core.Settings
             }
         }
 
-        public static bool IsPortable
+        public static void ChangeSettingsLocation(string targedLocation)
         {
-            get { return File.Exists(IsPortableFilePath); }
+            MoveSettings(SettingsLocation, targedLocation);
         }
 
-        public static void MakeSettingsPortable()
+        public static void MakeSettingsPortable(bool isPortable)
         {
-            string oldLocation = GetSettingsLocation();
+            string sourceLocation = string.Empty;
+            string targedLocation = string.Empty;
 
-            if (!File.Exists(IsPortableFilePath))
+            if (isPortable)
+            {
+                sourceLocation = SettingsLocation;
+                targedLocation = PortableSettingsLocation;
+
+                // Create the file that indicates that the application is portable
                 File.Create(IsPortableFilePath);
+            }
+            else
+            {
+                sourceLocation = PortableSettingsLocation;
+                targedLocation = SettingsLocation;
 
-            MoveSettings(oldLocation, PortableSettingsLocation);
-        }
+                // Delete the file that indicates that the application is portable
+                File.Delete(IsPortableFilePath);
+            }
 
-        public static void RestoreSettingsDefault()
-        {
-            File.Delete(IsPortableFilePath);
-
-            MoveSettings(PortableSettingsLocation, DefaultSettingsLocation);
+            // Move all existing settings to the targed location
+            MoveSettings(sourceLocation, targedLocation);
         }
 
         #region WakeOnLan
@@ -106,8 +119,8 @@ namespace NETworkManager.Core.Settings
 
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {
-                var test = (List<WakeOnLanInfo>)(serializer.Deserialize(stream));
-                list.AddRange(test);
+                List<WakeOnLanInfo> _list = (List<WakeOnLanInfo>)(serializer.Deserialize(stream));
+                list.AddRange(_list);
             }
 
             return list;
@@ -115,7 +128,7 @@ namespace NETworkManager.Core.Settings
 
         public static List<WakeOnLanInfo> GetWakeOnLanTemplates()
         {
-            string filePath = Path.Combine(GetSettingsLocation(), Properties.Settings.Default.FileName_WakeOnLanTemplates);
+            string filePath = Path.Combine(SettingsLocation, Properties.Settings.Default.FileName_WakeOnLanTemplates);
 
             if (File.Exists(filePath))
                 return DeserializeWakeOnLanTempaltes(filePath);
@@ -135,7 +148,7 @@ namespace NETworkManager.Core.Settings
 
         public static void SaveWakeOnLanTemplates(List<WakeOnLanInfo> list)
         {
-            string filePath = Path.Combine(GetSettingsLocation(), Properties.Settings.Default.FileName_WakeOnLanTemplates);
+            string filePath = Path.Combine(SettingsLocation, Properties.Settings.Default.FileName_WakeOnLanTemplates);
 
             SerializeWakeOnLanTemplates(list, filePath);
         }

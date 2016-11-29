@@ -31,19 +31,14 @@ namespace NETworkManager.GUI
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             viewModel.SaveSettings();
-            
+
             // Show Dialog if restart is required
-            if(viewModel.RestartRequired)
+            if (viewModel.RestartRequired)
             {
-                
+
             }
         }
-        
-        private void btnChangeSettingsLocation_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
+                
         private void MetroWindowSettings_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -72,6 +67,14 @@ namespace NETworkManager.GUI
                 return;
 
             viewModel.ChangeLocalizationOnSelectionChanged();
-        }                
+        }
+
+        private void toggleSwitchSettingsPortable_IsCheckedChanged(object sender, System.EventArgs e)
+        {
+            if (_isLoading)
+                return;
+            
+            viewModel.SettingsPortableIsCheckedChanged();
+        }
     }
 }

@@ -28,9 +28,14 @@ public class CustomSettingsProvider : SettingsProvider
     {
         get { return "CustomSettingsProvider"; }
     }
+
     public virtual string GetAppSettingsPath()
     {
-        return SettingsController.GetSettingsLocation();
+        if (SettingsController.IsPortable)
+            return SettingsController.PortableSettingsLocation;
+
+
+        return SettingsController.SettingsLocation;
     }
 
     public virtual string GetAppSettingsFilename()
