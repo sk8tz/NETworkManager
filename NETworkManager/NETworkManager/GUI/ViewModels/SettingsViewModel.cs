@@ -191,15 +191,23 @@ namespace NETworkManager.GUI.ViewModels
 
         public void ChangeSettingsAction()
         {
-            SettingsController.ChangeSettingsLocation(SettingsLocationSelectedPath);
-
-            SettingsChanged = true;
+            SettingsController.ChangeSettingsLocation(SettingsLocationSelectedPath, true);
+                        
             Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
+            Properties.Settings.Default.Save();
         }
 
         public void SettingsPortableIsCheckedChanged()
         {
-            SettingsController.MakeSettingsPortable(SettingsPortable);
+            SettingsController.MakeSettingsPortable(SettingsPortable, true);
+
+            if (!SettingsController.IsPortable)
+            {
+                SettingsLocationSelectedPath = SettingsController.SettingsLocation;
+                                
+                Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

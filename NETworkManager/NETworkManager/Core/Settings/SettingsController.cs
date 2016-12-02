@@ -61,7 +61,7 @@ namespace NETworkManager.Core.Settings
             get { return File.Exists(IsPortableFilePath); }
         }
 
-        public static void MoveSettings(string sourceLocation, string targedLocation)
+        public static void MoveSettings(string sourceLocation, string targedLocation, bool overwriteExistingFiles)
         {
             if (!Directory.Exists(targedLocation))
                 Directory.CreateDirectory(targedLocation);
@@ -73,18 +73,23 @@ namespace NETworkManager.Core.Settings
                 foreach (string file in files)
                 {
                     string fileName = Path.GetFileName(file);
+                    string targedFile = Path.Combine(targedLocation, fileName);
 
-                    File.Move(file, Path.Combine(targedLocation, fileName));
+                    // Delete file if it already exists
+                    if (overwriteExistingFiles)
+                        File.Delete(targedFile);
+
+                    File.Move(file, targedFile);
                 }
             }
         }
 
-        public static void ChangeSettingsLocation(string targedLocation)
+        public static void ChangeSettingsLocation(string targedLocation, bool overrideExistingFiles)
         {
-            MoveSettings(SettingsLocation, targedLocation);
+            MoveSettings(SettingsLocation, targedLocation, overrideExistingFiles);
         }
 
-        public static void MakeSettingsPortable(bool isPortable)
+        public static void MakeSettingsPortable(bool isPortable, bool overrideExistingFiles)
         {
             string sourceLocation = string.Empty;
             string targedLocation = string.Empty;
@@ -107,7 +112,7 @@ namespace NETworkManager.Core.Settings
             }
 
             // Move all existing settings to the targed location
-            MoveSettings(sourceLocation, targedLocation);
+            MoveSettings(sourceLocation, targedLocation, overrideExistingFiles);
         }
 
         #region WakeOnLan
