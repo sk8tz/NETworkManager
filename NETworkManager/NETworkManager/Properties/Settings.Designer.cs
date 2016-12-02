@@ -128,5 +128,29 @@ namespace NETworkManager.Properties {
                 this["WakeOnLan_MAC"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Application_MinimizeToTray {
+            get {
+                return ((bool)(this["Application_MinimizeToTray"]));
+            }
+            set {
+                this["Application_MinimizeToTray"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Application_CloseToTray {
+            get {
+                return ((bool)(this["Application_CloseToTray"]));
+            }
+            set {
+                this["Application_CloseToTray"] = value;
+            }
+        }
     }
 }

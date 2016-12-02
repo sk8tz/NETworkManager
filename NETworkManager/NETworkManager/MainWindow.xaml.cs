@@ -10,10 +10,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using NETworkManager.Core.Settings;
-using System.Reflection;
 using System.IO;
-//using System.Reflection;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace NETworkManager
 {
@@ -22,6 +21,9 @@ namespace NETworkManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
+       // WindowState windowState = new WindowState();
+
         #region Load
         public MainWindow()
         {
@@ -31,7 +33,7 @@ namespace NETworkManager
             // Load appearance
             AppearanceController.LoadAppearance();
 
-            InitializeComponent();           
+            InitializeComponent();
 
             // Set a filter for ListView Apps and sort them
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
@@ -41,7 +43,7 @@ namespace NETworkManager
 
         private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
         {
-       
+            InitNotifyIcon();
         }
         #endregion
 
@@ -71,6 +73,33 @@ namespace NETworkManager
         }
         #endregion
 
+        #region NotifyIcon
+        private void InitNotifyIcon()
+        {
+            // Get the application icon for the tray
+            using (Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/NETworkManager.ico")).Stream)
+            {
+                notifyIcon.Icon = new Icon(iconStream);
+                notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
+            }
+        }
+
+        private void NotifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            ShowTrayIcon(false);
+        }
+
+        private void ShowTrayIcon(bool show)
+        {
+            // Restore window (normal / maximized)     
+            if(!show)       
+            WindowState = new WindowState();
+
+            notifyIcon.Visible = show;
+            ShowInTaskbar = !show;
+        }
+        #endregion
+
         #region Events
         private void listViewApps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -92,5 +121,32 @@ namespace NETworkManager
                 return ((item as ApplicationInfo).Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
         #endregion
+
+        private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
+        {
+            if (Properties.Settings.Default.Application_CloseToTray)
+            {
+                e.Cancel = true;
+                                
+                WindowState = WindowState.Minimized;
+                ShowTrayIcon(true);
+
+                return;
+            }
+
+            // Dispose the notify icon to prevent errors
+            if (notifyIcon != null)
+                notifyIcon.Dispose();
+        }
+
+        private void MetroWindowMain_StateChanged(object sender, EventArgs e)
+        {
+            // Handle tray icon
+            if (WindowState == WindowState.Minimized)
+            {
+                if (Properties.Settings.Default.Application_MinimizeToTray)
+                    ShowTrayIcon(true);
+            }
+        }
     }
 }
