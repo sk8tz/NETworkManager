@@ -34,8 +34,12 @@
     <system:String x:Key="LocalizedString_Calculate">Calculate</system:String>
     <system:String x:Key="LocalizedString_Portable">Portable</system:String>
     <system:String x:Key="LocalizedString_Enabled">Enabled</system:String>
-    <system:String x:Key="LocalizedString_Disabled">Disabled</system:String> 
-    
+    <system:String x:Key="LocalizedString_Disabled">Disabled</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTray">Minimize to Tray</system:String>
+    <system:String x:Key="LocalizedString_StartApplicationMinimized">Start application minimized</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimize to Tray, when application is minimized</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimize to Tray, instead of closing the application</system:String>
+
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Enter location...</system:String>

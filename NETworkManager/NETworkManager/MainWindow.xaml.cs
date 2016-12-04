@@ -22,7 +22,7 @@ namespace NETworkManager
     public partial class MainWindow : MetroWindow
     {
         System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
-       // WindowState windowState = new WindowState();
+        WindowState windowState = new WindowState();
 
         #region Load
         public MainWindow()
@@ -92,8 +92,8 @@ namespace NETworkManager
         private void ShowTrayIcon(bool show)
         {
             // Restore window (normal / maximized)     
-            if(!show)       
-            WindowState = new WindowState();
+            if (!show)
+                WindowState = windowState;
 
             notifyIcon.Visible = show;
             ShowInTaskbar = !show;
@@ -127,7 +127,9 @@ namespace NETworkManager
             if (Properties.Settings.Default.Application_CloseToTray)
             {
                 e.Cancel = true;
-                                
+
+                windowState = WindowState;
+
                 WindowState = WindowState.Minimized;
                 ShowTrayIcon(true);
 

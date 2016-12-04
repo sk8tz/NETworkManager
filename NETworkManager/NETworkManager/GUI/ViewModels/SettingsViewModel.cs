@@ -7,6 +7,9 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
 using System.IO;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Data;
 
 namespace NETworkManager.GUI.ViewModels
 {
@@ -45,6 +48,48 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
+        private bool _startApplicationMinimized;
+        public bool StartApplicationMinimized
+        {
+            get { return _startApplicationMinimized; }
+            set
+            {
+                if (value == _startApplicationMinimized)
+                    return;
+
+                _startApplicationMinimized = value;
+                OnPropertyChanged("StartApplicationMinimized");
+            }
+        }
+
+        private bool _minimizeToTrayOnClose;
+        public bool MinimizeToTrayOnClose
+        {
+            get { return _minimizeToTrayOnClose; }
+            set
+            {
+                if (value == _minimizeToTrayOnClose)
+                    return;
+
+                _minimizeToTrayOnClose = value;
+                OnPropertyChanged("MinimizeToTrayOnClose");
+            }
+        }
+
+        private bool _minimizeToTrayOnMinimize;
+        public bool MinimizeToTrayOnMinimize
+        {
+            get { return _minimizeToTrayOnMinimize; }
+            set
+            {
+                if (value == _minimizeToTrayOnMinimize)
+                    return;
+
+                _minimizeToTrayOnMinimize = value;
+                OnPropertyChanged("MinimizeToTrayOnMinimize");
+            }
+        }
+        
         private AppTheme _appThemeSelectedItem;
         public AppTheme AppThemeSelectedItem
         {
@@ -171,7 +216,7 @@ namespace NETworkManager.GUI.ViewModels
             get { return new RelayCommand(p => BrowseFolderAction()); }
         }
 
-        public void BrowseFolderAction()
+        private void BrowseFolderAction()
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
 
@@ -189,10 +234,10 @@ namespace NETworkManager.GUI.ViewModels
             get { return new RelayCommand(p => ChangeSettingsAction()); }
         }
 
-        public void ChangeSettingsAction()
+        private void ChangeSettingsAction()
         {
             SettingsController.ChangeSettingsLocation(SettingsLocationSelectedPath, true);
-                        
+
             Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
             Properties.Settings.Default.Save();
         }
@@ -204,7 +249,7 @@ namespace NETworkManager.GUI.ViewModels
             if (!SettingsController.IsPortable)
             {
                 SettingsLocationSelectedPath = SettingsController.SettingsLocation;
-                                
+
                 Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
                 Properties.Settings.Default.Save();
             }

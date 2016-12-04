@@ -1,10 +1,12 @@
 ﻿using NETworkManager.Core.Network;
 using NETworkManager.Core.Settings;
+using NETworkManager.GUI.Interface;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
+using System.Windows.Input;
 
 namespace NETworkManager.GUI.ViewModels
 {
@@ -109,7 +111,7 @@ namespace NETworkManager.GUI.ViewModels
             Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
         }
 
-        public void SaveSettings()
+        private void SaveSettings()
         {
             Properties.Settings.Default.WakeOnLan_MAC = MACAddress;
             Properties.Settings.Default.WakeOnLan_Broadcast = BroadcastAddress;
@@ -125,14 +127,26 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        public void SaveTemplates()
+        public ICommand WakeUpCommand
+        {
+            get { return new RelayCommand(p => WakeUpAction()); }
+        }
+
+        private void WakeUpAction()
+        {
+            MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(BroadcastAddress), int.Parse(Port));
+
+            SaveSettings();
+        }
+
+        public ICommand SaveTemplatesCommand
+        {
+            get { return new RelayCommand(p => SaveTemplatesAction()); }
+        }
+
+        private void SaveTemplatesAction()
         {
             SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanInfo>(WakeOnLanTemplates));
         }
-
-        public void WakeUp()
-        {
-            MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(BroadcastAddress), int.Parse(Port));
-        }
-    }
+    }          
 }

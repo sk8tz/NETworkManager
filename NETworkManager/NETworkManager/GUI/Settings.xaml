@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NETworkManager.GUI"
         xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
         xmlns:localization="clr-namespace:NETworkManager.Core.Localization"
-        xmlns:brushConverter="clr-namespace:NETworkManager.GUI.BrushConverter"
+        xmlns:Converter="clr-namespace:NETworkManager.GUI.Converter"
         xmlns:translator="clr-namespace:NETworkManager.GUI.Translator"
         xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -19,8 +19,8 @@
     </Controls:MetroWindow.WindowButtonCommands>
     <Controls:MetroWindow.Resources>
         <!-- Brush Converter -->
-        <brushConverter:AppThemeToBrushConverter x:Key="AppThemeToBrushConverter" />
-        <brushConverter:AccentToBrushConverter x:Key="AccentToBrushConverter" />
+        <Converter:AppThemeToBrushConverter x:Key="AppThemeToBrushConverter" />
+        <Converter:AccentToBrushConverter x:Key="AccentToBrushConverter" />
         <!-- Transltor / Localization -->
         <translator:AccentNameTranslator x:Key="AccentNameTranslator" />
         <translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
@@ -101,7 +101,10 @@
                         <!-- General -->
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
-
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_MinimizeToTray}" />
+                                <CheckBox x:Name="checkBoxStartApplicationMinimized" Content="{DynamicResource LocalizedString_StartApplicationMinimized}" IsChecked="{Binding StartApplicationMinimized}" Margin="0,0,0,10" />
+                                <CheckBox x:Name="checkBoxMinimizeToTrayOnClose" Content="{DynamicResource LocalizedString_MinimizeToTrayOnClose}" IsChecked="{Binding MinimizeToTrayOnClose}" Margin="0,0,0,10" />
+                                <CheckBox x:Name="checkBoxMinimizeToTrayOnMinimize" Content="{DynamicResource LocalizedString_MinimizeToTrayOnMinimize}" IsChecked="{Binding MinimizeToTrayOnMinimize}" />
                             </StackPanel>
                         </TabItem>
                         <!-- Appearance -->

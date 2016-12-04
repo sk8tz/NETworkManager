@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace NETworkManager.GUI.BrushConverter
+namespace NETworkManager.GUI.Converter
 {
     public sealed class AccentToBrushConverter : IValueConverter
     {

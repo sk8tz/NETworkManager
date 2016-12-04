@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:NETworkManager.GUI"
         xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
         xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
+        xmlns:Converter="clr-namespace:NETworkManager.GUI.Converter"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
@@ -44,7 +45,7 @@
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />
-                        <ComboBox x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}"  SelectionChanged="cbMACAddress_SelectionChanged">
+                        <ComboBox x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}" SelectionChanged="cbMACAddress_SelectionChanged">
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -55,7 +56,7 @@
                             </ComboBox.Text>
                             <ComboBox.SelectedItem>
                                 <Binding Path="WakeOnLanInfoSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
-                            </ComboBox.SelectedItem>                                
+                            </ComboBox.SelectedItem>
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -69,7 +70,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button x:Name="btnWakeUp"  Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Click="btnWakeUp_Click" IsDefault="True" Content="{DynamicResource LocalizedString_WakeUp}" >
+                        <Button x:Name="btnWakeUp"  Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Command="{Binding WakeUpCommand}" IsDefault="True" Content="{DynamicResource LocalizedString_WakeUp}" >
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}" >
                                     <Setter Property="IsEnabled" Value="False" />
@@ -141,7 +142,7 @@
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Description}" Binding="{Binding Description}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Grid.Row="2" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Click="btnSaveTemplates_Click"/>
+                        <Button Grid.Row="2" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Command="{Binding SaveTemplatesCommand}"/>
                     </Grid>
                 </Grid>
             </TabItem>

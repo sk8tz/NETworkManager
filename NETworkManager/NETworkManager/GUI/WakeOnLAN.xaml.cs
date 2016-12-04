@@ -1,10 +1,9 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using MahApps.Metro.Controls;
 using NETworkManager.GUI.ViewModels;
 using System.Windows.Controls;
-using NETworkManager.Core.Network;
 using System.Windows.Input;
+using System.Windows.Data;
 
 namespace NETworkManager.GUI
 {
@@ -27,33 +26,6 @@ namespace NETworkManager.GUI
         {
             _isLoading = false;
         }
-
-        #region Buttons
-        private void btnWakeUp_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                viewModel.WakeUp();
-                viewModel.SaveSettings();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Application.Current.Resources["LocalizedString_Error"] as string, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void btnSaveTemplates_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                viewModel.SaveTemplates();                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Application.Current.Resources["LocalizedString_Error"] as string, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        #endregion
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -85,6 +57,21 @@ namespace NETworkManager.GUI
         {
             if (e.Key == Key.Escape && tabControl.SelectedIndex != 1)
                 Close();
+        }
+    }
+
+    public class ItemTemplateSelector : DataTemplateSelector
+    {
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        {
+            DataTemplate template;
+
+            if (item == CollectionView.NewItemPlaceholder)
+                template = null;
+            else
+                template = base.SelectTemplate(item, container);
+
+            return template;
         }
     }
 }

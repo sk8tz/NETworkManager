@@ -35,7 +35,11 @@
     <system:String x:Key="LocalizedString_Portable">Portable</system:String>
     <system:String x:Key="LocalizedString_Enabled">Aktiviert</system:String>
     <system:String x:Key="LocalizedString_Disabled">Deaktiviert</system:String>
-
+    <system:String x:Key="LocalizedString_MinimizeToTray">Minimieren ins Tray</system:String>
+    <system:String x:Key="LocalizedString_StartApplicationMinimized">Anwendung minimiert starten</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimiere ins Tray, wenn Anwendung minimiert wird</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimiere ins Tray, anstatt die Anwendung zu schließen</system:String>
+    
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Speicherort eingeben...</system:String>

@@ -99,8 +99,8 @@
     </Compile>
     <Compile Include="Core\Appearance\AppearanceController.cs" />
     <Compile Include="Core\Settings\CustomSettingsProvider.cs" />
-    <Compile Include="GUI\BrushConverter\AccentToBrushConverter.cs" />
-    <Compile Include="GUI\BrushConverter\AppThemeToBrushConverter.cs" />
+    <Compile Include="GUI\Converter\AccentToBrushConverter.cs" />
+    <Compile Include="GUI\Converter\AppThemeToBrushConverter.cs" />
     <Compile Include="Core\Network\ConvertMACAddress.cs" />
     <Compile Include="Core\Network\MagicPacket.cs" />
     <Compile Include="Core\Network\SubnetInfo.cs" />
