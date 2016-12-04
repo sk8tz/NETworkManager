@@ -7,9 +7,6 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
 using System.IO;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Data;
 
 namespace NETworkManager.GUI.ViewModels
 {

@@ -4,6 +4,7 @@ using NETworkManager.GUI.ViewModels;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Data;
+using System.ComponentModel;
 
 namespace NETworkManager.GUI
 {

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace NETworkManager.GUI.ViewModels
@@ -148,5 +150,5 @@ namespace NETworkManager.GUI.ViewModels
         {
             SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanInfo>(WakeOnLanTemplates));
         }
-    }          
+    }
 }

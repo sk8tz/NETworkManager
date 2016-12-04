@@ -45,7 +45,7 @@
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />
-                        <ComboBox x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  ItemsSource="{Binding WakeOnLanTemplates}" SelectionChanged="cbMACAddress_SelectionChanged">
+                        <ComboBox x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" ItemsSource="{Binding WakeOnLanTemplatesDropDown}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  SelectionChanged="cbMACAddress_SelectionChanged">
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -126,14 +126,18 @@
             </TabItem>
             <!-- Templates -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
+                
                 <Grid Style="{StaticResource GridTabItem}">
+                    <StackPanel>
+                    
+
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="10" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid Grid.Row="0" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All">
+                        <DataGrid Grid.Row="0" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}"  Binding="{Binding MAC}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" />
@@ -144,6 +148,7 @@
                         </DataGrid>
                         <Button Grid.Row="2" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Command="{Binding SaveTemplatesCommand}"/>
                     </Grid>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>
