@@ -15,6 +15,7 @@
     <system:String x:Key="LocalizedString_RestartRequired">Restart Required</system:String>
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Some settings are applied only after restarting the application!</system:String>
     <system:String x:Key="LocalizedString_Templates">Templates</system:String>
+    <system:String x:Key="LocalizedString_AddTemplate">Add template</system:String>
     <system:String x:Key="LocalizedString_EnterMACAddress">Enter MAC-Address...</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Wake Up</system:String>
     <system:String x:Key="LocalizedString_Error">Error</system:String>
@@ -35,8 +36,10 @@
     <system:String x:Key="LocalizedString_Portable">Portable</system:String>
     <system:String x:Key="LocalizedString_Enabled">Enabled</system:String>
     <system:String x:Key="LocalizedString_Disabled">Disabled</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTray">Minimize to Tray</system:String>
+    <system:String x:Key="LocalizedString_Autostart">Autostart</system:String>
+    <system:String x:Key="LocalizedString_StartApplicationWithWindows">Start application with Windows (current user)</system:String>
     <system:String x:Key="LocalizedString_StartApplicationMinimized">Start application minimized</system:String>
+    <system:String x:Key="LocalizedString_Tray">Tray</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimize to Tray, when application is minimized</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimize to Tray, instead of closing the application</system:String>
 

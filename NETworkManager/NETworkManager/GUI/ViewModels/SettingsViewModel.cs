@@ -45,6 +45,20 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
+        private bool _startApplicationWithWindows;
+        public bool StartApplicationWithWindows
+        {
+            get { return _startApplicationWithWindows; }
+            set
+            {
+                if (value == _startApplicationWithWindows)
+                    return;
+
+                _startApplicationWithWindows = value;
+                OnPropertyChanged("StartApplicationWithWindows");
+            }
+        }
+
         private bool _startApplicationMinimized;
         public bool StartApplicationMinimized
         {

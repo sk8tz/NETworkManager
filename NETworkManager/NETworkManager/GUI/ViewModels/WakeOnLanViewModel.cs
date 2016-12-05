@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
-using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace NETworkManager.GUI.ViewModels
@@ -60,6 +58,76 @@ namespace NETworkManager.GUI.ViewModels
 
                 _port = value;
                 OnPropertyChanged("Port");
+            }
+        }
+
+        private string _addTemplateMACAddress;
+        public string AddTemplateMACAddress
+        {
+            get { return _addTemplateMACAddress; }
+            set
+            {
+                if (value == _addTemplateMACAddress)
+                    return;
+
+                _addTemplateMACAddress = value;
+                OnPropertyChanged("AddTemplateMACAddress");
+            }
+        }
+
+        private string _addTemplateHostname;
+        public string AddTemplateHostname
+        {
+            get { return _addTemplateHostname; }
+            set
+            {
+                if (value == _addTemplateHostname)
+                    return;
+
+                _addTemplateHostname = value;
+                OnPropertyChanged("AddTemplateHostname");
+            }
+        }
+
+        private string _addTemplateBroadcast;
+        public string AddTemplateBroadcast
+        {
+            get { return _addTemplateBroadcast; }
+            set
+            {
+                if (value == _addTemplateBroadcast)
+                    return;
+
+                _addTemplateBroadcast = value;
+                OnPropertyChanged("AddTemplateBroadcast");
+            }
+        }
+
+        private string _addTemplatePort;
+        public string AddTemplatePort
+        {
+            get { return _addTemplatePort; }
+            set
+            {
+                if (value == _addTemplatePort)
+                    return;
+
+                _addTemplatePort = value;
+                OnPropertyChanged("AddTemplatePort");
+            }
+        }
+
+        private string _addTemplateDescription;
+        public string AddTemplateDescription
+        {
+            get { return _addTemplateDescription; }
+            set
+            {
+                if (value == _addTemplateDescription)
+                    return;
+
+                _addTemplateDescription = value;
+                OnPropertyChanged("AddTemplateDescription");
             }
         }
 
@@ -139,6 +207,26 @@ namespace NETworkManager.GUI.ViewModels
             MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(BroadcastAddress), int.Parse(Port));
 
             SaveSettings();
+        }
+
+        public ICommand AddTemplateCommand
+        {
+            get { return new RelayCommand(p => AddTemplateAction()); }
+        }
+
+        public void AddTemplateAction()
+        {
+            WakeOnLanInfo template = new WakeOnLanInfo
+            {
+                MAC = AddTemplateMACAddress,
+                Broadcast = AddTemplateBroadcast,
+                Hostname = AddTemplateHostname,
+                Port = AddTemplatePort,
+                Description = AddTemplateDescription
+            };
+
+            WakeOnLanTemplates.Add(template);
+
         }
 
         public ICommand SaveTemplatesCommand

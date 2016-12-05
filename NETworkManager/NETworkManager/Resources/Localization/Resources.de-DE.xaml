@@ -15,6 +15,7 @@
     <system:String x:Key="LocalizedString_RestartRequired">Neustart Erforderlich</system:String>
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Einige Einstellungen werden erst nach einem Neustart der Anwendung angewendet!</system:String>
     <system:String x:Key="LocalizedString_Templates">Vorlagen</system:String>
+    <system:String x:Key="LocalizedString_AddTemplate">Vorlage hinzufügen</system:String>
     <system:String x:Key="LocalizedString_EnterMACAddress">MAC-Adresse eingeben...</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Aufwecken</system:String>
     <system:String x:Key="LocalizedString_Error">Fehler</system:String>
@@ -35,6 +36,8 @@
     <system:String x:Key="LocalizedString_Portable">Portable</system:String>
     <system:String x:Key="LocalizedString_Enabled">Aktiviert</system:String>
     <system:String x:Key="LocalizedString_Disabled">Deaktiviert</system:String>
+    <system:String x:Key="LocalizedString_Autostart">Autostart</system:String>
+    <system:String x:Key="LocalizedString_StartApplicationWithWindows">Anwendung mit Windows starten (aktueller Benutzer)</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTray">Minimieren ins Tray</system:String>
     <system:String x:Key="LocalizedString_StartApplicationMinimized">Anwendung minimiert starten</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimiere ins Tray, wenn Anwendung minimiert wird</system:String>

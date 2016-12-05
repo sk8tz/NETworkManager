@@ -11,7 +11,8 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="325" Width="350" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" PreviewKeyDown="MetroWindowWakeOnLAN_PreviewKeyDown" >
+                      
+        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="450"  Width="700"  BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" PreviewKeyDown="MetroWindowWakeOnLAN_PreviewKeyDown" >
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
@@ -110,7 +111,7 @@
                                 </TextBox.Text>
                             </TextBox>
                             <TextBlock Text="{DynamicResource LocalizedString_Port}" Style="{StaticResource TextBlockGrid}" Grid.Row="2" Grid.Column="0" />
-                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="80" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left">
+                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="65" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left">
                                 <TextBox.Text>
                                     <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -126,29 +127,96 @@
             </TabItem>
             <!-- Templates -->
             <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
-                
                 <Grid Style="{StaticResource GridTabItem}">
-                    <StackPanel>
-                    
-
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="10" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid Grid.Row="0" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" CanUserAddRows="False">
+                        <Grid Grid.Row="0">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_AddTemplate}"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="120" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Row="0" Grid.Column="0"  FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_MACAddress}" >
+                                        <TextBox.Text>
+                                            <Binding Path="AddTemplateMACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                                    <Validator:MACAddressValidator ValidatesOnTargetUpdated="True" />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox Grid.Row="0" Grid.Column="2" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Hostname}" >
+                                        <TextBox.Text>
+                                            <Binding Path="AddTemplateHostname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox Grid.Row="0" Grid.Column="4" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Broadcast}" >
+                                        <TextBox.Text>
+                                            <Binding Path="AddTemplateBroadcast" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
+                                                <Binding.ValidationRules>
+                                                    <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                                    <Validator:IPv4AddressValidator ValidatesOnTargetUpdated="True" />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <TextBox Grid.Row="0" Grid.Column="6" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Port}" TextAlignment="Center">
+                                        <TextBox.Text>
+                                            <Binding Path="AddTemplatePort" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
+                                                <Binding.ValidationRules>
+                                                    <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                                    <Validator:PortValidator ValidatesOnTargetUpdated="True" />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <Button Grid.Row="0" Grid.Column="8" FontSize="14" Margin="0" Padding="4" Command="{Binding AddTemplateCommand}">
+                                        <Rectangle Width="20" Height="20"  Fill="{DynamicResource AccentColorBrush}">
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Grid.Row="2" Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Templates}" />
+                        <DataGrid Grid.Row="3" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}"  Binding="{Binding MAC}" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Broadcast}" Binding="{Binding Broadcast}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Port}" Binding="{Binding Port}" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Description}" Binding="{Binding Description}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Grid.Row="2" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Command="{Binding SaveTemplatesCommand}"/>
+                        <Button Grid.Row="5" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Command="{Binding SaveTemplatesCommand}"/>
                     </Grid>
-                    </StackPanel>
+
                 </Grid>
             </TabItem>
         </TabControl>
