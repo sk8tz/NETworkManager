@@ -3,7 +3,6 @@ using MahApps.Metro.Controls;
 using NETworkManager.GUI.ViewModels;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Data;
 using System.ComponentModel;
 
 namespace NETworkManager.GUI
@@ -37,7 +36,7 @@ namespace NETworkManager.GUI
             if (tabControl.SelectedIndex == 0)
             {
                 Width = 350;
-                Height = 325;
+                Height = 300;
             }
             else if (tabControl.SelectedIndex == 1)
             {
@@ -59,20 +58,11 @@ namespace NETworkManager.GUI
             if (e.Key == Key.Escape && tabControl.SelectedIndex != 1)
                 Close();
         }
-    }
 
-    public class ItemTemplateSelector : DataTemplateSelector
-    {
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        private void MetroWindowWakeOnLAN_Closing(object sender, CancelEventArgs e)
         {
-            DataTemplate template;
-
-            if (item == CollectionView.NewItemPlaceholder)
-                template = null;
-            else
-                template = base.SelectTemplate(item, container);
-
-            return template;
-        }
+            if (viewModel.TemplatesChanged)
+                viewModel.SaveTemplates();
+        }      
     }
 }

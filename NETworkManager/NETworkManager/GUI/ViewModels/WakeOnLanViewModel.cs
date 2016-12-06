@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Net;
+using System.Windows;
 using System.Windows.Input;
 
 namespace NETworkManager.GUI.ViewModels
@@ -58,6 +60,20 @@ namespace NETworkManager.GUI.ViewModels
 
                 _port = value;
                 OnPropertyChanged("Port");
+            }
+        }
+
+        private bool _templatesChanged;
+        public bool TemplatesChanged
+        {
+            get { return _templatesChanged; }
+            set
+            {
+                if (value == _templatesChanged)
+                    return;
+
+                _templatesChanged = value;
+                OnPropertyChanged("TemplatesChanged");
             }
         }
 
@@ -117,20 +133,6 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        private string _addTemplateDescription;
-        public string AddTemplateDescription
-        {
-            get { return _addTemplateDescription; }
-            set
-            {
-                if (value == _addTemplateDescription)
-                    return;
-
-                _addTemplateDescription = value;
-                OnPropertyChanged("AddTemplateDescription");
-            }
-        }
-
         private ObservableCollection<WakeOnLanInfo> _wakeOnLanTemplates = new ObservableCollection<WakeOnLanInfo>();
         public ObservableCollection<WakeOnLanInfo> WakeOnLanTemplates
         {
@@ -145,16 +147,16 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        private WakeOnLanInfo _wakeOnLanInfoSelectedItem;
-        public WakeOnLanInfo WakeOnLanInfoSelectedItem
+        private WakeOnLanInfo _selectedItemWakeOnLanInfo  = new WakeOnLanInfo();
+        public WakeOnLanInfo SelectedItemWakeOnLanInfo
         {
-            get { return _wakeOnLanInfoSelectedItem; }
+            get { return _selectedItemWakeOnLanInfo; }
             set
             {
-                if (value == _wakeOnLanInfoSelectedItem)
+                if (value == _selectedItemWakeOnLanInfo)
                     return;
 
-                _wakeOnLanInfoSelectedItem = value;
+                _selectedItemWakeOnLanInfo = value;
                 OnPropertyChanged("WakeOnLanInfoSelectedItem");
             }
         }
@@ -167,11 +169,11 @@ namespace NETworkManager.GUI.ViewModels
 
         public void WakeOnLanInfoSelectedItemChanged()
         {
-            if (WakeOnLanInfoSelectedItem == null)
+            if (SelectedItemWakeOnLanInfo == null)
                 return;
 
-            BroadcastAddress = WakeOnLanInfoSelectedItem.Broadcast;
-            Port = WakeOnLanInfoSelectedItem.Port;
+            BroadcastAddress = SelectedItemWakeOnLanInfo.Broadcast;
+            Port = SelectedItemWakeOnLanInfo.Port;
         }
 
         public void LoadSettings()
@@ -222,19 +224,13 @@ namespace NETworkManager.GUI.ViewModels
                 Broadcast = AddTemplateBroadcast,
                 Hostname = AddTemplateHostname,
                 Port = AddTemplatePort,
-                Description = AddTemplateDescription
             };
 
+            TemplatesChanged = true;
             WakeOnLanTemplates.Add(template);
-
         }
 
-        public ICommand SaveTemplatesCommand
-        {
-            get { return new RelayCommand(p => SaveTemplatesAction()); }
-        }
-
-        private void SaveTemplatesAction()
+        public void SaveTemplates()
         {
             SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanInfo>(WakeOnLanTemplates));
         }

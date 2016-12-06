@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.IO;
 using System.Drawing;
 using System.Windows.Media.Imaging;
+using System.Windows.Forms;
 
 namespace NETworkManager
 {
@@ -77,10 +78,20 @@ namespace NETworkManager
         private void InitNotifyIcon()
         {
             // Get the application icon for the tray
-            using (Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/NETworkManager.ico")).Stream)
+            using (Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/NETworkManager.ico")).Stream)
             {
                 notifyIcon.Icon = new Icon(iconStream);
                 notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
+                notifyIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(NotifyIcon_MouseDown);
+            }
+        }
+
+        private void NotifyIcon_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                System.Windows.Controls.ContextMenu menu = (System.Windows.Controls.ContextMenu)FindResource("contextMenuNotifyIcon");
+                menu.IsOpen = true;
             }
         }
 
@@ -88,6 +99,7 @@ namespace NETworkManager
         {
             ShowTrayIcon(false);
         }
+
 
         private void ShowTrayIcon(bool show)
         {
@@ -124,7 +136,7 @@ namespace NETworkManager
 
         private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
         {
-            if (Properties.Settings.Default.Application_CloseToTray)
+            if (Properties.Settings.Default.Application_CloseToTray || true)
             {
                 e.Cancel = true;
 

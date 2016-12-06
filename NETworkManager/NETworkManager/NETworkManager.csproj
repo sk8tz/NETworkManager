@@ -81,7 +81,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\WakeOnLan.xaml">
+    <Page Include="GUI\WakeOnLAN.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -128,8 +128,8 @@
     <Compile Include="GUI\ViewModels\SubnetCalculatorViewModel.cs" />
     <Compile Include="GUI\ViewModels\SettingsViewModel.cs" />
     <Compile Include="GUI\ViewModels\WakeOnLanViewModel.cs" />
-    <Compile Include="GUI\WakeOnLan.xaml.cs">
-      <DependentUpon>WakeOnLan.xaml</DependentUpon>
+    <Compile Include="GUI\WakeOnLAN.xaml.cs">
+      <DependentUpon>WakeOnLAN.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\SubnetCalculator.xaml.cs">
       <DependentUpon>SubnetCalculator.xaml</DependentUpon>

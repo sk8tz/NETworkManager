@@ -10,9 +10,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
-        mc:Ignorable="d"
-                      
-        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="450"  Width="700"  BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" PreviewKeyDown="MetroWindowWakeOnLAN_PreviewKeyDown" >
+        mc:Ignorable="d"                      
+        Title="{DynamicResource LocalizedString_ApplicationName_WakeOnLan}" TitleCaps="False" Height="300" Width="350" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindowWakeOnLAN_Loaded" ResizeMode="CanMinimize" PreviewKeyDown="MetroWindowWakeOnLAN_PreviewKeyDown" Closing="MetroWindowWakeOnLAN_Closing" >
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
@@ -37,7 +36,6 @@
         <Style x:Key="DataGridColumnHeaderNormal" BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="Controls:ControlsHelper.ContentCharacterCasing" Value="Normal" />
         </Style>
-
     </Controls:MetroWindow.Resources>
     <Grid>
         <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
@@ -46,52 +44,69 @@
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />
-                        <ComboBox x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" ItemsSource="{Binding WakeOnLanTemplates}" SelectedValuePath="MAC" FontSize="14" Margin="0,0,0,10"  SelectionChanged="cbMACAddress_SelectionChanged">
-                            <ComboBox.Text>
-                                <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
-                                        <Validator:MACAddressValidator ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </ComboBox.Text>
-                            <ComboBox.SelectedItem>
-                                <Binding Path="WakeOnLanInfoSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
-                            </ComboBox.SelectedItem>
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="20" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="25" />
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="14"  FontFamily="Consolas" Text="{Binding Path=MAC}" />
-                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="14" Text="{Binding Path=Hostname}" Opacity="0.5" />
-                                    </Grid>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <Button x:Name="btnWakeUp"  Width="150" HorizontalAlignment="Right" Margin="0,0,0,20" Command="{Binding WakeUpCommand}" IsDefault="True" Content="{DynamicResource LocalizedString_WakeUp}" >
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}" >
-                                    <Setter Property="IsEnabled" Value="False" />
-                                    <Style.Triggers>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=cbMACAddress}" Value="False"/>
-                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtBroadcast}" Value="False"/>
-                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPort}" Value="False"/>
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="IsEnabled" Value="True" />
-                                        </MultiDataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" Grid.Row="0" x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" ItemsSource="{Binding WakeOnLanTemplates}" SelectedValuePath="MAC" FontSize="14"  SelectionChanged="cbMACAddress_SelectionChanged">
+                                <ComboBox.Text>
+                                    <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
+                                            <Validator:MACAddressValidator ValidatesOnTargetUpdated="True"/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.Text>
+                                <ComboBox.SelectedItem>
+                                    <Binding Path="WakeOnLanInfoSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                </ComboBox.SelectedItem>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="20" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="25" />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="14"  FontFamily="Consolas" Text="{Binding Path=MAC}" />
+                                            <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="14" Text="{Binding Path=Hostname}" Opacity="0.5" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Grid.Column="2" Grid.Row="0" Margin="0" Padding="4" Command="{Binding WakeUpCommand}" IsDefault="True" >
+                                <Button.Content>
+                                    <Rectangle Width="20" Height="20"  Fill="{DynamicResource AccentColorBrush}">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_control_play}" />
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button.Content>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}" >
+                                        <Setter Property="IsEnabled" Value="False" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=cbMACAddress}" Value="False"/>
+                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtBroadcast}" Value="False"/>
+                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPort}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Settings}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -159,7 +174,7 @@
                                         <ColumnDefinition Width="10" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Row="0" Grid.Column="0"  FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_MACAddress}" >
+                                    <TextBox x:Name="txtAddTemplateMACAddress" Grid.Row="0" Grid.Column="0"  FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_MACAddress}" >
                                         <TextBox.Text>
                                             <Binding Path="AddTemplateMACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -169,7 +184,7 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox Grid.Row="0" Grid.Column="2" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Hostname}" >
+                                    <TextBox x:Name="txtAddTemplateHostname" Grid.Row="0" Grid.Column="2" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Hostname}" >
                                         <TextBox.Text>
                                             <Binding Path="AddTemplateHostname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -178,7 +193,7 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox Grid.Row="0" Grid.Column="4" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Broadcast}" >
+                                    <TextBox x:Name="txtAddTemplateBroadcast" Grid.Row="0" Grid.Column="4" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Broadcast}" >
                                         <TextBox.Text>
                                             <Binding Path="AddTemplateBroadcast" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
                                                 <Binding.ValidationRules>
@@ -188,7 +203,7 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox Grid.Row="0" Grid.Column="6" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Port}" TextAlignment="Center">
+                                    <TextBox x:Name="txtAddTemplatePort" Grid.Row="0" Grid.Column="6" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Port}" TextAlignment="Center">
                                         <TextBox.Text>
                                             <Binding Path="AddTemplatePort" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
                                                 <Binding.ValidationRules>
@@ -198,29 +213,44 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <Button Grid.Row="0" Grid.Column="8" FontSize="14" Margin="0" Padding="4" Command="{Binding AddTemplateCommand}">
-                                        <Rectangle Width="20" Height="20"  Fill="{DynamicResource AccentColorBrush}">
-                                            <Rectangle.OpacityMask>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                            </Rectangle.OpacityMask>
-                                        </Rectangle>
+                                    <Button Grid.Row="0" Grid.Column="8" Margin="0" Padding="4" Command="{Binding AddTemplateCommand}">
+                                        <Button.Content>
+                                            <Rectangle Width="20" Height="20"  Fill="{DynamicResource AccentColorBrush}">
+                                                <Rectangle.OpacityMask>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                </Rectangle.OpacityMask>
+                                            </Rectangle>
+                                        </Button.Content>
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}" >
+                                                <Setter Property="IsEnabled" Value="False" />
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtAddTemplateMACAddress}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtAddTemplateHostname}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtAddTemplateBroadcast}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtAddTemplatePort}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="IsEnabled" Value="True" />
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
                                     </Button>
                                 </Grid>
                             </StackPanel>
                         </Grid>
                         <TextBlock Grid.Row="2" Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Templates}" />
-                        <DataGrid Grid.Row="3" FontSize="14" x:Name="gridWakeOnLanTemplates" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" CanUserAddRows="False">
+                        <DataGrid Grid.Row="3" FontSize="14" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" IsReadOnly="True" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" />
-                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" />
-                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Broadcast}" Binding="{Binding Broadcast}" />
-                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Port}" Binding="{Binding Port}" />
-                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Description}" Binding="{Binding Description}" Width="*" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" Width="*" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" Width="*" />
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Broadcast}" Binding="{Binding Broadcast}" Width="120"/>
+                                <DataGridTextColumn Header="{DynamicResource LocalizedString_Port}" Binding="{Binding Port}" Width="60"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Grid.Row="5" x:Name="btnSaveTemplates" Width="150" Content="Save" FontSize="14" HorizontalAlignment="Right" Command="{Binding SaveTemplatesCommand}"/>
-                    </Grid>
-
+                    </Grid>                    
                 </Grid>
             </TabItem>
         </TabControl>

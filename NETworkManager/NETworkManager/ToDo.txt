@@ -1,16 +1,16 @@
 ﻿## General
 * Design Flyout... 
-* TrayIcon / Global Hotkey
 * Global Hotkey ?? To open launcher
+* ContextMenu tray Icon
 
 ## Settings
-* Add Button restore default location if something else is shown in the textbox...
+* Autostart
+* Re-design viewModel --> Bind Settings to Set {}
+* Button to restore default settings location
 * Import / Export von Settings
 * Move files, overwrite?
 * Catch Errors
 
 
 ## WakeOnLan
-* Validate Template Row / Context Menu
-* Remove {NewItemPlaceHolder} in ComboBox
-* ICommand for Buttons...
+- ContextMenu/Button to delete template

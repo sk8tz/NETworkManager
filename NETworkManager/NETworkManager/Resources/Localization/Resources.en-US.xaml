@@ -42,6 +42,8 @@
     <system:String x:Key="LocalizedString_Tray">Tray</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimize to Tray, when application is minimized</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimize to Tray, instead of closing the application</system:String>
+    <system:String x:Key="LocalizedString_Show">Show</system:String>
+    <system:String x:Key="LocalizedString_Close">Close</system:String>
 
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
