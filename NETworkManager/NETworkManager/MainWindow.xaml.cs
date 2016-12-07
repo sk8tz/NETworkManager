@@ -136,7 +136,7 @@ namespace NETworkManager
 
         private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
         {
-            if (Properties.Settings.Default.Application_CloseToTray || true)
+            if (Properties.Settings.Default.Application_MinimizeToTrayOnClose || true)
             {
                 e.Cancel = true;
 
@@ -158,7 +158,7 @@ namespace NETworkManager
             // Handle tray icon
             if (WindowState == WindowState.Minimized)
             {
-                if (Properties.Settings.Default.Application_MinimizeToTray)
+                if (Properties.Settings.Default.Application_MinimizeToTrayOnMinimize)
                     ShowTrayIcon(true);
             }
         }

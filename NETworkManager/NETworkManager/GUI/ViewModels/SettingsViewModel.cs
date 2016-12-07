@@ -19,30 +19,19 @@ namespace NETworkManager.GUI.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
+        private bool _isLoading = true;
+
         private bool _settingsChanged;
         public bool SettingsChanged
         {
-            get { return _settingsChanged; }
+            get { return _settingsChanged;}
             set
             {
                 if (value == _settingsChanged)
                     return;
 
-                _settingsChanged = value;
-            }
-        }
-
-        private bool _restartRequired;
-        public bool RestartRequired
-        {
-            get { return _restartRequired; }
-            set
-            {
-                if (value == _restartRequired)
-                    return;
-
-                _restartRequired = value;
-            }
+                _settingsChanged = true;
+            }            
         }
 
         private bool _startApplicationWithWindows;
@@ -68,6 +57,12 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _startApplicationMinimized)
                     return;
 
+                if (!_isLoading)
+                {
+                    Properties.Settings.Default.Application_StartApplicationMinimized = value;
+                    SettingsChanged = true;
+                }
+
                 _startApplicationMinimized = value;
                 OnPropertyChanged("StartApplicationMinimized");
             }
@@ -81,6 +76,12 @@ namespace NETworkManager.GUI.ViewModels
             {
                 if (value == _minimizeToTrayOnClose)
                     return;
+
+                if(!_isLoading)
+                {
+                    Properties.Settings.Default.Application_MinimizeToTrayOnClose = value;
+                    SettingsChanged = true;
+                }
 
                 _minimizeToTrayOnClose = value;
                 OnPropertyChanged("MinimizeToTrayOnClose");
@@ -96,11 +97,17 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _minimizeToTrayOnMinimize)
                     return;
 
+                if (!_isLoading)
+                {
+                    Properties.Settings.Default.Application_MinimizeToTrayOnMinimize = value;
+                    SettingsChanged = true;
+                }
+
                 _minimizeToTrayOnMinimize = value;
                 OnPropertyChanged("MinimizeToTrayOnMinimize");
             }
         }
-        
+
         private AppTheme _appThemeSelectedItem;
         public AppTheme AppThemeSelectedItem
         {
@@ -109,6 +116,14 @@ namespace NETworkManager.GUI.ViewModels
             {
                 if (value == _appThemeSelectedItem)
                     return;
+
+                if (!_isLoading)
+                {
+                    AppearanceController.ChangeAppTheme(value.Name);
+
+                    Properties.Settings.Default.Appearance_AppTheme = value.Name;
+                    SettingsChanged = true;
+                }
 
                 _appThemeSelectedItem = value;
                 OnPropertyChanged("AppThemeSelectedItem");
@@ -124,6 +139,14 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _accentSelectedItem)
                     return;
 
+                if (!_isLoading)
+                {
+                    AppearanceController.ChangeAccent(value.Name);
+
+                    Properties.Settings.Default.Appearance_Accent = value.Name;
+                    SettingsChanged = true;
+                }
+
                 _accentSelectedItem = value;
                 OnPropertyChanged("AccentSelectedItem");
             }
@@ -138,8 +161,17 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _localizationSelectedIndex)
                     return;
 
+                if (!_isLoading)
+                {
+                    LocalizationInfo info = LocalizationController.LocalizationList[value];
+                    LocalizationController.ChangeLocalization(info);
+                    
+                    Properties.Settings.Default.Localization_CultureCode = info.Code;
+                    SettingsChanged = true;
+                }
+
                 _localizationSelectedIndex = value;
-                OnPropertyChanged("LocalizationSelectedIndex");
+                OnPropertyChanged("LocalizationSelectedItem");
             }
         }
 
@@ -151,7 +183,7 @@ namespace NETworkManager.GUI.ViewModels
             {
                 if (value == _settingsLocationSelectedPath)
                     return;
-
+                
                 _settingsLocationSelectedPath = value;
                 OnPropertyChanged("SettingsLocationSelectedPath");
             }
@@ -174,10 +206,19 @@ namespace NETworkManager.GUI.ViewModels
         public SettingsViewModel()
         {
             LoadSettings();
+
+            _isLoading = false;
         }
 
         public void LoadSettings()
         {
+            // General - Start
+            StartApplicationMinimized = Properties.Settings.Default.Application_StartApplicationMinimized;
+
+            // General - Tray
+            MinimizeToTrayOnClose = Properties.Settings.Default.Application_MinimizeToTrayOnClose;
+            MinimizeToTrayOnMinimize = Properties.Settings.Default.Application_MinimizeToTrayOnMinimize;
+
             // Apperance
             AppThemeSelectedItem = ThemeManager.DetectAppStyle().Item1;
             AccentSelectedItem = ThemeManager.DetectAppStyle().Item2;
@@ -192,34 +233,8 @@ namespace NETworkManager.GUI.ViewModels
 
         public void SaveSettings()
         {
-            if (SettingsChanged)
+            if (_settingsChanged)
                 Properties.Settings.Default.Save();
-        }
-
-        public void ChangeAppThemeOnSelectionChanged()
-        {
-            AppearanceController.ChangeAppTheme(AppThemeSelectedItem.Name);
-
-            SettingsChanged = true;
-            Properties.Settings.Default.Appearance_AppTheme = AppThemeSelectedItem.Name;
-        }
-
-        public void ChangeAccentOnSelectionChanged()
-        {
-            AppearanceController.ChangeAccent(AccentSelectedItem.Name);
-
-            SettingsChanged = true;
-            Properties.Settings.Default.Appearance_Accent = AccentSelectedItem.Name;
-        }
-
-        public void ChangeLocalizationOnSelectionChanged()
-        {
-            LocalizationController.ChangeLocalization(LocalizationController.LocalizationList[LocalizationSelectedIndex]);
-
-            SettingsChanged = true;
-            RestartRequired = true;
-
-            Properties.Settings.Default.Localization_CultureCode = LocalizationController.CurrentLocalization.Code;
         }
 
         public ICommand BrowseFolderCommand

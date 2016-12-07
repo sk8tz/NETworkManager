@@ -14,3 +14,4 @@
 
 ## WakeOnLan
 - ContextMenu/Button to delete template
+- Replace DataGrid with ListBox

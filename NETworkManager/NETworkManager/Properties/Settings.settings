@@ -20,16 +20,19 @@
     <Setting Name="Settings_Location" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="FileName_WakeOnLanTemplates" Provider="CustomSettingsProvider" Type="System.String" Scope="Application">
+    <Setting Name="WakeOnLan_TemplatesFileName" Provider="CustomSettingsProvider" Type="System.String" Scope="Application">
       <Value Profile="(Default)">WakeOnLanTemplates.xml</Value>
     </Setting>
     <Setting Name="WakeOnLan_MAC" Provider="CustomSettingsProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Application_MinimizeToTray" Type="System.Boolean" Scope="User">
+    <Setting Name="Application_MinimizeToTrayOnMinimize" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Application_CloseToTray" Type="System.Boolean" Scope="User">
+    <Setting Name="Application_MinimizeToTrayOnClose" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Application_StartApplicationMinimized" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

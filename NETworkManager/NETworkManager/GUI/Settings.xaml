@@ -103,7 +103,7 @@
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Autostart}" />
                                 <CheckBox x:Name="checkBoxStartApplicationWithWindows" Content="{DynamicResource LocalizedString_StartApplicationWithWindows}" IsChecked="{Binding StartApplicationWithWindows}" Margin="0,0,0,10" />
-                                <CheckBox x:Name="checkBoxStartApplicationMinimized" Content="{DynamicResource LocalizedString_StartApplicationMinimized}" IsChecked="{Binding StartApplicationMinimized}" Margin="0,0,0,10" />
+                                <CheckBox Content="{DynamicResource LocalizedString_StartApplicationMinimized}" IsChecked="{Binding StartApplicationMinimized}" Margin="0,0,0,10" />
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Tray}" />
                                 <CheckBox x:Name="checkBoxMinimizeToTrayOnClose" Content="{DynamicResource LocalizedString_MinimizeToTrayOnClose}" IsChecked="{Binding MinimizeToTrayOnClose}" Margin="0,0,0,10" />
                                 <CheckBox x:Name="checkBoxMinimizeToTrayOnMinimize" Content="{DynamicResource LocalizedString_MinimizeToTrayOnMinimize}" IsChecked="{Binding MinimizeToTrayOnMinimize}" />
@@ -113,7 +113,7 @@
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
-                                <ListView  x:Name="listViewAppTheme" VerticalAlignment="Top" ItemsSource="{x:Static metro:ThemeManager.AppThemes}" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single" SelectionChanged="listViewAppTheme_SelectionChanged">
+                                <ListView  ItemsSource="{x:Static metro:ThemeManager.AppThemes}" VerticalAlignment="Top" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single" >
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AppThemeToBrushConverter}, ConverterParameter='Name'}" ToolTip="{Binding Converter={StaticResource AppThemeNameTranslator}, ConverterParameter='Name'}"/>
@@ -132,7 +132,7 @@
                                     </ListView.SelectedItem>
                                 </ListView>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
-                                <ListView x:Name="listViewAccent" ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionMode="Single" SelectionChanged="listViewAccent_SelectionChanged">
+                                <ListView ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate >
                                             <Rectangle Width="48" Height="48" Margin="-1,2" Fill="{Binding Converter={StaticResource AccentToBrushConverter}, ConverterParameter='Name'}"
@@ -156,7 +156,7 @@
                         <!-- Language -->
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
-                                <ListView x:Name="listBoxLanguage" Background="Transparent" ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}" BorderThickness="0" SelectionMode="Single" SelectionChanged="listBoxLanguage_SelectionChanged">
+                                <ListView ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}"  Background="Transparent" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="5">

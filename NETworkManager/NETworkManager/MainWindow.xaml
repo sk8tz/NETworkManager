@@ -38,19 +38,29 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Resources>
-        <ContextMenu x:Key="contextMenuNotifyIcon">
+        <ContextMenu x:Key="contextMenuNotifyIcon" MinWidth="200">
             <MenuItem Header="{DynamicResource LocalizedString_Show}" >
                 <MenuItem.Icon>
-                    <Rectangle Width="20" Height="20"  Fill="Black">
+                    <Rectangle Width="16" Height="16" Fill="Black">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_app}" />
                         </Rectangle.OpacityMask>
                     </Rectangle>
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="{DynamicResource LocalizedString_Settings}" >
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="Black">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
             <MenuItem Header="{DynamicResource LocalizedString_Close}">
                 <MenuItem.Icon>
-                    <Rectangle Width="20" Height="20"  Fill="Red">
+                    <Rectangle Width="16" Height="16" Fill="Red">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
                         </Rectangle.OpacityMask>

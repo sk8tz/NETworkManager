@@ -110,9 +110,9 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.SettingsProviderAttribute(typeof(CustomSettingsProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("WakeOnLanTemplates.xml")]
-        public string FileName_WakeOnLanTemplates {
+        public string WakeOnLan_TemplatesFileName {
             get {
-                return ((string)(this["FileName_WakeOnLanTemplates"]));
+                return ((string)(this["WakeOnLan_TemplatesFileName"]));
             }
         }
         
@@ -132,24 +132,36 @@ namespace NETworkManager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Application_MinimizeToTray {
+        public bool Application_MinimizeToTrayOnMinimize {
             get {
-                return ((bool)(this["Application_MinimizeToTray"]));
+                return ((bool)(this["Application_MinimizeToTrayOnMinimize"]));
             }
             set {
-                this["Application_MinimizeToTray"] = value;
+                this["Application_MinimizeToTrayOnMinimize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Application_CloseToTray {
+        public bool Application_MinimizeToTrayOnClose {
             get {
-                return ((bool)(this["Application_CloseToTray"]));
+                return ((bool)(this["Application_MinimizeToTrayOnClose"]));
             }
             set {
-                this["Application_CloseToTray"] = value;
+                this["Application_MinimizeToTrayOnClose"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Application_StartApplicationMinimized {
+            get {
+                return ((bool)(this["Application_StartApplicationMinimized"]));
+            }
+            set {
+                this["Application_StartApplicationMinimized"] = value;
             }
         }
     }

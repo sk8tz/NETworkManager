@@ -30,50 +30,21 @@ namespace NETworkManager.GUI
 
         private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
-            viewModel.SaveSettings();
-
-            // Show Dialog if restart is required
-            if (viewModel.RestartRequired)
-            {
-
-            }
+            if (viewModel.SettingsChanged)
+                viewModel.SaveSettings();
         }
-                
+
         private void MetroWindowSettings_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
                 Close();
         }
 
-        private void listViewAppTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_isLoading)
-                return;
-
-            viewModel.ChangeAppThemeOnSelectionChanged();
-        }
-
-        private void listViewAccent_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_isLoading)
-                return;
-
-            viewModel.ChangeAccentOnSelectionChanged();
-        }
-
-        private void listBoxLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_isLoading)
-                return;
-
-            viewModel.ChangeLocalizationOnSelectionChanged();
-        }
-
         private void toggleSwitchSettingsPortable_IsCheckedChanged(object sender, System.EventArgs e)
         {
             if (_isLoading)
                 return;
-            
+
             viewModel.SettingsPortableIsCheckedChanged();
         }
     }
