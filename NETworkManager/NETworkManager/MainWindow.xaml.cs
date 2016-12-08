@@ -14,6 +14,7 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Media.Imaging;
 using System.Windows.Forms;
+using NETworkManager.GUI.Interface;
 
 namespace NETworkManager
 {
@@ -35,6 +36,7 @@ namespace NETworkManager
             AppearanceController.LoadAppearance();
 
             InitializeComponent();
+            DataContext = this;
 
             // Set a filter for ListView Apps and sort them
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
@@ -62,16 +64,6 @@ namespace NETworkManager
                 await this.ShowMessageAsync("Error", dialogMessage, MessageDialogStyle.Affirmative);
             }
         }
-
-        private void btnSettings_Click(object sender, RoutedEventArgs e)
-        {
-            Settings settingsWindow = new Settings()
-            {
-                Owner = this
-            };
-
-            settingsWindow.ShowDialog();
-        }
         #endregion
 
         #region NotifyIcon
@@ -97,19 +89,19 @@ namespace NETworkManager
 
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            RestoreApplicationFromTray();
+            ShowWindowFromTray();
         }
 
-        private void MoveApplicationToTray()
+        private void HideWindowToTray()
         {
             _isInTray = true;
-            
+
             WindowState = WindowState.Minimized;
             ShowInTaskbar = false;
             notifyIcon.Visible = true;
         }
 
-        private void RestoreApplicationFromTray()
+        private void ShowWindowFromTray()
         {
             _isInTray = false;
 
@@ -143,11 +135,11 @@ namespace NETworkManager
 
         private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
         {
-            if (Properties.Settings.Default.Application_MinimizeToTrayOnClose)
+            if (Properties.Settings.Default.Application_MinimizeToTrayOnClose && !_isInTray)
             {
                 e.Cancel = true;
 
-                MoveApplicationToTray();
+               HideWindowToTray();
 
                 return;
             }
@@ -162,8 +154,49 @@ namespace NETworkManager
             if (WindowState == WindowState.Minimized)
             {
                 if (!_isInTray && Properties.Settings.Default.Application_MinimizeToTrayOnMinimize)
-                    MoveApplicationToTray();
+                    HideWindowToTray();
             }
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.ContextMenu menu = sender as System.Windows.Controls.ContextMenu;
+            menu.DataContext = this;
+        }
+
+        public ICommand OpenSettingsCommand
+        {
+            get { return new RelayCommand(p => OpenSettingsAction()); }
+        }
+
+        private void OpenSettingsAction()
+        {
+            Settings settingsWindow = new Settings()
+            {
+                Owner = this
+            };
+
+            settingsWindow.ShowDialog();
+        }
+
+        public ICommand ShowWindowCommand
+        {
+            get { return new RelayCommand(p => ShowWindowAction()); }
+        }
+
+        private void ShowWindowAction()
+        {
+            ShowWindowFromTray();
+        }
+
+        public ICommand CloseApplicationCommand
+        {
+            get { return new RelayCommand(p => CloseApplicationAction()); }
+        }        
+
+        private void CloseApplicationAction()
+        {
+            Close();
         }
     }
 }

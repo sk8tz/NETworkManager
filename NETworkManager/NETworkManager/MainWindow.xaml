@@ -28,7 +28,7 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Button>
-            <Button Name="btnSettings" Click="btnSettings_Click" ToolTip="{DynamicResource LocalizedString_ToolTip_Settings}">
+            <Button Command="{Binding OpenSettingsCommand}" ToolTip="{DynamicResource LocalizedString_ToolTip_Settings}">
                 <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                     <Rectangle.OpacityMask>
                         <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
@@ -38,8 +38,8 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Resources>
-        <ContextMenu x:Key="contextMenuNotifyIcon" MinWidth="200">
-            <MenuItem Header="{DynamicResource LocalizedString_Show}" >
+        <ContextMenu x:Key="contextMenuNotifyIcon" MinWidth="200" Opened="ContextMenu_Opened">
+            <MenuItem Header="{DynamicResource LocalizedString_Show}" Command="{Binding ShowWindowCommand}">
                 <MenuItem.Icon>
                     <Rectangle Width="16" Height="16" Fill="Black">
                         <Rectangle.OpacityMask>
@@ -48,7 +48,7 @@
                     </Rectangle>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="{DynamicResource LocalizedString_Settings}" >
+            <MenuItem Header="{DynamicResource LocalizedString_Settings}" Command="{Binding OpenSettingsCommand}">
                 <MenuItem.Icon>
                     <Rectangle Width="16" Height="16" Fill="Black">
                         <Rectangle.OpacityMask>
@@ -58,7 +58,7 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="{DynamicResource LocalizedString_Close}">
+            <MenuItem Header="{DynamicResource LocalizedString_Close}" Command="{Binding CloseApplicationCommand}">
                 <MenuItem.Icon>
                     <Rectangle Width="16" Height="16" Fill="Red">
                         <Rectangle.OpacityMask>
