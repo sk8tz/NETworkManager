@@ -48,11 +48,6 @@ namespace NETworkManager.GUI
             }
         }
 
-        private void cbMACAddress_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            viewModel.WakeOnLanInfoSelectedItemChanged();
-        }
-
         private void MetroWindowWakeOnLAN_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Escape && tabControl.SelectedIndex != 1)

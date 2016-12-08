@@ -22,8 +22,8 @@ namespace NETworkManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        System.Windows.Forms.NotifyIcon notifyIcon = new System.Windows.Forms.NotifyIcon();
-        WindowState windowState = new WindowState();
+        NotifyIcon notifyIcon = new NotifyIcon();
+        private bool _isInTray;
 
         #region Load
         public MainWindow()
@@ -88,7 +88,7 @@ namespace NETworkManager
 
         private void NotifyIcon_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 System.Windows.Controls.ContextMenu menu = (System.Windows.Controls.ContextMenu)FindResource("contextMenuNotifyIcon");
                 menu.IsOpen = true;
@@ -97,18 +97,25 @@ namespace NETworkManager
 
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            ShowTrayIcon(false);
+            RestoreApplicationFromTray();
         }
 
-
-        private void ShowTrayIcon(bool show)
+        private void MoveApplicationToTray()
         {
-            // Restore window (normal / maximized)     
-            if (!show)
-                WindowState = windowState;
+            _isInTray = true;
+            
+            WindowState = WindowState.Minimized;
+            ShowInTaskbar = false;
+            notifyIcon.Visible = true;
+        }
 
-            notifyIcon.Visible = show;
-            ShowInTaskbar = !show;
+        private void RestoreApplicationFromTray()
+        {
+            _isInTray = false;
+
+            WindowState = WindowState.Normal;
+            ShowInTaskbar = true;
+            notifyIcon.Visible = false;
         }
         #endregion
 
@@ -136,14 +143,11 @@ namespace NETworkManager
 
         private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
         {
-            if (Properties.Settings.Default.Application_MinimizeToTrayOnClose || true)
+            if (Properties.Settings.Default.Application_MinimizeToTrayOnClose)
             {
                 e.Cancel = true;
 
-                windowState = WindowState;
-
-                WindowState = WindowState.Minimized;
-                ShowTrayIcon(true);
+                MoveApplicationToTray();
 
                 return;
             }
@@ -155,11 +159,10 @@ namespace NETworkManager
 
         private void MetroWindowMain_StateChanged(object sender, EventArgs e)
         {
-            // Handle tray icon
             if (WindowState == WindowState.Minimized)
             {
-                if (Properties.Settings.Default.Application_MinimizeToTrayOnMinimize)
-                    ShowTrayIcon(true);
+                if (!_isInTray && Properties.Settings.Default.Application_MinimizeToTrayOnMinimize)
+                    MoveApplicationToTray();
             }
         }
     }

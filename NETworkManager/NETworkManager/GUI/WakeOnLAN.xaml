@@ -53,7 +53,7 @@
                                 <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0" Grid.Row="0" x:Name="cbMACAddress"  IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" ItemsSource="{Binding WakeOnLanTemplates}" SelectedValuePath="MAC" FontSize="14"  SelectionChanged="cbMACAddress_SelectionChanged">
+                            <ComboBox Grid.Column="0" Grid.Row="0" x:Name="cbMACAddress" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_EnterMACAddress}" ItemsSource="{Binding WakeOnLanTemplates}" SelectedValuePath="MAC" FontSize="14" >
                                 <ComboBox.Text>
                                     <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -63,21 +63,20 @@
                                     </Binding>
                                 </ComboBox.Text>
                                 <ComboBox.SelectedItem>
-                                    <Binding Path="WakeOnLanInfoSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                    <Binding Path="SelectedItemWakeOnLanInfo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
                                 </ComboBox.SelectedItem>
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="20" />
+                                                <ColumnDefinition Width="150" />
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="25" />
                                             </Grid.RowDefinitions>
                                             <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="14"  FontFamily="Consolas" Text="{Binding Path=MAC}" />
-                                            <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="14" Text="{Binding Path=Hostname}" Opacity="0.5" />
+                                            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="14" Text="{Binding Path=Hostname}" Opacity="0.5" />
                                         </Grid>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
@@ -121,7 +120,7 @@
                             <TextBlock Text="{DynamicResource LocalizedString_Broadcast}" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
                             <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch">
                                 <TextBox.Text>
-                                    <Binding Path="BroadcastAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding Path="Broadcast" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
                                             <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
                                             <Validator:IPv4AddressValidator ValidatesOnTargetUpdated="True" />

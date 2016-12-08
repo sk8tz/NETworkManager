@@ -35,17 +35,17 @@ namespace NETworkManager.GUI.ViewModels
             }
         }
 
-        private string _broadcastAddress;
-        public string BroadcastAddress
+        private string _broadcast;
+        public string Broadcast
         {
-            get { return _broadcastAddress; }
+            get { return _broadcast; }
             set
             {
-                if (value == _broadcastAddress)
+                if (value == _broadcast)
                     return;
 
-                _broadcastAddress = value;
-                OnPropertyChanged("BroadcastAddress");
+                _broadcast = value;
+                OnPropertyChanged("Broadcast");
             }
         }
 
@@ -156,8 +156,11 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _selectedItemWakeOnLanInfo)
                     return;
 
+                Port = value.Port;
+                Broadcast = value.Broadcast;
+
                 _selectedItemWakeOnLanInfo = value;
-                OnPropertyChanged("WakeOnLanInfoSelectedItem");
+                OnPropertyChanged("SelectedItemWakeOnLanInfo");
             }
         }
 
@@ -167,26 +170,17 @@ namespace NETworkManager.GUI.ViewModels
             LoadTemplates();
         }
 
-        public void WakeOnLanInfoSelectedItemChanged()
-        {
-            if (SelectedItemWakeOnLanInfo == null)
-                return;
-
-            BroadcastAddress = SelectedItemWakeOnLanInfo.Broadcast;
-            Port = SelectedItemWakeOnLanInfo.Port;
-        }
-
         public void LoadSettings()
         {
             MACAddress = Properties.Settings.Default.WakeOnLan_MAC;
-            BroadcastAddress = Properties.Settings.Default.WakeOnLan_Broadcast;
+            Broadcast = Properties.Settings.Default.WakeOnLan_Broadcast;
             Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
         }
 
         private void SaveSettings()
         {
             Properties.Settings.Default.WakeOnLan_MAC = MACAddress;
-            Properties.Settings.Default.WakeOnLan_Broadcast = BroadcastAddress;
+            Properties.Settings.Default.WakeOnLan_Broadcast = Broadcast;
             Properties.Settings.Default.WakeOnLan_Port = Convert.ToInt32(Port);
             Properties.Settings.Default.Save();
         }
@@ -206,7 +200,7 @@ namespace NETworkManager.GUI.ViewModels
 
         private void WakeUpAction()
         {
-            MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(BroadcastAddress), int.Parse(Port));
+            MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(Broadcast), int.Parse(Port));
 
             SaveSettings();
         }
