@@ -98,6 +98,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Appearance\AppearanceController.cs" />
+    <Compile Include="Core\Autostart\AutostartManager.cs" />
     <Compile Include="Core\Settings\CustomSettingsProvider.cs" />
     <Compile Include="GUI\Converter\AccentToBrushConverter.cs" />
     <Compile Include="GUI\Converter\AppThemeToBrushConverter.cs" />

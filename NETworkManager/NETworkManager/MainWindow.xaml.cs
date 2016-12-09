@@ -40,13 +40,13 @@ namespace NETworkManager
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             view.Filter = SearchFilter;
-        }
 
-        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
-        {
             InitNotifyIcon();
-        }
 
+            if (Properties.Settings.Default.Application_StartApplicationMinimized)
+                HideWindowToTray();
+        }
+                
         #region NotifyIcon
         private void InitNotifyIcon()
         {

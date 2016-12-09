@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
 using System.IO;
+using NETworkManager.Core.Autostart;
 
 namespace NETworkManager.GUI.ViewModels
 {
@@ -42,6 +43,14 @@ namespace NETworkManager.GUI.ViewModels
             {
                 if (value == _startApplicationWithWindows)
                     return;
+
+                if(!_isLoading)
+                {
+                    if (value)
+                        Autostart.Enable();
+                    else
+                        Autostart.Disable();
+                }
 
                 _startApplicationWithWindows = value;
                 OnPropertyChanged("StartApplicationWithWindows");
@@ -213,6 +222,7 @@ namespace NETworkManager.GUI.ViewModels
         public void LoadSettings()
         {
             // General - Start
+            StartApplicationWithWindows = Autostart.IsEnabled;
             StartApplicationMinimized = Properties.Settings.Default.Application_StartApplicationMinimized;
 
             // General - Tray

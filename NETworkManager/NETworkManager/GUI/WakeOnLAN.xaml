@@ -241,7 +241,7 @@
                             </StackPanel>
                         </Grid>
                         <TextBlock Grid.Row="2" Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Templates}" />
-                        <DataGrid Grid.Row="3" FontSize="14" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" IsReadOnly="True">
+                        <DataGrid Grid.Row="3" FontSize="14" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" IsReadOnly="True" CanUserDeleteRows="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" Width="*" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" Width="*" />
