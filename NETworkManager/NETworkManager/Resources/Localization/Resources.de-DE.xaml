@@ -2,8 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="LocalizedString_ToolTip_Settings">Einstellungen</system:String>
-    <system:String x:Key="LocalizedString_ToolTip_GitHub">Projekt auf GitHub</system:String>
     <system:String x:Key="LocalizedString_Application">Anwendung</system:String>
     <system:String x:Key="LocalizedString_About">Über</system:String>
     <system:String x:Key="LocalizedString_General">Allgemein</system:String>
@@ -16,7 +14,6 @@
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Einige Einstellungen werden erst nach einem Neustart der Anwendung angewendet!</system:String>
     <system:String x:Key="LocalizedString_Templates">Vorlagen</system:String>
     <system:String x:Key="LocalizedString_AddTemplate">Vorlage hinzufügen</system:String>
-    <system:String x:Key="LocalizedString_EnterMACAddress">MAC-Adresse eingeben...</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Aufwecken</system:String>
     <system:String x:Key="LocalizedString_Error">Fehler</system:String>
     <system:String x:Key="LocalizedString_Location">Speicherort</system:String>
@@ -40,14 +37,23 @@
     <system:String x:Key="LocalizedString_StartApplicationWithWindows">Anwendung mit Windows starten (aktueller Benutzer)</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTray">Minimieren ins Tray</system:String>
     <system:String x:Key="LocalizedString_StartApplicationMinimized">Anwendung minimiert starten</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimiere ins Tray, wenn Anwendung minimiert wird</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimiere ins Tray, anstatt die Anwendung zu schließen</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Ins Tray minimieren, anstatt die Anwendung zu schließen</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Ins Tray minimieren, wenn Anwendung minimiert wird</system:String>
     <system:String x:Key="LocalizedString_Show">Anzeigen</system:String>
     <system:String x:Key="LocalizedString_Close">Schließen</system:String>
-    
+
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Speicherort eingeben...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_EnterMACAddress">MAC-Adresse eingeben...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_MACAddress">MAC-Adresse...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_Hostname">Hostname...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_Broadcast">Broadcast...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_Port">Port...</system:String>
+
+    <!-- ToolTip -->
+    <system:String x:Key="LocalizedString_ToolTip_Settings">Einstellungen öffnen</system:String>
+    <system:String x:Key="LocalizedString_ToolTip_GitHub">Projekt auf Github anzeigen</system:String>
 
     <!-- Validate (User Input in GUI) -->
     <system:String x:Key="LocalizedString_ValidateError_FieldEmpty">Feld darf nicht leer sein</system:String>

@@ -2,8 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="LocalizedString_ToolTip_Settings">Settings</system:String>
-    <system:String x:Key="LocalizedString_ToolTip_GitHub">Project on GitHub</system:String>
     <system:String x:Key="LocalizedString_Application">Application</system:String>
     <system:String x:Key="LocalizedString_About">About</system:String>
     <system:String x:Key="LocalizedString_General">General</system:String>
@@ -16,7 +14,6 @@
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Some settings are applied only after restarting the application!</system:String>
     <system:String x:Key="LocalizedString_Templates">Templates</system:String>
     <system:String x:Key="LocalizedString_AddTemplate">Add template</system:String>
-    <system:String x:Key="LocalizedString_EnterMACAddress">Enter MAC-Address...</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Wake Up</system:String>
     <system:String x:Key="LocalizedString_Error">Error</system:String>
     <system:String x:Key="LocalizedString_Location">Location</system:String>
@@ -40,14 +37,23 @@
     <system:String x:Key="LocalizedString_StartApplicationWithWindows">Start application with Windows (current user)</system:String>
     <system:String x:Key="LocalizedString_StartApplicationMinimized">Start application minimized</system:String>
     <system:String x:Key="LocalizedString_Tray">Tray</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimize to Tray, when application is minimized</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimize to Tray, instead of closing the application</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimize to tray, instead of closing the application</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimize to tray, when application is minimized</system:String>
     <system:String x:Key="LocalizedString_Show">Show</system:String>
     <system:String x:Key="LocalizedString_Close">Close</system:String>
 
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Enter location...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_EnterMACAddress">Enter MAC-Address...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_MACAddress">MAC-Address...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_Hostname">Hostname...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_Broadcast">Broadcast...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_Port">Port...</system:String>
+
+    <!-- ToolTip-->
+    <system:String x:Key="LocalizedString_ToolTip_Settings">Open settings</system:String>
+    <system:String x:Key="LocalizedString_ToolTip_GitHub">Show project on GitHub</system:String>
 
     <!-- Validate (User Input in GUI) -->
     <system:String x:Key="LocalizedString_ValidateError_FieldEmpty">Field cannot be empty</system:String>

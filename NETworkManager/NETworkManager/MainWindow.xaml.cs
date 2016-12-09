@@ -12,7 +12,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.IO;
 using System.Drawing;
-using System.Windows.Media.Imaging;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
 
@@ -26,7 +25,6 @@ namespace NETworkManager
         NotifyIcon notifyIcon = new NotifyIcon();
         private bool _isInTray;
 
-        #region Load
         public MainWindow()
         {
             // Load localization
@@ -48,23 +46,6 @@ namespace NETworkManager
         {
             InitNotifyIcon();
         }
-        #endregion
-
-        #region RightWindowCommands
-        private async void btnGithub_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Process.Start(Properties.Resources.GitHubProjectURL);
-            }
-            catch (Exception ex)
-            {
-                string dialogMessage = string.Format("Fehler beim öffnen der Github Project Seite.\n\nException:\n{0}", ex.Message);
-
-                await this.ShowMessageAsync("Error", dialogMessage, MessageDialogStyle.Affirmative);
-            }
-        }
-        #endregion
 
         #region NotifyIcon
         private void InitNotifyIcon()
@@ -75,6 +56,7 @@ namespace NETworkManager
                 notifyIcon.Icon = new Icon(iconStream);
                 notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
                 notifyIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(NotifyIcon_MouseDown);
+                notifyIcon.Text = Title;
             }
         }
 
@@ -139,7 +121,7 @@ namespace NETworkManager
             {
                 e.Cancel = true;
 
-               HideWindowToTray();
+                HideWindowToTray();
 
                 return;
             }
@@ -162,6 +144,17 @@ namespace NETworkManager
         {
             System.Windows.Controls.ContextMenu menu = sender as System.Windows.Controls.ContextMenu;
             menu.DataContext = this;
+        }
+
+        #region Commands
+        public ICommand OpenGithubProjectCommand
+        {
+            get { return new RelayCommand(p => OpenGithubProjectAction()); }
+        }
+
+        private void OpenGithubProjectAction()
+        {
+            Process.Start(Properties.Resources.GitHubProjectURL);
         }
 
         public ICommand OpenSettingsCommand
@@ -192,11 +185,12 @@ namespace NETworkManager
         public ICommand CloseApplicationCommand
         {
             get { return new RelayCommand(p => CloseApplicationAction()); }
-        }        
+        }
 
         private void CloseApplicationAction()
         {
             Close();
         }
+        #endregion
     }
 }
