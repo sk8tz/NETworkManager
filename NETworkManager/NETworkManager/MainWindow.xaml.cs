@@ -46,7 +46,7 @@ namespace NETworkManager
             if (Properties.Settings.Default.Application_StartApplicationMinimized)
                 HideWindowToTray();
         }
-                
+
         #region NotifyIcon
         private void InitNotifyIcon()
         {
@@ -78,17 +78,16 @@ namespace NETworkManager
         {
             _isInTray = true;
 
-            WindowState = WindowState.Minimized;
-            ShowInTaskbar = false;
             notifyIcon.Visible = true;
+            Hide();
         }
 
         private void ShowWindowFromTray()
         {
             _isInTray = false;
 
+            Show();
             WindowState = WindowState.Normal;
-            ShowInTaskbar = true;
             notifyIcon.Visible = false;
         }
         #endregion
@@ -164,10 +163,10 @@ namespace NETworkManager
 
         private void OpenSettingsAction()
         {
-            Settings settingsWindow = new Settings()
-            {
-                Owner = this
-            };
+            Settings settingsWindow = new Settings();
+
+            if (Visibility != Visibility.Hidden)
+                settingsWindow.Owner = this;
 
             settingsWindow.ShowDialog();
         }
@@ -192,5 +191,7 @@ namespace NETworkManager
             Close();
         }
         #endregion
+
+
     }
 }
