@@ -86,5 +86,14 @@ namespace NETworkManager.Properties {
                 return ResourceManager.GetString("WakeOnLan_DefaultPort", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die WakeOnLanTemplates.xml ähnelt.
+        /// </summary>
+        internal static string WakeOnLan_TemplatesFileName {
+            get {
+                return ResourceManager.GetString("WakeOnLan_TemplatesFileName", resourceCulture);
+            }
+        }
     }
 }

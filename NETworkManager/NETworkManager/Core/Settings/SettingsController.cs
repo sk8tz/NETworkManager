@@ -133,7 +133,7 @@ namespace NETworkManager.Core.Settings
 
         public static List<WakeOnLanInfo> GetWakeOnLanTemplates()
         {
-            string filePath = Path.Combine(SettingsLocation, Properties.Settings.Default.WakeOnLan_TemplatesFileName);
+            string filePath = Path.Combine(SettingsLocation, Properties.Resources.WakeOnLan_TemplatesFileName);
 
             if (File.Exists(filePath))
                 return DeserializeWakeOnLanTempaltes(filePath);
@@ -153,7 +153,7 @@ namespace NETworkManager.Core.Settings
 
         public static void SaveWakeOnLanTemplates(List<WakeOnLanInfo> list)
         {
-            string filePath = Path.Combine(SettingsLocation, Properties.Settings.Default.WakeOnLan_TemplatesFileName);
+            string filePath = Path.Combine(SettingsLocation, Properties.Resources.WakeOnLan_TemplatesFileName);
 
             SerializeWakeOnLanTemplates(list, filePath);
         }

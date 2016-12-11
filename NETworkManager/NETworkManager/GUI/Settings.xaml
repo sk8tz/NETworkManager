@@ -77,8 +77,8 @@
             <TabItem  Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition MinWidth="150" Width="Auto"/>
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush3}" Padding="0,0,10,0" Margin="0" >
                         <ListBox.Resources>

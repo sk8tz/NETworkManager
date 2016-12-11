@@ -48,7 +48,9 @@
     <system:String x:Key="LocalizedString_Watermark_MACAddress">MAC-Address...</system:String>
     <system:String x:Key="LocalizedString_Watermark_Hostname">Hostname...</system:String>
     <system:String x:Key="LocalizedString_Watermark_Broadcast">Broadcast...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_ExampleBroadcast">192.168.178.255</system:String>
     <system:String x:Key="LocalizedString_Watermark_Port">Port...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_ExamplePort">7</system:String>
     
     
     <!-- ToolTip-->

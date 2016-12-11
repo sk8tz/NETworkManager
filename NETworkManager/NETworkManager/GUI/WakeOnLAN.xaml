@@ -111,7 +111,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <TextBlock Text="{DynamicResource LocalizedString_Broadcast}" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
-                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExampleBroadcast}" TextAlignment="Center" HorizontalAlignment="Stretch">
+                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExampleBroadcast}" HorizontalAlignment="Stretch">
                                 <TextBox.Text>
                                     <Binding Path="Broadcast" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>

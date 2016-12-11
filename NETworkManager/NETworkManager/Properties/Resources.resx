@@ -127,4 +127,7 @@
   <data name="WakeOnLan_DefaultPort" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="WakeOnLan_TemplatesFileName" xml:space="preserve">
+    <value>WakeOnLanTemplates.xml</value>
+  </data>
 </root>
