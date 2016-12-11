@@ -165,7 +165,7 @@ namespace NETworkManager
         {
             Settings settingsWindow = new Settings();
 
-            if (Visibility != Visibility.Hidden)
+            if (!_isInTray)
                 settingsWindow.Owner = this;
 
             settingsWindow.ShowDialog();

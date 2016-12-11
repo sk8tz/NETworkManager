@@ -31,17 +31,16 @@
     <system:String x:Key="LocalizedString_SubnetmaskCDIR">Subnetmask / CDIR</system:String>
     <system:String x:Key="LocalizedString_Calculate">Calculate</system:String>
     <system:String x:Key="LocalizedString_Portable">Portable</system:String>
-    <system:String x:Key="LocalizedString_Enabled">Enabled</system:String>
-    <system:String x:Key="LocalizedString_Disabled">Disabled</system:String>
     <system:String x:Key="LocalizedString_Autostart">Autostart</system:String>
     <system:String x:Key="LocalizedString_StartApplicationWithWindows">Start application with Windows (current user)</system:String>
     <system:String x:Key="LocalizedString_StartApplicationMinimized">Start application minimized</system:String>
     <system:String x:Key="LocalizedString_Tray">Tray</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Minimize to tray, instead of closing the application</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimize to tray, when application is minimized</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Minimize to tray, when the application is minimized</system:String>
     <system:String x:Key="LocalizedString_Show">Show</system:String>
     <system:String x:Key="LocalizedString_Close">Close</system:String>
-
+    <system:String x:Key="LocalizedString_SaveSettingsInApplicationFolder">Save settngs in the application folder</system:String>
+    
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Enter location...</system:String>

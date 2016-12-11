@@ -25,7 +25,7 @@ namespace NETworkManager.GUI.ViewModels
         private bool _settingsChanged;
         public bool SettingsChanged
         {
-            get { return _settingsChanged;}
+            get { return _settingsChanged; }
             set
             {
                 if (value == _settingsChanged)
@@ -33,7 +33,7 @@ namespace NETworkManager.GUI.ViewModels
 
                 _settingsChanged = true;
                 OnPropertyChanged("SettingsChanged");
-            }            
+            }
         }
 
         private bool _restartRequired;
@@ -59,7 +59,7 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _startApplicationWithWindows)
                     return;
 
-                if(!_isLoading)
+                if (!_isLoading)
                 {
                     if (value)
                         Autostart.Enable();
@@ -101,7 +101,7 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _minimizeToTrayOnClose)
                     return;
 
-                if(!_isLoading)
+                if (!_isLoading)
                 {
                     Properties.Settings.Default.Application_MinimizeToTrayOnClose = value;
                     SettingsChanged = true;
@@ -189,7 +189,7 @@ namespace NETworkManager.GUI.ViewModels
                 {
                     LocalizationInfo info = LocalizationController.LocalizationList[value];
                     LocalizationController.ChangeLocalization(info);
-                    
+
                     Properties.Settings.Default.Localization_CultureCode = info.Code;
                     RestartRequired = true;
                     SettingsChanged = true;
@@ -208,7 +208,7 @@ namespace NETworkManager.GUI.ViewModels
             {
                 if (value == _settingsLocationSelectedPath)
                     return;
-                
+
                 _settingsLocationSelectedPath = value;
                 OnPropertyChanged("SettingsLocationSelectedPath");
             }
@@ -222,6 +222,22 @@ namespace NETworkManager.GUI.ViewModels
             {
                 if (value == _settingsPortable)
                     return;
+
+                if (!_isLoading)
+                {
+                    // Save settings before moving them
+                    SaveSettings();
+
+                    SettingsController.MakeSettingsPortable(value, true);
+
+                    if (!SettingsController.IsPortable)
+                    {
+                        SettingsLocationSelectedPath = SettingsController.SettingsLocation;
+
+                        Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
+                        SettingsChanged = true;
+                    }
+                }
 
                 _settingsPortable = value;
                 OnPropertyChanged("SettingsPortable");
@@ -237,11 +253,9 @@ namespace NETworkManager.GUI.ViewModels
 
         public void LoadSettings()
         {
-            // General - Start
+            // General
             StartApplicationWithWindows = Autostart.IsEnabled;
             StartApplicationMinimized = Properties.Settings.Default.Application_StartApplicationMinimized;
-
-            // General - Tray
             MinimizeToTrayOnClose = Properties.Settings.Default.Application_MinimizeToTrayOnClose;
             MinimizeToTrayOnMinimize = Properties.Settings.Default.Application_MinimizeToTrayOnMinimize;
 
@@ -259,7 +273,7 @@ namespace NETworkManager.GUI.ViewModels
 
         public void SaveSettings()
         {
-            if (_settingsChanged)
+            if (SettingsChanged)
                 Properties.Settings.Default.Save();
         }
 
@@ -292,19 +306,6 @@ namespace NETworkManager.GUI.ViewModels
 
             Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
             Properties.Settings.Default.Save();
-        }
-
-        public void SettingsPortableIsCheckedChanged()
-        {
-            SettingsController.MakeSettingsPortable(SettingsPortable, true);
-
-            if (!SettingsController.IsPortable)
-            {
-                SettingsLocationSelectedPath = SettingsController.SettingsLocation;
-
-                Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
-                Properties.Settings.Default.Save();
-            }
         }
     }
 }

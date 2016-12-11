@@ -13,7 +13,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="650" ResizeMode="CanResize" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing" Padding="0" WindowStartupLocation="CenterOwner" IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="True" PreviewKeyDown="MetroWindowSettings_PreviewKeyDown" ShowInTaskbar="False">
+        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="650" ResizeMode="CanResize" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Closing="MetroWindow_Closing" Padding="0" WindowStartupLocation="CenterOwner" IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="True" PreviewKeyDown="MetroWindowSettings_PreviewKeyDown" ShowInTaskbar="False">
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
@@ -102,11 +102,37 @@
                         <TabItem>
                             <StackPanel Style="{StaticResource StackPanelTabItem}">
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Autostart}" />
-                                <CheckBox Content="{DynamicResource LocalizedString_StartApplicationWithWindows}" IsChecked="{Binding StartApplicationWithWindows}" Margin="0,0,0,10" />
-                                <CheckBox Content="{DynamicResource LocalizedString_StartApplicationMinimized}" IsChecked="{Binding StartApplicationMinimized}" Margin="0,0,0,10" />
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LocalizedString_StartApplicationWithWindows}" Style="{StaticResource TextBlockGrid}" />
+                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="0" IsChecked="{Binding StartApplicationWithWindows}" OffLabel="" OnLabel="" />
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource LocalizedString_StartApplicationMinimized}" Style="{StaticResource TextBlockGrid}" />
+                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding StartApplicationMinimized}" OffLabel="" OnLabel="" />
+                                </Grid>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Tray}" />
-                                <CheckBox Content="{DynamicResource LocalizedString_MinimizeToTrayOnClose}" IsChecked="{Binding MinimizeToTrayOnClose}" Margin="0,0,0,10" />
-                                <CheckBox Content="{DynamicResource LocalizedString_MinimizeToTrayOnMinimize}" IsChecked="{Binding MinimizeToTrayOnMinimize}" />
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LocalizedString_MinimizeToTrayOnClose}" Style="{StaticResource TextBlockGrid}" />
+                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="0" IsChecked="{Binding MinimizeToTrayOnClose}" OffLabel="" OnLabel="" />
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource LocalizedString_MinimizeToTrayOnMinimize}" Style="{StaticResource TextBlockGrid}" />
+                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding MinimizeToTrayOnMinimize}" OffLabel="" OnLabel="" />
+                                </Grid>
                             </StackPanel>
                         </TabItem>
                         <!-- Appearance -->
@@ -220,14 +246,9 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Style="{StaticResource TextBlockGrid}" Text="Einstellungen mit Anwendung speichern" Grid.Column="0"/>
-                                    <Controls:ToggleSwitch Grid.Column="1" x:Name="toggleSwitchSettingsPortable" OffLabel="" OnLabel="" IsCheckedChanged="toggleSwitchSettingsPortable_IsCheckedChanged"  >
-                                        <Controls:ToggleSwitch.IsChecked>
-                                            <Binding Path="SettingsPortable" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
-                                        </Controls:ToggleSwitch.IsChecked>
-                                    </Controls:ToggleSwitch>
+                                    <TextBlock Style="{StaticResource TextBlockGrid}" Text="{DynamicResource LocalizedString_SaveSettingsInApplicationFolder}" Grid.Column="0"/>
+                                    <Controls:ToggleSwitch Grid.Column="1" OffLabel="" OnLabel="" IsChecked="{Binding SettingsPortable}" />
                                 </Grid>
-
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />
                             </StackPanel>

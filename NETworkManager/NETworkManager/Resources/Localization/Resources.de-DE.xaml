@@ -31,16 +31,15 @@
     <system:String x:Key="LocalizedString_SubnetmaskCDIR">Subnetzmaske / CDIR</system:String>
     <system:String x:Key="LocalizedString_Calculate">Berechnen</system:String>
     <system:String x:Key="LocalizedString_Portable">Portable</system:String>
-    <system:String x:Key="LocalizedString_Enabled">Aktiviert</system:String>
-    <system:String x:Key="LocalizedString_Disabled">Deaktiviert</system:String>
     <system:String x:Key="LocalizedString_Autostart">Autostart</system:String>
     <system:String x:Key="LocalizedString_StartApplicationWithWindows">Anwendung mit Windows starten (aktueller Benutzer)</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTray">Minimieren ins Tray</system:String>
     <system:String x:Key="LocalizedString_StartApplicationMinimized">Anwendung minimiert starten</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Ins Tray minimieren, anstatt die Anwendung zu schließen</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Ins Tray minimieren, wenn Anwendung minimiert wird</system:String>
+    <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Ins Tray minimieren, wenn die Anwendung minimiert wird</system:String>
     <system:String x:Key="LocalizedString_Show">Anzeigen</system:String>
     <system:String x:Key="LocalizedString_Close">Schließen</system:String>
+    <system:String x:Key="LocalizedString_SaveSettingsInApplicationFolder">Einstellungen im Anwendungsordner speichern</system:String>
 
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>

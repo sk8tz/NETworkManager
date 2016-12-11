@@ -1,7 +1,6 @@
 ﻿## General
 * Design Flyout... 
 * Global Hotkey ?? To open launcher
-* ContextMenu tray Icon
 
 ## Settings
 * Autostart
