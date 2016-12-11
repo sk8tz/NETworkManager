@@ -36,15 +36,12 @@ namespace NETworkManager.GUI
             if (tabControl.SelectedIndex == 0)
             {
                 Width = 350;
-                Height = 300;
+                Height = 325;
             }
             else if (tabControl.SelectedIndex == 1)
             {
-                if (Width < 700)
-                    Width = 700;
-
-                if (Height < 450)
-                    Height = 450;
+                Width = 700;
+                Height = 450;
             }
         }
 
