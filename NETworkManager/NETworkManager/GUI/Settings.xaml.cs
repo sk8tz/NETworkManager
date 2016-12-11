@@ -17,6 +17,11 @@ namespace NETworkManager.GUI
 
         private SettingsViewModel viewModel = new SettingsViewModel();
 
+        public bool RestartRequired
+        {
+            get { return viewModel.RestartRequired; }
+        }
+
         public Settings()
         {
             InitializeComponent();

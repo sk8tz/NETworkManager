@@ -1,13 +1,10 @@
 ﻿using NETworkManager.Core.Network;
 using NETworkManager.Core.Settings;
 using NETworkManager.GUI.Interface;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
 using System.Net;
-using System.Windows;
 using System.Windows.Input;
 
 namespace NETworkManager.GUI.ViewModels
@@ -20,6 +17,9 @@ namespace NETworkManager.GUI.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
+        private bool _isLoading = true;
+        private bool _templatesChanged = true;
 
         private string _MACAddress;
         public string MACAddress
@@ -60,20 +60,6 @@ namespace NETworkManager.GUI.ViewModels
 
                 _port = value;
                 OnPropertyChanged("Port");
-            }
-        }
-
-        private bool _templatesChanged;
-        public bool TemplatesChanged
-        {
-            get { return _templatesChanged; }
-            set
-            {
-                if (value == _templatesChanged)
-                    return;
-
-                _templatesChanged = value;
-                OnPropertyChanged("TemplatesChanged");
             }
         }
 
@@ -142,12 +128,15 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _wakeOnLanTemplates)
                     return;
 
+                if (!_isLoading)
+                    _templatesChanged = true;
+
                 _wakeOnLanTemplates = value;
                 OnPropertyChanged("WakeOnLanTemplates");
             }
         }
 
-        private WakeOnLanInfo _selectedItemWakeOnLanInfo  = new WakeOnLanInfo();
+        private WakeOnLanInfo _selectedItemWakeOnLanInfo = new WakeOnLanInfo();
         public WakeOnLanInfo SelectedItemWakeOnLanInfo
         {
             get { return _selectedItemWakeOnLanInfo; }
@@ -156,8 +145,11 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _selectedItemWakeOnLanInfo)
                     return;
 
-                Port = value.Port;
-                Broadcast = value.Broadcast;
+                if (value != null)
+                {
+                    Port = value.Port;
+                    Broadcast = value.Broadcast;
+                }
 
                 _selectedItemWakeOnLanInfo = value;
                 OnPropertyChanged("SelectedItemWakeOnLanInfo");
@@ -166,23 +158,11 @@ namespace NETworkManager.GUI.ViewModels
 
         public WakeOnLanViewModel()
         {
-            LoadSettings();
             LoadTemplates();
-        }
 
-        public void LoadSettings()
-        {
-            MACAddress = Properties.Settings.Default.WakeOnLan_MAC;
-            Broadcast = Properties.Settings.Default.WakeOnLan_Broadcast;
-            Port = Convert.ToString(Properties.Settings.Default.WakeOnLan_Port);
-        }
+            Port = Properties.Resources.WakeOnLan_DefaultPort;
 
-        private void SaveSettings()
-        {
-            Properties.Settings.Default.WakeOnLan_MAC = MACAddress;
-            Properties.Settings.Default.WakeOnLan_Broadcast = Broadcast;
-            Properties.Settings.Default.WakeOnLan_Port = Convert.ToInt32(Port);
-            Properties.Settings.Default.Save();
+            _isLoading = false;
         }
 
         public void LoadTemplates()
@@ -201,8 +181,6 @@ namespace NETworkManager.GUI.ViewModels
         private void WakeUpAction()
         {
             MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(Broadcast), int.Parse(Port));
-
-            SaveSettings();
         }
 
         public ICommand AddTemplateCommand
@@ -220,13 +198,13 @@ namespace NETworkManager.GUI.ViewModels
                 Port = AddTemplatePort,
             };
 
-            TemplatesChanged = true;
             WakeOnLanTemplates.Add(template);
         }
 
         public void SaveTemplates()
         {
-            SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanInfo>(WakeOnLanTemplates));
+            if (_templatesChanged)
+                SettingsController.SaveWakeOnLanTemplates(new List<WakeOnLanInfo>(WakeOnLanTemplates));
         }
     }
 }

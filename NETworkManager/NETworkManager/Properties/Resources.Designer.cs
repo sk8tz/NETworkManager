@@ -77,5 +77,14 @@ namespace NETworkManager.Properties {
                 return ResourceManager.GetString("Localization_DefaultCultureCode", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 7 ähnelt.
+        /// </summary>
+        internal static string WakeOnLan_DefaultPort {
+            get {
+                return ResourceManager.GetString("WakeOnLan_DefaultPort", resourceCulture);
+            }
+        }
     }
 }

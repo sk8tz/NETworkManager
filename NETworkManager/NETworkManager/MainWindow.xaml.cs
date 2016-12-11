@@ -169,6 +169,8 @@ namespace NETworkManager
                 settingsWindow.Owner = this;
 
             settingsWindow.ShowDialog();
+
+            flyoutRestartRequired.IsOpen = settingsWindow.RestartRequired;
         }
 
         public ICommand ShowWindowCommand

@@ -46,10 +46,10 @@
     <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Speicherort eingeben...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterMACAddress">MAC-Adresse eingeben...</system:String>
-    <system:String x:Key="LocalizedString_Watermark_MACAddress">MAC-Adresse...</system:String>
-    <system:String x:Key="LocalizedString_Watermark_Hostname">Hostname...</system:String>
-    <system:String x:Key="LocalizedString_Watermark_Broadcast">Broadcast...</system:String>
-    <system:String x:Key="LocalizedString_Watermark_Port">Port...</system:String>
+    <system:String x:Key="LocalizedString_Watermark_ExampleMACAddress">0F:C3:4B:67:DD:AB</system:String>
+    <system:String x:Key="LocalizedString_Watermark_ExampleHostname">PC-WIN10</system:String>
+    <system:String x:Key="LocalizedString_Watermark_ExampleBroadcast">192.168.0.255</system:String>
+    <system:String x:Key="LocalizedString_Watermark_ExamplePort">7</system:String>
 
     <!-- ToolTip -->
     <system:String x:Key="LocalizedString_ToolTip_Settings">Einstellungen öffnen</system:String>

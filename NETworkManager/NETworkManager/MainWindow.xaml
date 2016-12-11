@@ -72,6 +72,13 @@
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
     </Controls:MetroWindow.Resources>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="flyoutRestartRequired" Position="Top" Header="Restart Required" >
+        
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
     <Grid Margin="10">
         <StackPanel>
             <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Left" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush3}" BorderThickness="0,0,0,1" TextChanged="txtSearch_TextChanged" mah:TextBoxHelper.UseFloatingWatermark="True"/>

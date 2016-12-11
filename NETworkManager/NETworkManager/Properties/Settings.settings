@@ -11,12 +11,6 @@
     <Setting Name="Localization_CultureCode" Provider="CustomSettingsProvider" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="WakeOnLan_Port" Provider="CustomSettingsProvider" Roaming="true" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">7</Value>
-    </Setting>
-    <Setting Name="WakeOnLan_Broadcast" Provider="CustomSettingsProvider" Roaming="true" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="Settings_Location" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

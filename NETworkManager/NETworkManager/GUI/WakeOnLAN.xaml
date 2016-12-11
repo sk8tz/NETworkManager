@@ -118,7 +118,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <TextBlock Text="{DynamicResource LocalizedString_Broadcast}" Style="{StaticResource TextBlockGrid}" Grid.Row="0" Grid.Column="0"  />
-                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" TextAlignment="Center" HorizontalAlignment="Stretch">
+                            <TextBox x:Name="txtBroadcast" Grid.Row="0" Grid.Column="1" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExampleBroadcast}" TextAlignment="Center" HorizontalAlignment="Stretch">
                                 <TextBox.Text>
                                     <Binding Path="Broadcast" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -129,7 +129,7 @@
                                 </TextBox.Text>
                             </TextBox>
                             <TextBlock Text="{DynamicResource LocalizedString_Port}" Style="{StaticResource TextBlockGrid}" Grid.Row="2" Grid.Column="0" />
-                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="65" FontSize="14" TextAlignment="Center" HorizontalAlignment="Left">
+                            <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Width="65" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExamplePort}" TextAlignment="Center" HorizontalAlignment="Left">
                                 <TextBox.Text>
                                     <Binding Path="Port" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
@@ -173,7 +173,7 @@
                                         <ColumnDefinition Width="10" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBox x:Name="txtAddTemplateMACAddress" Grid.Row="0" Grid.Column="0"  FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_MACAddress}" >
+                                    <TextBox x:Name="txtAddTemplateMACAddress" Grid.Row="0" Grid.Column="0"  FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExampleMACAddress}" >
                                         <TextBox.Text>
                                             <Binding Path="AddTemplateMACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -183,7 +183,7 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox x:Name="txtAddTemplateHostname" Grid.Row="0" Grid.Column="2" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Hostname}" >
+                                    <TextBox x:Name="txtAddTemplateHostname" Grid.Row="0" Grid.Column="2" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExampleHostname}" >
                                         <TextBox.Text>
                                             <Binding Path="AddTemplateHostname" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
@@ -192,7 +192,7 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox x:Name="txtAddTemplateBroadcast" Grid.Row="0" Grid.Column="4" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Broadcast}" >
+                                    <TextBox x:Name="txtAddTemplateBroadcast" Grid.Row="0" Grid.Column="4" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExampleBroadcast}" >
                                         <TextBox.Text>
                                             <Binding Path="AddTemplateBroadcast" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
                                                 <Binding.ValidationRules>
@@ -202,7 +202,7 @@
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
-                                    <TextBox x:Name="txtAddTemplatePort" Grid.Row="0" Grid.Column="6" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Port}" TextAlignment="Center">
+                                    <TextBox x:Name="txtAddTemplatePort" Grid.Row="0" Grid.Column="6" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_ExamplePort}" TextAlignment="Center">
                                         <TextBox.Text>
                                             <Binding Path="AddTemplatePort" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
                                                 <Binding.ValidationRules>
@@ -241,7 +241,7 @@
                             </StackPanel>
                         </Grid>
                         <TextBlock Grid.Row="2" Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Templates}" />
-                        <DataGrid Grid.Row="3" FontSize="14" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" IsReadOnly="True" CanUserDeleteRows="True">
+                        <DataGrid  Grid.Row="3" FontSize="14" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" Width="*" />
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_Hostname}" Binding="{Binding Hostname}" Width="*" />

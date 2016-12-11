@@ -42,9 +42,9 @@
         </Style>
         <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="20,0" />
             <Setter Property="FontSize" Value="14" />
         </Style>
+        <Style TargetType="mah:ToggleSwitch" BasedOn="{ StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
         <Style TargetType="{x:Type TextBox}" x:Key="BrowseFolderButtonMetroTextBox" BasedOn="{StaticResource ButtonCommandMetroTextBox}">
             <Setter Property="mah:TextBoxHelper.ButtonTemplate">
                 <Setter.Value>
@@ -215,11 +215,19 @@
                                     </Button.Style>
                                 </Button>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Portable}" />
-                                <Controls:ToggleSwitch x:Name="toggleSwitchSettingsPortable" OffLabel="{DynamicResource LocalizedString_Disabled}" OnLabel="{DynamicResource LocalizedString_Enabled}" Margin="0,0,0,20" IsCheckedChanged="toggleSwitchSettingsPortable_IsCheckedChanged"  >
-                                    <Controls:ToggleSwitch.IsChecked>
-                                        <Binding Path="SettingsPortable" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
-                                    </Controls:ToggleSwitch.IsChecked>
-                                </Controls:ToggleSwitch>
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Style="{StaticResource TextBlockGrid}" Text="Einstellungen mit Anwendung speichern" Grid.Column="0"/>
+                                    <Controls:ToggleSwitch Grid.Column="1" x:Name="toggleSwitchSettingsPortable" OffLabel="" OnLabel="" IsCheckedChanged="toggleSwitchSettingsPortable_IsCheckedChanged"  >
+                                        <Controls:ToggleSwitch.IsChecked>
+                                            <Binding Path="SettingsPortable" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
+                                        </Controls:ToggleSwitch.IsChecked>
+                                    </Controls:ToggleSwitch>
+                                </Grid>
+
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />
                             </StackPanel>

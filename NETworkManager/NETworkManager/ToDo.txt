@@ -13,5 +13,4 @@
 
 
 ## WakeOnLan
-- ContextMenu/Button to delete template
-- Replace DataGrid with ListBox
+- Add ContextMenu to DataGrid to delete row

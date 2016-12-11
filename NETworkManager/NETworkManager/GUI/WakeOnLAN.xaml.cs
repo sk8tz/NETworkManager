@@ -56,8 +56,7 @@ namespace NETworkManager.GUI
 
         private void MetroWindowWakeOnLAN_Closing(object sender, CancelEventArgs e)
         {
-            if (viewModel.TemplatesChanged)
-                viewModel.SaveTemplates();
-        }      
+            viewModel.SaveTemplates();
+        }
     }
 }

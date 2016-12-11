@@ -124,4 +124,7 @@
   <data name="Localization_DefaultCultureCode" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="WakeOnLan_DefaultPort" xml:space="preserve">
+    <value>7</value>
+  </data>
 </root>

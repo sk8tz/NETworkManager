@@ -32,7 +32,22 @@ namespace NETworkManager.GUI.ViewModels
                     return;
 
                 _settingsChanged = true;
+                OnPropertyChanged("SettingsChanged");
             }            
+        }
+
+        private bool _restartRequired;
+        public bool RestartRequired
+        {
+            get { return _restartRequired; }
+            set
+            {
+                if (value == _restartRequired)
+                    return;
+
+                _restartRequired = true;
+                OnPropertyChanged("RestartRequired");
+            }
         }
 
         private bool _startApplicationWithWindows;
@@ -176,6 +191,7 @@ namespace NETworkManager.GUI.ViewModels
                     LocalizationController.ChangeLocalization(info);
                     
                     Properties.Settings.Default.Localization_CultureCode = info.Code;
+                    RestartRequired = true;
                     SettingsChanged = true;
                 }
 
