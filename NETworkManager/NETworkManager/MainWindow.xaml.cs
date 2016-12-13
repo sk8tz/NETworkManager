@@ -20,10 +20,31 @@ namespace NETworkManager
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
         NotifyIcon notifyIcon = new NotifyIcon();
         private bool _isInTray;
+
+        private bool _flyoutRestartRequiredIsOpen = true;
+        public bool FlyoutRestartRequiredIsOpen
+        {
+            get { return _flyoutRestartRequiredIsOpen; }
+            set
+            {
+                if (value == _flyoutRestartRequiredIsOpen)
+                    return;
+
+                _flyoutRestartRequiredIsOpen = value;
+                OnPropertyChanged("FlyoutRestartRequiredIsOpen");
+            }
+        }
 
         public MainWindow()
         {
@@ -170,7 +191,8 @@ namespace NETworkManager
 
             settingsWindow.ShowDialog();
 
-            flyoutRestartRequired.IsOpen = settingsWindow.RestartRequired;
+            if (settingsWindow.RestartRequired)
+                FlyoutRestartRequiredIsOpen = true;
         }
 
         public ICommand ShowWindowCommand
@@ -192,8 +214,16 @@ namespace NETworkManager
         {
             Close();
         }
+
+        public ICommand HideFlyoutRestartReqiredCommand
+        {
+            get { return new RelayCommand(p => HideFlyoutRestartReqiredAction()); }
+        }
+
+        private void HideFlyoutRestartReqiredAction()
+        {
+            FlyoutRestartRequiredIsOpen = false;
+        }
         #endregion
-
-
     }
 }
