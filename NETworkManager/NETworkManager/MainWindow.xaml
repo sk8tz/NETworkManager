@@ -74,13 +74,13 @@
     </Controls:MetroWindow.Resources>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="flyoutRestartRequired" Theme="Adapt"  Header="{DynamicResource LocalizedString_RestartRequired}" Position="Bottom" IsOpen="{Binding FlyoutRestartRequiredIsOpen}" Margin="20,0" BorderBrush="Black" BorderThickness="3,0,3,3" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CloseButtonVisibility="Collapsed" AutoCloseInterval="10000" IsAutoCloseEnabled="True" >
+            <Controls:Flyout x:Name="flyoutRestartRequired" Theme="Accent" Header="{DynamicResource LocalizedString_RestartRequired}" Position="Bottom" IsOpen="{Binding FlyoutRestartRequiredIsOpen}" MaxWidth="800" Margin="20,0" BorderBrush="Red" BorderThickness="3,0,3,3" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CloseButtonVisibility="Collapsed" >
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock TextWrapping="Wrap" Grid.Row="0" FontSize="14" Text="Die Anwendung muss neu gestartet werden, damit alle Einstellungen angewendet werden." Margin="0,0,0,10"/>
+                    <TextBlock TextWrapping="Wrap" Grid.Row="0" FontSize="14" Text="Die Anwendung muss neu gestartet werden, damit alle Einstellungen angewendet werden." Margin="0,0,0,20"/>
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button MinWidth="150" FontSize="14" Content="Später" Command="{Binding HideFlyoutRestartReqiredCommand}" />
                         <Button MinWidth="150" FontSize="14" Content="Neustarten" Margin="10,0,0,0"/>
