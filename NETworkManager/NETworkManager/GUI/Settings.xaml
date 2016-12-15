@@ -25,7 +25,7 @@
         <translator:AccentNameTranslator x:Key="AccentNameTranslator" />
         <translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
         <!-- Styles -->
-        <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+        <Style x:Key="TabItemHeader" BasedOn="{StaticResource ResourceKey=MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
         <Style x:Key="GridTabItem" TargetType="Grid">
@@ -34,17 +34,11 @@
         <Style x:Key="StackPanelTabItem" TargetType="StackPanel">
             <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
-        <Style x:Key="TextBlockHeader" TargetType="TextBlock">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Margin" Value="0,0,0,10" />
-            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
-        </Style>
         <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="14" />
         </Style>
-        <Style TargetType="mah:ToggleSwitch" BasedOn="{ StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
+        <Style TargetType="mah:ToggleSwitch" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
         <Style TargetType="{x:Type TextBox}" x:Key="BrowseFolderButtonMetroTextBox" BasedOn="{StaticResource ButtonCommandMetroTextBox}">
             <Setter Property="mah:TextBoxHelper.ButtonTemplate">
                 <Setter.Value>
@@ -74,7 +68,7 @@
     <Grid>
         <TabControl>
             <!-- Application -->
-            <TabItem  Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
+            <TabItem  Style="{StaticResource TabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="150" Width="Auto"/>
@@ -257,7 +251,7 @@
                 </Grid>
             </TabItem>
             <!-- About -->
-            <TabItem Style="{DynamicResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_About}">
+            <TabItem Style="{DynamicResource TabItemHeader}" Header="{DynamicResource LocalizedString_About}">
                 <Grid Style="{StaticResource GridTabItem}">
 
                 </Grid>

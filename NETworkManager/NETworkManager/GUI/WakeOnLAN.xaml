@@ -16,12 +16,6 @@
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
     <Controls:MetroWindow.Resources>
-        <Style x:Key="TextBlockHeader" TargetType="TextBlock">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="Margin" Value="0,0,0,10" />
-            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
-        </Style>
         <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>

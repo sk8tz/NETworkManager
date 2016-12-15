@@ -33,5 +33,4 @@ namespace NETworkManager.GUI
             Icon = icon;
         }
     }
-
 }
