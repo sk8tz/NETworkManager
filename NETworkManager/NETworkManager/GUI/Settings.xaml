@@ -31,9 +31,6 @@
         <Style x:Key="GridTabItem" TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="10" />
         </Style>
-        <Style x:Key="StackPanelTabItem" TargetType="{x:Type StackPanel}">
-            <Setter Property="Margin" Value="10,0,0,0" />
-        </Style>
         <Style x:Key="TextBlockGrid" TargetType="{x:Type TextBlock}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="14" />
@@ -73,9 +70,12 @@
                 <Grid Style="{StaticResource GridTabItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="150" Width="Auto"/>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush2}" Padding="0,0,10,0" Margin="0" >
+                    <ListBox Background="Transparent" Name="listBoxSettings" Margin="0" >
                         <ListBox.Resources>
                             <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
                                 <Setter Property="FontSize" Value="14" />
@@ -87,7 +87,12 @@
                         <ListBoxItem Content="{DynamicResource LocalizedString_Language}" />
                         <ListBoxItem Content="{DynamicResource LocalizedString_Settings}" />
                     </ListBox>
-                    <TabControl SelectedIndex="{Binding ElementName=listBoxSettings, Path=SelectedIndex}" Grid.Column="1" >
+                    <Separator Grid.Column="2" Background="{DynamicResource AccentColorBrush2}">
+                        <Separator.LayoutTransform>
+                            <RotateTransform Angle="90" />
+                        </Separator.LayoutTransform>
+                    </Separator>
+                    <TabControl SelectedIndex="{Binding ElementName=listBoxSettings, Path=SelectedIndex}" Grid.Column="4" >
                         <TabControl.Resources>
                             <Style TargetType="TabItem">
                                 <Setter Property="Visibility" Value="Collapsed" />
@@ -95,7 +100,7 @@
                         </TabControl.Resources>
                         <!-- General -->
                         <TabItem>
-                            <StackPanel Style="{StaticResource StackPanelTabItem}">
+                            <StackPanel>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Autostart}" />
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
@@ -132,7 +137,7 @@
                         </TabItem>
                         <!-- Appearance -->
                         <TabItem>
-                            <StackPanel Style="{StaticResource StackPanelTabItem}">
+                            <StackPanel>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
                                 <ListView  ItemsSource="{x:Static metro:ThemeManager.AppThemes}" VerticalAlignment="Top" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single" >
                                     <ListView.ItemTemplate>
@@ -176,7 +181,7 @@
                         </TabItem>
                         <!-- Language -->
                         <TabItem>
-                            <StackPanel Style="{StaticResource StackPanelTabItem}">
+                            <StackPanel>
                                 <ListView ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}"  Background="Transparent" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -201,7 +206,7 @@
                         </TabItem>
                         <!-- Settings -->
                         <TabItem>
-                            <StackPanel Style="{StaticResource StackPanelTabItem}">
+                            <StackPanel >
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
                                 <TextBox FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" mah:TextBoxHelper.ButtonCommand="{Binding BrowseFolderCommand}" Margin="0,0,0,10">
                                     <TextBox.Text>
