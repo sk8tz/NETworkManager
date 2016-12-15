@@ -83,7 +83,7 @@
                             <Separator Background="{DynamicResource AccentColorBrush2}" Margin="0,0,0,10"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Button MinWidth="150" FontSize="14" Content="{DynamicResource LocalizedString_Later}" VerticalAlignment="Center" Command="{Binding HideFlyoutRestartReqiredCommand}" />
-                                <Button MinWidth="150" FontSize="14" Content="{DynamicResource LocalizedString_RestartNow}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <Button MinWidth="150" FontSize="14" Content="{DynamicResource LocalizedString_RestartNow}" VerticalAlignment="Center" Command="{Binding RestartApplicationCommand}" Margin="10,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
                         <Rectangle Height="10" Fill="{DynamicResource AccentColorBrush}" />

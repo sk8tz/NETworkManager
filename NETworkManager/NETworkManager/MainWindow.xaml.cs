@@ -13,6 +13,7 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
+using System.Reflection;
 
 namespace NETworkManager
 {
@@ -230,6 +231,17 @@ namespace NETworkManager
         private void HideFlyoutRestartReqiredAction()
         {
             FlyoutRestartRequiredIsOpen = false;
+        }
+
+        public ICommand RestartApplicationCommand
+        {
+            get { return new RelayCommand(p => RestartApplicationAction()); }
+        }
+
+        private void RestartApplicationAction()
+        {
+            Process.Start(Assembly.GetExecutingAssembly().Location);
+            Close();
         }
         #endregion
     }

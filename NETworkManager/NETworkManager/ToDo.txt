@@ -1,9 +1,9 @@
 ﻿## General
-* Design Flyout... 
+* Flyout: Restart Now Command...
+* Autostart paramter
 * Global Hotkey ?? To open launcher
 
 ## Settings
-* Autostart
 * Button to restore default settings location
 * Import & Export
 * Move files, overwrite?
