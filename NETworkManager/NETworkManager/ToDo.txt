@@ -4,12 +4,10 @@
 
 ## Settings
 * Autostart
-* Re-design viewModel --> Bind Settings to Set {}
 * Button to restore default settings location
-* Import / Export von Settings
+* Import & Export
 * Move files, overwrite?
 * Catch Errors
-
 
 ## WakeOnLan
 - Add ContextMenu to DataGrid to delete row
