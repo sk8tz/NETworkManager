@@ -31,8 +31,9 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _settingsChanged)
                     return;
 
-                _settingsChanged = true;
-                OnPropertyChanged("SettingsChanged");
+                MessageBox.Show("TEST: Settings changed");
+
+                _settingsChanged = value;
             }
         }
 
@@ -45,8 +46,7 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _restartRequired)
                     return;
 
-                _restartRequired = true;
-                OnPropertyChanged("RestartRequired");
+                _restartRequired = value;               
             }
         }
 
@@ -62,9 +62,9 @@ namespace NETworkManager.GUI.ViewModels
                 if (!_isLoading)
                 {
                     if (value)
-                        Autostart.Enable();
+                        AutostartManager.Enable();
                     else
-                        Autostart.Disable();
+                        AutostartManager.Disable();
                 }
 
                 _startApplicationWithWindows = value;
@@ -193,6 +193,8 @@ namespace NETworkManager.GUI.ViewModels
                     Properties.Settings.Default.Localization_CultureCode = info.Code;
                     RestartRequired = true;
                     SettingsChanged = true;
+
+                    MessageBox.Show("TEST: Localization wurde geändert!");                    
                 }
 
                 _localizationSelectedIndex = value;
@@ -254,7 +256,7 @@ namespace NETworkManager.GUI.ViewModels
         public void LoadSettings()
         {
             // General
-            StartApplicationWithWindows = Autostart.IsEnabled;
+            StartApplicationWithWindows = AutostartManager.IsEnabled;
             StartApplicationMinimized = Properties.Settings.Default.Application_StartApplicationMinimized;
             MinimizeToTrayOnClose = Properties.Settings.Default.Application_MinimizeToTrayOnClose;
             MinimizeToTrayOnMinimize = Properties.Settings.Default.Application_MinimizeToTrayOnMinimize;

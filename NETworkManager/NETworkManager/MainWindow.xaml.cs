@@ -1,5 +1,4 @@
 ﻿using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
 using NETworkManager.Core.Appearance;
 using NETworkManager.Core.Localization;
 using NETworkManager.GUI;
@@ -32,7 +31,7 @@ namespace NETworkManager
         NotifyIcon notifyIcon = new NotifyIcon();
         private bool _isInTray;
 
-        private bool _flyoutRestartRequiredIsOpen = true;
+        private bool _flyoutRestartRequiredIsOpen;
         public bool FlyoutRestartRequiredIsOpen
         {
             get { return _flyoutRestartRequiredIsOpen; }
@@ -56,6 +55,12 @@ namespace NETworkManager
 
             InitializeComponent();
             DataContext = this;
+
+            foreach(string parameter in Environment.GetCommandLineArgs())
+            {
+                if (Properties.Resources.StartParameter_Autostart == parameter.TrimStart((char)47))
+                    System.Windows.MessageBox.Show(parameter);       
+            }
 
             // Set a filter for ListView Apps and sort them
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
@@ -174,7 +179,7 @@ namespace NETworkManager
 
         private void OpenGithubProjectAction()
         {
-            Process.Start(Properties.Resources.GitHubProjectURL);
+            Process.Start(Properties.Resources.GitHub_ProjectURL);
         }
 
         public ICommand OpenSettingsCommand

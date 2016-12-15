@@ -13,7 +13,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="650" ResizeMode="CanResize" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Closing="MetroWindow_Closing" Padding="0" WindowStartupLocation="CenterOwner" IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="True" PreviewKeyDown="MetroWindowSettings_PreviewKeyDown" ShowInTaskbar="False">
+        Title="{DynamicResource LocalizedString_Settings}" TitleAlignment="Center" TitleCaps="False" Height="450" Width="650" MinHeight="450" MinWidth="650" ResizeMode="CanResize" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Closing="MetroWindow_Closing" Padding="0" WindowStartupLocation="CenterOwner" IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="True" PreviewKeyDown="MetroWindowSettings_PreviewKeyDown" ShowInTaskbar="False" >
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
@@ -75,7 +75,7 @@
                         <ColumnDefinition MinWidth="150" Width="Auto"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush3}" Padding="0,0,10,0" Margin="0" >
+                    <ListBox Background="Transparent" Name="listBoxSettings" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource AccentColorBrush2}" Padding="0,0,10,0" Margin="0" >
                         <ListBox.Resources>
                             <Style BasedOn="{StaticResource MetroListBoxItem}" TargetType="{x:Type ListBoxItem}">
                                 <Setter Property="FontSize" Value="14" />

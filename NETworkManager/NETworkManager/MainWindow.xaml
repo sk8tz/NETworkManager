@@ -74,24 +74,32 @@
     </Controls:MetroWindow.Resources>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="flyoutRestartRequired" Theme="Accent" Header="{DynamicResource LocalizedString_RestartRequired}" Position="Bottom" IsOpen="{Binding FlyoutRestartRequiredIsOpen}" MaxWidth="800" Margin="20,0" BorderBrush="Red" BorderThickness="3,0,3,3" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CloseButtonVisibility="Collapsed" >
-                <Grid Margin="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock TextWrapping="Wrap" Grid.Row="0" FontSize="14" Text="Die Anwendung muss neu gestartet werden, damit alle Einstellungen angewendet werden." Margin="0,0,0,20"/>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button MinWidth="150" FontSize="14" Content="Später" Command="{Binding HideFlyoutRestartReqiredCommand}" />
-                        <Button MinWidth="150" FontSize="14" Content="Neustarten" Margin="10,0,0,0"/>
+            <Controls:Flyout x:Name="flyoutRestartRequired" Theme="Adapt" Position="Bottom" IsOpen="{Binding FlyoutRestartRequiredIsOpen}" MaxWidth="900" Margin="25,0" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CloseButtonVisibility="Collapsed" TitleVisibility="Collapsed">
+                <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1,1,1,0" >
+                    <StackPanel>
+                        <Grid Margin="10,10,10,20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Style="{StaticResource TextBlockTitle}" Text="{DynamicResource LocalizedString_RestartRequired}" />
+                            <TextBlock Grid.Row="2" TextWrapping="Wrap" FontSize="14" Text="{DynamicResource LocalizedString_RestartRequiredAfterSettingsChanged}" />
+                        </Grid>
+                        <Grid Background="{DynamicResource AccentColorBrush}">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" HorizontalAlignment="Right">
+                            <Button MinWidth="150" FontSize="14" Content="Später" VerticalAlignment="Center" Command="{Binding HideFlyoutRestartReqiredCommand}" />
+                            <Button MinWidth="150" FontSize="14" Content="Neustarten" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Grid>                                               
                     </StackPanel>
-                </Grid>
+                </Border>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
     <Grid Margin="10">
         <StackPanel>
-            <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Left" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush3}" BorderThickness="0,0,0,1" TextChanged="txtSearch_TextChanged" mah:TextBoxHelper.UseFloatingWatermark="True"/>
+            <TextBox x:Name="txtSearch" FontSize="14" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_Search}" Width="250" HorizontalAlignment="Left" Margin="0,0,0,10"  BorderBrush="{DynamicResource AccentColorBrush2}" BorderThickness="0,0,0,1" TextChanged="txtSearch_TextChanged" mah:TextBoxHelper.UseFloatingWatermark="True"/>
             <ListView x:Name="lvApps" Background="Transparent" ItemsSource="{Binding Source={x:Static GUI:ApplicationController.ApplicationList}}" BorderThickness="0" MouseDoubleClick="listViewApps_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -117,7 +125,7 @@
                                                        ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-            </ListView>
+            </ListView>            
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>
