@@ -12,6 +12,8 @@
     <system:String x:Key="LocalizedString_Accent">Akzent</system:String>
     <system:String x:Key="LocalizedString_RestartRequired">Neustart Erforderlich</system:String>
     <system:String x:Key="LocalizedString_RestartRequiredAfterSettingsChanged">Einige Einstellungen werden erst nach einem Neustart der Anwendung angewendet!</system:String>
+    <system:String x:Key="LocalizedString_Later">Später</system:String>
+    <system:String x:Key="LocalizedString_RestartNow">Jetzt neu starten</system:String>
     <system:String x:Key="LocalizedString_Templates">Vorlagen</system:String>
     <system:String x:Key="LocalizedString_AddTemplate">Vorlage hinzufügen</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Aufwecken</system:String>

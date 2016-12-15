@@ -75,23 +75,18 @@
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
             <Controls:Flyout x:Name="flyoutRestartRequired" Theme="Adapt" Position="Bottom" IsOpen="{Binding FlyoutRestartRequiredIsOpen}" MaxWidth="900" Margin="25,0" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CloseButtonVisibility="Collapsed" TitleVisibility="Collapsed">
-                <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1,1,1,0" >
+                <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1,1,1,0">
                     <StackPanel>
-                        <Grid Margin="10,10,10,20">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="20" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Style="{StaticResource TextBlockTitle}" Text="{DynamicResource LocalizedString_RestartRequired}" />
-                            <TextBlock Grid.Row="2" TextWrapping="Wrap" FontSize="14" Text="{DynamicResource LocalizedString_RestartRequiredAfterSettingsChanged}" />
-                        </Grid>
-                        <Grid Background="{DynamicResource AccentColorBrush}">
-                            <StackPanel Orientation="Horizontal" Margin="10,5" HorizontalAlignment="Right">
-                            <Button MinWidth="150" FontSize="14" Content="Später" VerticalAlignment="Center" Command="{Binding HideFlyoutRestartReqiredCommand}" />
-                            <Button MinWidth="150" FontSize="14" Content="Neustarten" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        <StackPanel Margin="10">
+                            <TextBlock Style="{StaticResource TextBlockTitle}" Text="{DynamicResource LocalizedString_RestartRequired}" Margin="0,0,0,10"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="14" Text="{DynamicResource LocalizedString_RestartRequiredAfterSettingsChanged}" Margin="0,0,0,20"/>
+                            <Separator Background="{DynamicResource AccentColorBrush2}" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button MinWidth="150" FontSize="14" Content="{DynamicResource LocalizedString_Later}" VerticalAlignment="Center" Command="{Binding HideFlyoutRestartReqiredCommand}" />
+                                <Button MinWidth="150" FontSize="14" Content="{DynamicResource LocalizedString_RestartNow}" VerticalAlignment="Center" Margin="10,0,0,0"/>
                             </StackPanel>
-                        </Grid>                                               
+                        </StackPanel>
+                        <Rectangle Height="10" Fill="{DynamicResource AccentColorBrush}" />
                     </StackPanel>
                 </Border>
             </Controls:Flyout>
@@ -125,7 +120,7 @@
                                                        ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-            </ListView>            
+            </ListView>
         </StackPanel>
     </Grid>
 </Controls:MetroWindow>

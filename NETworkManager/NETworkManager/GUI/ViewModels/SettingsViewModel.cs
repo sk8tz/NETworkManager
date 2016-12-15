@@ -31,8 +31,6 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _settingsChanged)
                     return;
 
-                MessageBox.Show("TEST: Settings changed");
-
                 _settingsChanged = value;
             }
         }
@@ -193,8 +191,6 @@ namespace NETworkManager.GUI.ViewModels
                     Properties.Settings.Default.Localization_CultureCode = info.Code;
                     RestartRequired = true;
                     SettingsChanged = true;
-
-                    MessageBox.Show("TEST: Localization wurde geändert!");                    
                 }
 
                 _localizationSelectedIndex = value;
