@@ -185,8 +185,10 @@ namespace NETworkManager
         private void OpenSettingsAction()
         {
             Settings settingsWindow = new Settings();
-
-            if (!_isInTray)
+            
+            if (_isInTray)
+                settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            else
                 settingsWindow.Owner = this;
 
             settingsWindow.ShowDialog();
