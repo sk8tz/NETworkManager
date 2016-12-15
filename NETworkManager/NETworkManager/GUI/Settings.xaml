@@ -25,18 +25,19 @@
         <translator:AccentNameTranslator x:Key="AccentNameTranslator" />
         <translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
         <!-- Styles -->
-        <Style x:Key="TabItemHeader" BasedOn="{StaticResource ResourceKey=MetroTabItem}" TargetType="{x:Type TabItem}">
+        <Style x:Key="TabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
-        <Style x:Key="GridTabItem" TargetType="Grid">
+        <Style x:Key="GridTabItem" TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="10" />
         </Style>
-        <Style x:Key="StackPanelTabItem" TargetType="StackPanel">
+        <Style x:Key="StackPanelTabItem" TargetType="{x:Type StackPanel}">
             <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
-        <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
+        <Style x:Key="TextBlockGrid" TargetType="{x:Type TextBlock}">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         </Style>
         <Style TargetType="mah:ToggleSwitch" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
         <Style TargetType="{x:Type TextBox}" x:Key="BrowseFolderButtonMetroTextBox" BasedOn="{StaticResource ButtonCommandMetroTextBox}">
