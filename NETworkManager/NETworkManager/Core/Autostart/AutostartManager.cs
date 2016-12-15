@@ -5,7 +5,7 @@ using System.Security.Permissions;
 
 namespace NETworkManager.Core.Autostart
 {
-    public static class Autostart
+    public static class AutostartManager
     {
         private static string AppName = Assembly.GetEntryAssembly().GetName().Name;
         private const string RunKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -27,7 +27,9 @@ namespace NETworkManager.Core.Autostart
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(RunKey, true);
 
-            registryKey.SetValue(AppName, Assembly.GetExecutingAssembly().Location);
+            string command = string.Format("{0} /{1}", Assembly.GetExecutingAssembly().Location, Properties.Resources.StartParameter_Autostart);
+
+            registryKey.SetValue(AppName, command);
             registryKey.Close();
         }
 

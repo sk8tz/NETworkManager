@@ -117,12 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GitHubProjectURL" xml:space="preserve">
+  <data name="GitHub_ProjectURL" xml:space="preserve">
     <value>https://github.com/BornToBeRoot/NETworkManager</value>
     <comment>URL of the GitHub project page</comment>
   </data>
   <data name="Localization_DefaultCultureCode" xml:space="preserve">
     <value>en-US</value>
+  </data>
+  <data name="StartParameter_Autostart" xml:space="preserve">
+    <value>Autostart</value>
   </data>
   <data name="WakeOnLan_DefaultPort" xml:space="preserve">
     <value>7</value>

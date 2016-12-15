@@ -63,9 +63,9 @@ namespace NETworkManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die https://github.com/BornToBeRoot/NETworkManager ähnelt.
         /// </summary>
-        internal static string GitHubProjectURL {
+        internal static string GitHub_ProjectURL {
             get {
-                return ResourceManager.GetString("GitHubProjectURL", resourceCulture);
+                return ResourceManager.GetString("GitHub_ProjectURL", resourceCulture);
             }
         }
         
@@ -75,6 +75,15 @@ namespace NETworkManager.Properties {
         internal static string Localization_DefaultCultureCode {
             get {
                 return ResourceManager.GetString("Localization_DefaultCultureCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Autostart ähnelt.
+        /// </summary>
+        internal static string StartParameter_Autostart {
+            get {
+                return ResourceManager.GetString("StartParameter_Autostart", resourceCulture);
             }
         }
         
