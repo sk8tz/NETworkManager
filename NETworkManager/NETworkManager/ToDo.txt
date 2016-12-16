@@ -1,13 +1,14 @@
 ﻿## General
-* Flyout: Restart Now Command...
 * Autostart paramter
 * Global Hotkey ?? To open launcher
 
 ## Settings
 * Button to restore default settings location
 * Import & Export
-* Move files, overwrite?
+* Move files, Ask to overwrite...
 * Catch Errors
 
 ## WakeOnLan
 - Add ContextMenu to DataGrid to delete row
+
+## Subnet Calculator

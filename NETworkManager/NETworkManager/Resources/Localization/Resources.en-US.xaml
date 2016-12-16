@@ -15,7 +15,7 @@
     <system:String x:Key="LocalizedString_Later">Later</system:String>
     <system:String x:Key="LocalizedString_RestartNow">Restart now</system:String>
     <system:String x:Key="LocalizedString_Templates">Templates</system:String>
-    <system:String x:Key="LocalizedString_AddTemplate">Add template</system:String>
+    <system:String x:Key="LocalizedString_Add">Add</system:String>
     <system:String x:Key="LocalizedString_WakeUp">Wake Up</system:String>
     <system:String x:Key="LocalizedString_Error">Error</system:String>
     <system:String x:Key="LocalizedString_Location">Location</system:String>

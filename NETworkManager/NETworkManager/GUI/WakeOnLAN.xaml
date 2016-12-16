@@ -16,11 +16,11 @@
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
     <Controls:MetroWindow.Resources>
-        <Style x:Key="MetroTabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+        <Style x:Key="TabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
         </Style>
         <Style x:Key="GridTabItem" TargetType="Grid">
-            <Setter Property="Margin" Value="10" />
+            <Setter Property="Margin" Value="5" />
         </Style>
         <Style x:Key="TextBlockGrid" TargetType="TextBlock" >
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -34,7 +34,7 @@
     <Grid>
         <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
             <!-- Application -->
-            <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
+            <TabItem Style="{StaticResource TabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />
@@ -131,7 +131,7 @@
                 </Grid>
             </TabItem>
             <!-- Templates -->
-            <TabItem Style="{StaticResource MetroTabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
+            <TabItem Style="{StaticResource TabItemHeader}" Header="{DynamicResource LocalizedString_Templates}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -144,7 +144,7 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_AddTemplate}"/>
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Add}"/>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
