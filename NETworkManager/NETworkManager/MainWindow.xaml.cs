@@ -244,5 +244,13 @@ namespace NETworkManager
             Close();
         }
         #endregion
+
+        private void MetroWindowMain_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(!txtSearch.IsKeyboardFocused && ((e.Key >= Key.A && e.Key <= Key.Z)))
+            {
+                txtSearch.Focus();
+            }
+        }
     }
 }
