@@ -7,12 +7,16 @@
         xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
         xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="{DynamicResource LocalizedString_ApplicationName_SubnetCalculator}" Height="450" Width="500" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
+        Title="{DynamicResource LocalizedString_ApplicationName_SubnetCalculator}" Height="450" Width="650" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}">
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
     <Controls:MetroWindow.Resources>
+        <Style x:Key="TabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+            <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
+        </Style>
         <Style x:Key="TextBlockHeader" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="14" />
@@ -24,80 +28,13 @@
             <Setter Property="Margin" Value="20,0" />
             <Setter Property="FontSize" Value="14" />
         </Style>
+        <Style TargetType="mah:ToggleSwitch" BasedOn="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
     </Controls:MetroWindow.Resources>
-    <Grid Margin="10" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <TextBlock behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Input}" Style="{StaticResource TextBlockHeader}"/>
-            <Grid Margin="0,0,0,10" MaxWidth="500">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="{DynamicResource LocalizedString_IPAddress}" Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBlockGrid}" />
-                <TextBox x:Name="txtIPAddress" Grid.Column="1" Grid.Row="0" FontSize="14" HorizontalAlignment="Stretch">
-                    <TextBox.Text>
-                        <Binding Path="IPAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
-                                <Validator:IPv4AddressValidator ValidatesOnTargetUpdated="True"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBlock Text="{DynamicResource LocalizedString_SubnetmaskCDIR}"  Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBlockGrid}" />
-                <TextBox x:Name="txtSubnetmaskCDIR" Grid.Column="1" Grid.Row="2" FontSize="14" HorizontalAlignment="Stretch" >
-                    <TextBox.Text>
-                        <Binding Path="SubnetmaskCDIR" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <Validator:EmptyFieldValidator ValidatesOnTargetUpdated="True" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBlock Text="Splitte Subnetz" Grid.Column="0" Grid.Row="4" Style="{StaticResource TextBlockGrid}" />
-                <Controls:ToggleSwitch x:Name="toggleSwitcheSplitSubnet" Content="" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" />
-                <TextBlock Text="Neue Subnetzmaske / CDIR" Grid.Column="0" Grid.Row="6">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockGrid}">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=toggleSwitcheSplitSubnet, Path=IsChecked}" Value="True">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-                <TextBox x:Name="txtNewSubnetmaskCDIR" Grid.Column="1" Grid.Row="6" FontSize="14" HorizontalAlignment="Stretch">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=toggleSwitcheSplitSubnet, Path=IsChecked}" Value="True">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-            </Grid>
-            <Button x:Name="btnCalculate" Content="{DynamicResource LocalizedString_Calculate}" Width="150" HorizontalAlignment="Right" Margin="0,0,0,20"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1">
-            <TextBlock behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Output}" Style="{StaticResource TextBlockHeader}"/>
-        </StackPanel>
+    <Grid>
+        <TabControl>
+            <TabItem Style="{StaticResource TabItemHeader}" Header="Subnetz Information">
+                <Button Content="Tet" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Controls:MetroWindow>
