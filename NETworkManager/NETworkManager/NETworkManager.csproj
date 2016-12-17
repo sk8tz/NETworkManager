@@ -100,6 +100,8 @@
     <Compile Include="Core\Appearance\AppearanceController.cs" />
     <Compile Include="Core\Autostart\AutostartManager.cs" />
     <Compile Include="Core\Settings\CustomSettingsProvider.cs" />
+    <Compile Include="GUI\Converter\ChangeSettingsLocationIsEnabledConverter.cs" />
+    <Compile Include="GUI\Converter\SettingsPathIsDefaultLocationToBoolConverter.cs" />
     <Compile Include="GUI\Converter\AccentToBrushConverter.cs" />
     <Compile Include="GUI\Converter\AppThemeToBrushConverter.cs" />
     <Compile Include="Core\Network\ConvertMACAddress.cs" />
@@ -114,7 +116,7 @@
     <Compile Include="GUI\Translator\AppThemeNameTranslator.cs" />
     <Compile Include="Core\Settings\SettingsController.cs" />
     <Compile Include="GUI\ApplicationController.cs" />
-    <Compile Include="GUI\Behaviors\TextBlockBehavior.cs" />
+    <Compile Include="GUI\Behavior\TextBlockBehavior.cs" />
     <Compile Include="GUI\IPScanner.xaml.cs">
       <DependentUpon>IPScanner.xaml</DependentUpon>
     </Compile>

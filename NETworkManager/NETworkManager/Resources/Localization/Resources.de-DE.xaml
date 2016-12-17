@@ -21,7 +21,6 @@
     <system:String x:Key="LocalizedString_Location">Speicherort</system:String>
     <system:String x:Key="LocalizedString_Import">Importieren</system:String>
     <system:String x:Key="LocalizedString_Export">Exportieren</system:String>
-    <system:String x:Key="LocalizedString_Change">Wechseln</system:String>
     <system:String x:Key="LocalizedString_MACAddress">MAC-Adresse</system:String>
     <system:String x:Key="LocalizedString_Hostname">Hostname</system:String>
     <system:String x:Key="LocalizedString_Description">Beschreibung</system:String>
@@ -43,6 +42,11 @@
     <system:String x:Key="LocalizedString_Close">Schließen</system:String>
     <system:String x:Key="LocalizedString_SaveSettingsInApplicationFolder">Einstellungen im Anwendungsordner speichern</system:String>
 
+    <!-- Buttons -->
+    <system:String x:Key="LocalizedString_Button_Change">Wechseln</system:String>
+    <system:String x:Key="LocalizedString_Button_Default">Standard</system:String>
+    <system:String x:Key="LocalizedString_Button_WakeUp">Aufwecken</system:String>
+    
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Suche...</system:String>
     <system:String x:Key="LocalizedString_Watermark_EnterLocation">Speicherort eingeben...</system:String>

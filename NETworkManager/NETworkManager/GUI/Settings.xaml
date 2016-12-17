@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
-        xmlns:behaviors="clr-namespace:NETworkManager.GUI.Behaviors"
+        xmlns:behavior="clr-namespace:NETworkManager.GUI.Behavior"
         xmlns:localization="clr-namespace:NETworkManager.Core.Localization"
         xmlns:Converter="clr-namespace:NETworkManager.GUI.Converter"
         xmlns:translator="clr-namespace:NETworkManager.GUI.Translator"
@@ -21,6 +21,9 @@
         <!-- Brush Converter -->
         <Converter:AppThemeToBrushConverter x:Key="AppThemeToBrushConverter" />
         <Converter:AccentToBrushConverter x:Key="AccentToBrushConverter" />
+        <!-- ToBool Converter -->
+        <Converter:SettingsPathIsDefaultLocationToBoolConverter x:Key="SettingsPathIsDefaultLocationToBoolConverter" />
+        <Converter:ChangeSettingsLocationIsEnabledConverter x:Key="ChangeSettingsLocationIsEnabledConverter" />
         <!-- Transltor / Localization -->
         <translator:AccentNameTranslator x:Key="AccentNameTranslator" />
         <translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
@@ -101,7 +104,7 @@
                         <!-- General -->
                         <TabItem>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Autostart}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Autostart}" />
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -117,7 +120,7 @@
                                     <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource LocalizedString_StartApplicationMinimized}" Style="{StaticResource TextBlockGrid}" />
                                     <Controls:ToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding StartApplicationMinimized}" OffLabel="" OnLabel="" />
                                 </Grid>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Tray}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Tray}" />
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -138,7 +141,7 @@
                         <!-- Appearance -->
                         <TabItem>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
                                 <ListView  ItemsSource="{x:Static metro:ThemeManager.AppThemes}" VerticalAlignment="Top" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single" >
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -157,7 +160,7 @@
                                         <Binding Path="AppThemeSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
                                     </ListView.SelectedItem>
                                 </ListView>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
                                 <ListView ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate >
@@ -207,7 +210,7 @@
                         <!-- Settings -->
                         <TabItem>
                             <StackPanel >
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
                                 <TextBox FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" mah:TextBoxHelper.ButtonCommand="{Binding BrowseFolderCommand}" Margin="0,0,0,10">
                                     <TextBox.Text>
                                         <Binding Path="SettingsLocationSelectedPath" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -228,29 +231,47 @@
                                         </Style>
                                     </TextBox.Style>
                                 </TextBox>
-                                <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Change}" Command="{Binding ChangeSettingsCommand}" MinWidth="150" HorizontalAlignment="Right" FontSize="14" Margin="0,0,0,20">
-                                    <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource MetroFlatButton}">
-                                            <Setter Property="IsEnabled" Value="True" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding ElementName=toggleSwitchSettingsPortable,Path=IsChecked}" Value="True" >
-                                                    <Setter Property="IsEnabled" Value="False" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Portable}" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,0,0,20">
+                                    <Button Content="{DynamicResource LocalizedString_Button_Default}" Command="{Binding RestoreDefaultSettingsLocationCommand}" MinWidth="150" FontSize="14" Margin="0,0,10,0">
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroFlatButton}">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=toggleSwitchSettingsPortable,Path=IsChecked}" Value="False" >
+                                                        <Setter Property="IsEnabled" Value="True" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Value="False">
+                                                        <DataTrigger.Binding>
+                                                            <Binding Converter="{StaticResource SettingsPathIsDefaultLocationToBoolConverter}" ElementName="txtSettingsLocationFolder" Path="Text"/>
+                                                        </DataTrigger.Binding>
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Button_Change}" Command="{Binding ChangeSettingsCommand}" MinWidth="150" FontSize="14">
+                                        <Button.IsEnabled>
+                                            <MultiBinding Converter="{StaticResource ChangeSettingsLocationIsEnabledConverter}">
+                                                <Binding ElementName="txtSettingsLocationFolder" Path="Text" />
+                                                <Binding ElementName="toggleSwitchSettingsPortable" Path="IsChecked" />
+                                                <Binding Path="Validation.HasError" ElementName="txtSettingsLocationFolder}" />
+                                            </MultiBinding>
+                                        </Button.IsEnabled>
+                                    </Button>
+                                </StackPanel>
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Portable}" />
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Style="{StaticResource TextBlockGrid}" Text="{DynamicResource LocalizedString_SaveSettingsInApplicationFolder}" Grid.Column="0"/>
-                                    <Controls:ToggleSwitch Grid.Column="1" OffLabel="" OnLabel="" IsChecked="{Binding SettingsPortable}" />
+                                    <Controls:ToggleSwitch x:Name="toggleSwitchSettingsPortable" Grid.Column="1" OffLabel="" OnLabel="" IsChecked="{Binding SettingsPortable}" />
                                 </Grid>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behaviors:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />
                             </StackPanel>
                         </TabItem>
                     </TabControl>

@@ -21,7 +21,6 @@
     <system:String x:Key="LocalizedString_Location">Location</system:String>
     <system:String x:Key="LocalizedString_Import">Import</system:String>
     <system:String x:Key="LocalizedString_Export">Export</system:String>
-    <system:String x:Key="LocalizedString_Change">Change</system:String>
     <system:String x:Key="LocalizedString_MACAddress">MAC-Address</system:String>
     <system:String x:Key="LocalizedString_Hostname">Hostname</system:String>
     <system:String x:Key="LocalizedString_Description">Description</system:String>
@@ -42,6 +41,11 @@
     <system:String x:Key="LocalizedString_Show">Show</system:String>
     <system:String x:Key="LocalizedString_Close">Close</system:String>
     <system:String x:Key="LocalizedString_SaveSettingsInApplicationFolder">Save settngs in the application folder</system:String>
+
+    <!-- Buttons -->
+    <system:String x:Key="LocalizedString_Button_Change">Change</system:String>
+    <system:String x:Key="LocalizedString_Button_Default">Default</system:String>
+    <system:String x:Key="LocalizedString_Button_WakeUp">Wake Up</system:String>
     
     <!-- Watermark -->
     <system:String x:Key="LocalizedString_Watermark_Search">Search...</system:String>
@@ -53,8 +57,7 @@
     <system:String x:Key="LocalizedString_Watermark_ExampleBroadcast">192.168.178.255</system:String>
     <system:String x:Key="LocalizedString_Watermark_Port">Port...</system:String>
     <system:String x:Key="LocalizedString_Watermark_ExamplePort">7</system:String>
-    
-    
+        
     <!-- ToolTip-->
     <system:String x:Key="LocalizedString_ToolTip_Settings">Open settings</system:String>
     <system:String x:Key="LocalizedString_ToolTip_GitHub">Show project on GitHub</system:String>

@@ -305,5 +305,15 @@ namespace NETworkManager.GUI.ViewModels
             Properties.Settings.Default.Settings_Location = SettingsLocationSelectedPath;
             Properties.Settings.Default.Save();
         }
+
+        public ICommand RestoreDefaultSettingsLocationCommand
+        {
+            get { return new RelayCommand(p => RestoreDefaultSettingsLocationAction()); }
+        }
+
+        private void RestoreDefaultSettingsLocationAction()
+        {
+            SettingsLocationSelectedPath = SettingsController.DefaultSettingsLocation;
+        }
     }
 }

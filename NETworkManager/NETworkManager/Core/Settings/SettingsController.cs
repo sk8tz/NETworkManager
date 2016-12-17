@@ -20,7 +20,7 @@ namespace NETworkManager.Core.Settings
         }
 
         // Default settings location ("%AppData%\PRODUCTNAME\Settings")
-        private static string DefaultSettingsLocation
+        public static string DefaultSettingsLocation
         {
             get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName, SettingsFolderName); }
         }
