@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
+        xmlns:Network="clr-namespace:NETworkManager.Core.Network"
         xmlns:behavior="clr-namespace:NETworkManager.GUI.Behavior"
         xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -52,7 +53,8 @@
                             <TextBlock Grid.Column="0" Grid.Row="0" Text="IP-Addresse" Style="{StaticResource TextBlockGrid}" />
                             <TextBox Grid.Column="1" Grid.Row="0" FontSize="14" />
                             <TextBlock Grid.Column="0" Grid.Row="2" Text="Netzmaske" Style="{StaticResource TextBlockGrid}" />
-                            <ComboBox Width="Auto" IsEditable="False" FontSize="14" Grid.Column="1" Grid.Row="2" />
+                            <ComboBox Width="Auto" IsEditable="False" FontSize="14" Grid.Column="1" Grid.Row="2" ItemsSource="{x:Static Network:SubnetCalculator.SubnetmaskList}" />
+
                         </Grid>
                         <Button Content="Berechnen" MinWidth="150" HorizontalAlignment="Right" />
                         <TextBlock Style="{StaticResource TextBlockHeader}" Text="Ausgabe" />

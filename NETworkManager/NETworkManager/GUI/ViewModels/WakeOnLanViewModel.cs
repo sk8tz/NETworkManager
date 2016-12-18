@@ -180,7 +180,7 @@ namespace NETworkManager.GUI.ViewModels
 
         private void WakeUpAction()
         {
-            MagicPacket.Send(MagicPacket.Create(MACAddress), IPAddress.Parse(Broadcast), int.Parse(Port));
+            WakeOnLan.SendMagicPacket(WakeOnLan.Create(MACAddress), IPAddress.Parse(Broadcast), int.Parse(Port));
         }
 
         public ICommand AddTemplateCommand

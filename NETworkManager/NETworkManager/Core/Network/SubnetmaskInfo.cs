@@ -4,18 +4,16 @@
     {
         public int Suffix { get; set; }
         public string Subnetmask { get; set; }
-        public int Hosts { get; set; }        
 
         public SubnetmaskInfo()
         {
 
         }
 
-        public SubnetmaskInfo(int suffix, string subnetmask, int hosts)
+        public SubnetmaskInfo(int suffix, string subnetmask)
         {
             Suffix = suffix;
             Subnetmask = subnetmask;
-            Hosts = hosts;
         }
 
         public override string ToString()

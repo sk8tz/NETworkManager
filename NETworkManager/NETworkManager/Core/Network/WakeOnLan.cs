@@ -3,14 +3,14 @@ using System.Net.Sockets;
 
 namespace NETworkManager.Core.Network
 {
-    public static class MagicPacket
+    public static class WakeOnLan
     {
         /// <summary>
         /// Create a Magic Packet from MAC-Address
         /// </summary>
         /// <param name="MAC">MAC-Address as byte[]</param>
         /// <returns>Magic Packet as byte array</returns>
-        public static byte[] Create(byte[] mac)
+        public static byte[] CreateMagicPacket(byte[] mac)
         {
             byte[] packet = new byte[17 * 6];
 
@@ -34,7 +34,7 @@ namespace NETworkManager.Core.Network
         {
             byte[] macBytes = ConvertMACAddress.ToByteArray(mac);
 
-            return Create(macBytes);
+            return CreateMagicPacket(macBytes);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace NETworkManager.Core.Network
         /// <param name="packet">Magic Packet as byte array</param>
         /// <param name="broadcast">Broadcast-Address</param>
         /// <param name="port">Port-Number</param>
-        public static void Send(byte[] packet, IPAddress broadcast, int port)
+        public static void SendMagicPacket(byte[] packet, IPAddress broadcast, int port)
         {
             UdpClient udpClient = new UdpClient();
             
