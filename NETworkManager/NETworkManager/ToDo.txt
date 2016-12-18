@@ -3,7 +3,6 @@
 * Global Hotkey ?? To open launcher
 
 ## Settings
-* Button to restore default settings location
 * Import & Export
 * Move files, Ask to overwrite...
 * Catch Errors

@@ -211,7 +211,7 @@
                         <TabItem>
                             <StackPanel >
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
-                                <TextBox FontSize="14" x:Name="txtSettingsLocationFolder" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" mah:TextBoxHelper.ButtonCommand="{Binding BrowseFolderCommand}" Margin="0,0,0,10">
+                                <TextBox FontSize="14" x:Name="txtSettingsLocation" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" mah:TextBoxHelper.ButtonCommand="{Binding BrowseFolderCommand}" Margin="0,0,0,10">
                                     <TextBox.Text>
                                         <Binding Path="SettingsLocationSelectedPath" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -243,7 +243,7 @@
                                                     </DataTrigger>
                                                     <DataTrigger Value="False">
                                                         <DataTrigger.Binding>
-                                                            <Binding Converter="{StaticResource SettingsPathIsDefaultLocationToBoolConverter}" ElementName="txtSettingsLocationFolder" Path="Text"/>
+                                                            <Binding Converter="{StaticResource IsDefaultLocationToBoolConverter}" ElementName="txtSettingsLocation" Path="Text"/>
                                                         </DataTrigger.Binding>
                                                         <Setter Property="Visibility" Value="Visible" />
                                                     </DataTrigger>
@@ -259,8 +259,8 @@
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
                                                             <Condition Binding="{Binding ElementName=toggleSwitchSettingsPortable, Path=IsChecked}" Value="False" />
-                                                            <Condition Binding="{Binding ElementName=txtSettingsLocationFolder, Path=(Validation.HasError)}" Value="False" />
-                                                            <Condition Binding="{Binding ElementName=txtSettingsLocationFolder, Path=Text, Converter={StaticResource IsSettingsLocationToBoolConverter}}" Value="False" />
+                                                            <Condition Binding="{Binding ElementName=txtSettingsLocation, Path=(Validation.HasError)}" Value="False" />
+                                                            <Condition Binding="{Binding ElementName=txtSettingsLocation, Path=Text, Converter={StaticResource IsSettingsLocationToBoolConverter}}" Value="False" />
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="IsEnabled" Value="True" />
                                                     </MultiDataTrigger>
@@ -278,8 +278,8 @@
                                     <TextBlock Style="{StaticResource TextBlockGrid}" Text="{DynamicResource LocalizedString_SaveSettingsInApplicationFolder}" Grid.Column="0"/>
                                     <Controls:ToggleSwitch x:Name="toggleSwitchSettingsPortable" Grid.Column="1" OffLabel="" OnLabel="" IsChecked="{Binding SettingsPortable}" />
                                 </Grid>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />
+                                <!--<TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Import}" />-->
+                                <!--<TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Export}" />-->
                             </StackPanel>
                         </TabItem>
                     </TabControl>
