@@ -22,8 +22,8 @@
         <Converter:AppThemeToBrushConverter x:Key="AppThemeToBrushConverter" />
         <Converter:AccentToBrushConverter x:Key="AccentToBrushConverter" />
         <!-- ToBool Converter -->
-        <Converter:SettingsPathIsDefaultLocationToBoolConverter x:Key="SettingsPathIsDefaultLocationToBoolConverter" />
-        <Converter:ChangeSettingsLocationIsEnabledConverter x:Key="ChangeSettingsLocationIsEnabledConverter" />
+        <Converter:IsDefaultLocationToBoolConverter x:Key="IsDefaultLocationToBoolConverter" />
+        <Converter:IsSettingsLocationToBoolConverter x:Key="IsSettingsLocationToBoolConverter" />
         <!-- Transltor / Localization -->
         <translator:AccentNameTranslator x:Key="AccentNameTranslator" />
         <translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
@@ -252,13 +252,21 @@
                                         </Button.Style>
                                     </Button>
                                     <Button x:Name="btnChangeSettingsLocation" Content="{DynamicResource LocalizedString_Button_Change}" Command="{Binding ChangeSettingsCommand}" MinWidth="150" FontSize="14">
-                                        <Button.IsEnabled>
-                                            <MultiBinding Converter="{StaticResource ChangeSettingsLocationIsEnabledConverter}">
-                                                <Binding ElementName="txtSettingsLocationFolder" Path="Text" />
-                                                <Binding ElementName="toggleSwitchSettingsPortable" Path="IsChecked" />
-                                                <Binding Path="Validation.HasError" ElementName="txtSettingsLocationFolder}" />
-                                            </MultiBinding>
-                                        </Button.IsEnabled>
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroFlatButton}">
+                                                <Setter Property="IsEnabled" Value="False" />
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding ElementName=toggleSwitchSettingsPortable, Path=IsChecked}" Value="False" />
+                                                            <Condition Binding="{Binding ElementName=txtSettingsLocationFolder, Path=(Validation.HasError)}" Value="False" />
+                                                            <Condition Binding="{Binding ElementName=txtSettingsLocationFolder, Path=Text, Converter={StaticResource IsSettingsLocationToBoolConverter}}" Value="False" />
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="IsEnabled" Value="True" />
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
                                     </Button>
                                 </StackPanel>
                                 <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Portable}" />

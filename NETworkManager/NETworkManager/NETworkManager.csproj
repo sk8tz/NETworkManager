@@ -100,8 +100,8 @@
     <Compile Include="Core\Appearance\AppearanceController.cs" />
     <Compile Include="Core\Autostart\AutostartManager.cs" />
     <Compile Include="Core\Settings\CustomSettingsProvider.cs" />
-    <Compile Include="GUI\Converter\ChangeSettingsLocationIsEnabledConverter.cs" />
-    <Compile Include="GUI\Converter\SettingsPathIsDefaultLocationToBoolConverter.cs" />
+    <Compile Include="GUI\Converter\IsSettingsLocationToBoolConverter.cs" />
+    <Compile Include="GUI\Converter\IsDefaultLocationToBoolConverter.cs" />
     <Compile Include="GUI\Converter\AccentToBrushConverter.cs" />
     <Compile Include="GUI\Converter\AppThemeToBrushConverter.cs" />
     <Compile Include="Core\Network\ConvertMACAddress.cs" />

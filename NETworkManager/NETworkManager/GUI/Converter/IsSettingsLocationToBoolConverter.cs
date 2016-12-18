@@ -2,14 +2,15 @@
 using System.Globalization;
 using System.Windows.Data;
 using NETworkManager.Core.Settings;
+using System.Windows;
 
 namespace NETworkManager.GUI.Converter
 {
-    public sealed class SettingsPathIsDefaultLocationToBoolConverter : IValueConverter
+    public sealed class IsSettingsLocationToBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value as string == SettingsController.DefaultSettingsLocation)
+            if (value as string == SettingsController.SettingsLocation)
                 return true;
 
             return false;
