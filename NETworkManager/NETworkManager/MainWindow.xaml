@@ -8,7 +8,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title=".NETworkManager" Icon="NETworkManager.ico" Height="500" Width="750" MinHeight="450" MinWidth="650" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen" Closing="MetroWindowMain_Closing" StateChanged="MetroWindowMain_StateChanged" KeyDown="MetroWindowMain_KeyDown" Loaded="MetroWindowMain_Loaded" >
+        Title=".NETworkManager" Icon="NETworkManager.ico" Height="450" Width="700" MinWidth="560" MinHeight="350" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen" Closing="MetroWindowMain_Closing" StateChanged="MetroWindowMain_StateChanged" KeyDown="MetroWindowMain_KeyDown" Loaded="MetroWindowMain_Loaded" >
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>
@@ -102,13 +102,14 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="10" />
                             </Grid.RowDefinitions>
                             <Rectangle Width="48" Height="48" Fill="Black">
                                 <Rectangle.OpacityMask>
                                     <VisualBrush Stretch="Fill" Visual="{Binding Icon}" />
                                 </Rectangle.OpacityMask>
                             </Rectangle>
-                            <TextBlock Grid.Row="1" Margin="0,0,0,10" Text="{Binding Name}" FontSize="14" TextAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Text="{Binding Name}" FontSize="14" TextAlignment="Center"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
