@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="GUI\PortScanner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="GUI\IPScanner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +84,10 @@
     <Page Include="GUI\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\NetworkInterface.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="GUI\WakeOnLAN.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -114,6 +122,12 @@
     <Compile Include="Core\Localization\LocalizationController.cs" />
     <Compile Include="Core\Localization\LocalizationInfo.cs" />
     <Compile Include="GUI\Interface\RelayCommand.cs" />
+    <Compile Include="GUI\PortScanner.xaml.cs">
+      <DependentUpon>PortScanner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\NetworkInterface.xaml.cs">
+      <DependentUpon>NetworkInterface.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Translator\AccentNameTranslator.cs" />
     <Compile Include="GUI\Translator\AppThemeNameTranslator.cs" />
     <Compile Include="Core\Settings\SettingsController.cs" />

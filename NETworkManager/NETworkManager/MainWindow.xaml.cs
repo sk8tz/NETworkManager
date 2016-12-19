@@ -226,7 +226,10 @@ namespace NETworkManager
 
         private void ShowWindowAction()
         {
-            ShowWindowFromTray();
+            if (_isInTray)
+                ShowWindowFromTray();
+            else
+                Activate();
         }
 
         public ICommand CloseApplicationCommand

@@ -34,7 +34,7 @@
     <Grid>
         <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged">
             <!-- Application -->
-            <TabItem Style="{StaticResource TabItemHeader}" Header="{DynamicResource LocalizedString_Application}">
+            <TabItem Style="{StaticResource TabItemHeader}" Header="{DynamicResource LocalizedString_WakeUp}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
                         <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />

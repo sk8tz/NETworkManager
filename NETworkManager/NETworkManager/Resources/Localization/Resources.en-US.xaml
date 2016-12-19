@@ -74,8 +74,9 @@
 
     <!-- AppInfo.TranslatedName / AppLauncher.AppList -->
     <system:String x:Key="LocalizedString_ApplicationName_IPScanner">IP-Scanner</system:String>
-    <system:String x:Key="LocalizedString_ApplicationName_SubnetCalculator">Subnetz Rechner</system:String>
+    <system:String x:Key="LocalizedString_ApplicationName_NetworkInterface">Network Interface</system:String>
     <system:String x:Key="LocalizedString_ApplicationName_PortScanner">Port-Scanner</system:String>
+    <system:String x:Key="LocalizedString_ApplicationName_SubnetCalculator">Subnetz Rechner</system:String>
     <system:String x:Key="LocalizedString_ApplicationName_WakeOnLan">Wake on LAN</system:String>
 
     <!-- AppTheme.Name -->
