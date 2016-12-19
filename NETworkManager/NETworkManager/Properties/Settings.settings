@@ -23,5 +23,8 @@
     <Setting Name="Application_StartApplicationMinimized" Provider="CustomSettingsProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="Application_AlwaysShowIconInTray" Provider="CustomSettingsProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

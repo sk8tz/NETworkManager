@@ -116,5 +116,18 @@ namespace NETworkManager.Properties {
                 this["Application_StartApplicationMinimized"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsProviderAttribute(typeof(CustomSettingsProvider))]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Application_AlwaysShowIconInTray {
+            get {
+                return ((bool)(this["Application_AlwaysShowIconInTray"]));
+            }
+            set {
+                this["Application_AlwaysShowIconInTray"] = value;
+            }
+        }
     }
 }

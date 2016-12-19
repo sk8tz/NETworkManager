@@ -130,11 +130,15 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="10" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LocalizedString_MinimizeToTrayOnClose}" Style="{StaticResource TextBlockGrid}" />
-                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="0" IsChecked="{Binding MinimizeToTrayOnClose}" OffLabel="" OnLabel="" />
-                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource LocalizedString_MinimizeToTrayOnMinimize}" Style="{StaticResource TextBlockGrid}" />
-                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding MinimizeToTrayOnMinimize}" OffLabel="" OnLabel="" />
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource LocalizedString_AlwaysShowIconInTray}" Style="{StaticResource TextBlockGrid}" />
+                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="0" IsChecked="{Binding AlwaysShowIconInTray}" OffLabel="" OnLabel="" />
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource LocalizedString_MinimizeToTrayOnClose}" Style="{StaticResource TextBlockGrid}" />
+                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding MinimizeToTrayOnClose}" OffLabel="" OnLabel="" />
+                                    <TextBlock Grid.Column="0" Grid.Row="4" Text="{DynamicResource LocalizedString_MinimizeToTrayOnMinimize}" Style="{StaticResource TextBlockGrid}" />
+                                    <Controls:ToggleSwitch Grid.Column="1" Grid.Row="4" IsChecked="{Binding MinimizeToTrayOnMinimize}" OffLabel="" OnLabel="" />
                                 </Grid>
                             </StackPanel>
                         </TabItem>

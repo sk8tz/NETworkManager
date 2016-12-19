@@ -34,8 +34,8 @@
     <system:String x:Key="LocalizedString_Portable">Portable</system:String>
     <system:String x:Key="LocalizedString_Autostart">Autostart</system:String>
     <system:String x:Key="LocalizedString_StartApplicationWithWindows">Anwendung mit Windows starten (aktueller Benutzer)</system:String>
-    <system:String x:Key="LocalizedString_MinimizeToTray">Minimieren ins Tray</system:String>
     <system:String x:Key="LocalizedString_StartApplicationMinimized">Anwendung minimiert starten</system:String>
+    <system:String x:Key="LocalizedString_AlwaysShowIconInTray">Icon im Tray immer anzeigen </system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnClose">Ins Tray minimieren, anstatt die Anwendung zu schließen</system:String>
     <system:String x:Key="LocalizedString_MinimizeToTrayOnMinimize">Ins Tray minimieren, wenn die Anwendung minimiert wird</system:String>
     <system:String x:Key="LocalizedString_Show">Anzeigen</system:String>

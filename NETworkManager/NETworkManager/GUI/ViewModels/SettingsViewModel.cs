@@ -44,7 +44,7 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _restartRequired)
                     return;
 
-                _restartRequired = value;               
+                _restartRequired = value;
             }
         }
 
@@ -87,6 +87,26 @@ namespace NETworkManager.GUI.ViewModels
 
                 _startApplicationMinimized = value;
                 OnPropertyChanged("StartApplicationMinimized");
+            }
+        }
+
+        private bool _alwaysShowIconInTray;
+        public bool AlwaysShowIconInTray
+        {
+            get { return _alwaysShowIconInTray; }
+            set
+            {
+                if (value == _alwaysShowIconInTray)
+                    return;
+
+                if(!_isLoading)
+                {
+                    Properties.Settings.Default.Application_AlwaysShowIconInTray = value;
+                    SettingsChanged = true;
+                }
+
+                _alwaysShowIconInTray = value;
+                OnPropertyChanged("AlwaysShowIconInTray");
             }
         }
 
@@ -254,6 +274,7 @@ namespace NETworkManager.GUI.ViewModels
             // General
             StartApplicationWithWindows = AutostartManager.IsEnabled;
             StartApplicationMinimized = Properties.Settings.Default.Application_StartApplicationMinimized;
+            AlwaysShowIconInTray = Properties.Settings.Default.Application_AlwaysShowIconInTray;
             MinimizeToTrayOnClose = Properties.Settings.Default.Application_MinimizeToTrayOnClose;
             MinimizeToTrayOnMinimize = Properties.Settings.Default.Application_MinimizeToTrayOnMinimize;
 

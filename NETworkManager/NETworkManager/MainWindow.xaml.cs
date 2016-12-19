@@ -32,6 +32,19 @@ namespace NETworkManager
         NotifyIcon notifyIcon = new NotifyIcon();
         private bool _isInTray;
 
+        private bool _autostart;
+        public bool Autostart
+        {
+            get { return _autostart; }
+            set
+            {
+                if (value == _autostart)
+                    return;
+
+                _autostart = value;
+            }
+        }
+
         private bool _flyoutRestartRequiredIsOpen;
         public bool FlyoutRestartRequiredIsOpen
         {
@@ -53,25 +66,24 @@ namespace NETworkManager
 
             // Load appearance
             AppearanceController.LoadAppearance();
-
             InitializeComponent();
             DataContext = this;
-
-            foreach(string parameter in Environment.GetCommandLineArgs())
-            {
-                if (Properties.Resources.StartParameter_Autostart == parameter.TrimStart((char)47))
-                    System.Windows.MessageBox.Show(parameter);       
-            }
 
             // Set a filter for ListView Apps and sort them
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvApps.ItemsSource);
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             view.Filter = SearchFilter;
 
+            // Init notify icon
             InitNotifyIcon();
 
-            if (Properties.Settings.Default.Application_StartApplicationMinimized)
-                HideWindowToTray();
+            // Load Settings
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+            notifyIcon.Visible = Properties.Settings.Default.Application_AlwaysShowIconInTray;
         }
 
         #region NotifyIcon
@@ -106,6 +118,7 @@ namespace NETworkManager
             _isInTray = true;
 
             notifyIcon.Visible = true;
+
             Hide();
         }
 
@@ -114,8 +127,9 @@ namespace NETworkManager
             _isInTray = false;
 
             Show();
-            WindowState = WindowState.Normal;
-            notifyIcon.Visible = false;
+
+            if (!Properties.Settings.Default.Application_AlwaysShowIconInTray)
+                notifyIcon.Visible = false;
         }
         #endregion
 
@@ -191,13 +205,15 @@ namespace NETworkManager
         private void OpenSettingsAction()
         {
             Settings settingsWindow = new Settings();
-            
+
             if (_isInTray)
                 settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             else
                 settingsWindow.Owner = this;
 
             settingsWindow.ShowDialog();
+
+            LoadSettings();
 
             if (settingsWindow.RestartRequired)
                 FlyoutRestartRequiredIsOpen = true;
@@ -247,10 +263,16 @@ namespace NETworkManager
 
         private void MetroWindowMain_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if(!txtSearch.IsKeyboardFocused && ((e.Key >= Key.A && e.Key <= Key.Z)))
+            if (!txtSearch.IsKeyboardFocused && ((e.Key >= Key.A && e.Key <= Key.Z)))
             {
                 txtSearch.Focus();
             }
+        }
+
+        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Autostart && Properties.Settings.Default.Application_StartApplicationMinimized)
+                HideWindowToTray();
         }
     }
 }
