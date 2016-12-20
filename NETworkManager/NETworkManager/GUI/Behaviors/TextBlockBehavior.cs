@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace NETworkManager.GUI.Behavior
+namespace NETworkManager.GUI.Behaviors
 {
     static class TextBlockBehavior
     {

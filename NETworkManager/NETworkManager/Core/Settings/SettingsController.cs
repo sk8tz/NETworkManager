@@ -13,7 +13,7 @@ namespace NETworkManager.Core.Settings
     {
         private const string SettingsFolderName = "Settings";
         private const string IsPortableFileName = "IsPortable.settings";
-
+        
         private static string ApplicationName
         {
             get { return Assembly.GetEntryAssembly().GetName().Name; }

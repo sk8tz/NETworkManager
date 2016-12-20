@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
-        xmlns:behavior="clr-namespace:NETworkManager.GUI.Behavior"
-        xmlns:localization="clr-namespace:NETworkManager.Core.Localization"
-        xmlns:Converter="clr-namespace:NETworkManager.GUI.Converter"
-        xmlns:translator="clr-namespace:NETworkManager.GUI.Translator"
-        xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
+        xmlns:Behavior="clr-namespace:NETworkManager.GUI.Behaviors"
+        xmlns:Localization="clr-namespace:NETworkManager.Core.Localization"
+        xmlns:Converter="clr-namespace:NETworkManager.GUI.Converters"
+        xmlns:Translator="clr-namespace:NETworkManager.GUI.Translator"
+        xmlns:Validator="clr-namespace:NETworkManager.GUI.Validators"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
@@ -25,8 +25,8 @@
         <Converter:IsDefaultLocationToBoolConverter x:Key="IsDefaultLocationToBoolConverter" />
         <Converter:IsSettingsLocationToBoolConverter x:Key="IsSettingsLocationToBoolConverter" />
         <!-- Transltor / Localization -->
-        <translator:AccentNameTranslator x:Key="AccentNameTranslator" />
-        <translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
+        <Translator:AccentNameTranslator x:Key="AccentNameTranslator" />
+        <Translator:AppThemeNameTranslator x:Key="AppThemeNameTranslator" />
         <!-- Styles -->
         <Style x:Key="TabItemHeader" BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
             <Setter Property="mah:ControlsHelper.HeaderFontSize" Value="20" />
@@ -104,7 +104,7 @@
                         <!-- General -->
                         <TabItem>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Autostart}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Autostart}" />
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -120,7 +120,7 @@
                                     <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource LocalizedString_StartApplicationMinimized}" Style="{StaticResource TextBlockGrid}" />
                                     <Controls:ToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding StartApplicationMinimized}" OffLabel="" OnLabel="" />
                                 </Grid>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Tray}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Tray}" />
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -145,7 +145,7 @@
                         <!-- Appearance -->
                         <TabItem>
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Theme}"  />
                                 <ListView  ItemsSource="{x:Static metro:ThemeManager.AppThemes}" VerticalAlignment="Top" BorderThickness="0" Margin="0,0,0,20" SelectionMode="Single" >
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -164,7 +164,7 @@
                                         <Binding Path="AppThemeSelectedItem" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" />
                                     </ListView.SelectedItem>
                                 </ListView>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Accent}" />
                                 <ListView ItemsSource="{x:Static metro:ThemeManager.Accents}" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate >
@@ -189,7 +189,7 @@
                         <!-- Language -->
                         <TabItem>
                             <StackPanel>
-                                <ListView ItemsSource="{Binding Source={x:Static localization:LocalizationController.LocalizationList}}"  Background="Transparent" BorderThickness="0" SelectionMode="Single">
+                                <ListView ItemsSource="{Binding Source={x:Static Localization:LocalizationController.LocalizationList}}"  Background="Transparent" BorderThickness="0" SelectionMode="Single">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="5">
@@ -214,7 +214,7 @@
                         <!-- Settings -->
                         <TabItem>
                             <StackPanel >
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Location}" />
                                 <TextBox FontSize="14" x:Name="txtSettingsLocation" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterLocation}" mah:TextBoxHelper.ButtonCommand="{Binding BrowseFolderCommand}" Margin="0,0,0,10">
                                     <TextBox.Text>
                                         <Binding Path="SettingsLocationSelectedPath" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -273,7 +273,7 @@
                                         </Button.Style>
                                     </Button>
                                 </StackPanel>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Portable}" />
+                                <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Portable}" />
                                 <Grid Margin="0,0,0,20">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>

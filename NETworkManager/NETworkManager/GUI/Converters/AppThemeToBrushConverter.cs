@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace NETworkManager.GUI.Converter
+namespace NETworkManager.GUI.Converters
 {
     public sealed class AppThemeToBrushConverter : IValueConverter
     {

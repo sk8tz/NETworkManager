@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NETworkManager.GUI"
-        xmlns:behavior="clr-namespace:NETworkManager.GUI.Behavior"
-        xmlns:Validator="clr-namespace:NETworkManager.GUI.Validator"
-        xmlns:Converter="clr-namespace:NETworkManager.GUI.Converter"
+        xmlns:Behavior="clr-namespace:NETworkManager.GUI.Behaviors"
+        xmlns:Validator="clr-namespace:NETworkManager.GUI.Validators"
+        xmlns:Converter="clr-namespace:NETworkManager.GUI.Converters"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:metro="clr-namespace:MahApps.Metro;assembly=MahApps.Metro"
@@ -37,7 +37,7 @@
             <TabItem Style="{StaticResource TabItemHeader}" Header="{DynamicResource LocalizedString_WakeUp}">
                 <Grid Style="{StaticResource GridTabItem}">
                     <StackPanel>
-                        <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />
+                        <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_WakeUp}" />
                         <ComboBox Margin="0,0,0,10" x:Name="cbMACAddress" IsEditable="True" mah:TextBoxHelper.Watermark="{DynamicResource LocalizedString_Watermark_EnterMACAddress}" ItemsSource="{Binding WakeOnLanTemplates}" SelectedValuePath="MAC" FontSize="14" >
                             <ComboBox.Text>
                                 <Binding Path="MACAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -93,7 +93,7 @@
                                 </Style>
                             </Button.Style>
                         </Button>
-                        <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Settings}" />
+                        <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Settings}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
@@ -144,7 +144,7 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <StackPanel>
-                                <TextBlock Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Add}"/>
+                                <TextBlock Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Add}"/>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -228,7 +228,7 @@
                                 </Grid>
                             </StackPanel>
                         </Grid>
-                        <TextBlock Grid.Row="2" Style="{StaticResource TextBlockHeader}" behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Templates}" />
+                        <TextBlock Grid.Row="2" Style="{StaticResource TextBlockHeader}" Behavior:TextBlockBehavior.UpperText="{DynamicResource LocalizedString_Templates}" />
                         <DataGrid  Grid.Row="3" FontSize="14" DataContext="{Binding WakeOnLanTemplates}" ItemsSource="{Binding}" AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource DataGridColumnHeaderNormal}" GridLinesVisibility="All" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="{DynamicResource LocalizedString_MACAddress}" Binding="{Binding MAC}" Width="*" />

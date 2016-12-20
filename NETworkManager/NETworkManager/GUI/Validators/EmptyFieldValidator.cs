@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace NETworkManager.GUI.Validator
+namespace NETworkManager.GUI.Validators
 {
     public class EmptyFieldValidator : ValidationRule
     {

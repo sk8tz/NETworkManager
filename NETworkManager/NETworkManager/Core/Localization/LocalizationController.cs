@@ -62,23 +62,23 @@ namespace NETworkManager.Core.Localization
         /// Change the localization
         /// </summary>
         /// <param name="info">LocalizationInfo</param>
-        public static void ChangeLocalization(LocalizationInfo localizationInfo)
+        public static void ChangeLocalization(LocalizationInfo info)
         {
             // Set the current localization
-            CurrentLocalization = localizationInfo;
+            CurrentLocalization = info;
 
             // Remove dictionaries, which are no longer required
             if (_localizationResourceDictionary != null)
                 Application.Current.Resources.MergedDictionaries.Remove(_localizationResourceDictionary);
 
             // Create/Initialize a new dictionary from the .xaml-file in the resource
-            _localizationResourceDictionary = new ResourceDictionary { Source = new Uri(localizationInfo.Path, UriKind.Relative) };
+            _localizationResourceDictionary = new ResourceDictionary { Source = new Uri(info.Path, UriKind.Relative) };
 
             // Add the new dictionary
             Application.Current.Resources.MergedDictionaries.Add(_localizationResourceDictionary);
 
             // Set the culture code
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(localizationInfo.Code);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(info.Code);
         }
     }
 }

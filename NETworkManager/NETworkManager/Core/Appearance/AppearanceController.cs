@@ -19,7 +19,7 @@ namespace NETworkManager.Core.Appearance
 
             // Change the Accent if it is not empty and different from the currently loaded
             string accentName = Properties.Settings.Default.Appearance_Accent;
-
+            
             if (!string.IsNullOrEmpty(accentName) && accentName != ThemeManager.DetectAppStyle().Item2.Name)
                 ChangeAccent(accentName);
         }
@@ -27,20 +27,20 @@ namespace NETworkManager.Core.Appearance
         /// <summary>
         /// Change the AppTheme
         /// </summary>
-        /// <param name="appThemeName">Name of the AppTheme</param>
-        public static void ChangeAppTheme(string appThemeName)
+        /// <param name="name">Name of the AppTheme</param>
+        public static void ChangeAppTheme(string name)
         {
-            ThemeManager.ChangeAppTheme(Application.Current, appThemeName);
+            ThemeManager.ChangeAppTheme(Application.Current, name);
         }
 
         /// <summary>
         /// Change the Accent
         /// </summary>
-        /// <param name="accentName">Name of the Accent</param>
-        public static void ChangeAccent(string accentName)
+        /// <param name="name">Name of the Accent</param>
+        public static void ChangeAccent(string name)
         {
             Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
-            Accent accent = ThemeManager.GetAccent(accentName);
+            Accent accent = ThemeManager.GetAccent(name);
 
             ThemeManager.ChangeAppStyle(Application.Current, accent, appStyle.Item1);
         }

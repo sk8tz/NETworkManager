@@ -1,5 +1,5 @@
 ﻿using MahApps.Metro.Controls;
-using NETworkManager.Core.Appearance;
+using NETworkManager.Core.Settings;
 using NETworkManager.Core.Localization;
 using NETworkManager.GUI;
 using System;
@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
 using System.Reflection;
+using NETworkManager.Core.Appearance;
 
 namespace NETworkManager
 {
@@ -22,13 +23,16 @@ namespace NETworkManager
     /// </summary>
     public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
+        #region PropertyChangedEventHandler
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+        #endregion
 
+        #region Variables        
         NotifyIcon notifyIcon = new NotifyIcon();
 
         private bool _isInTray;
@@ -59,7 +63,9 @@ namespace NETworkManager
                 OnPropertyChanged("FlyoutRestartRequiredIsOpen");
             }
         }
+        #endregion
 
+        #region Window load and close events
         public MainWindow()
         {
             // Load localization
@@ -82,10 +88,28 @@ namespace NETworkManager
             LoadSettings();
         }
 
-        private void LoadSettings()
+        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
         {
-            notifyIcon.Visible = Properties.Settings.Default.Application_AlwaysShowIconInTray;
+            if (Autostart && Properties.Settings.Default.Application_StartApplicationMinimized)
+                HideWindowToTray();
         }
+
+        private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
+        {
+            if (Properties.Settings.Default.Application_MinimizeToTrayOnClose && !_isInTray)
+            {
+                e.Cancel = true;
+
+                HideWindowToTray();
+
+                return;
+            }
+
+            // Dispose the notify icon to prevent errors
+            if (notifyIcon != null)
+                notifyIcon.Dispose();
+        }
+        #endregion
 
         #region NotifyIcon
         private void InitNotifyIcon()
@@ -114,6 +138,21 @@ namespace NETworkManager
             ShowWindowFromTray();
         }
 
+        private void MetroWindowMain_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                if (!_isInTray && Properties.Settings.Default.Application_MinimizeToTrayOnMinimize)
+                    HideWindowToTray();
+            }
+        }
+
+        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.ContextMenu menu = sender as System.Windows.Controls.ContextMenu;
+            menu.DataContext = this;
+        }
+
         private void HideWindowToTray()
         {
             _isInTray = true;
@@ -132,7 +171,6 @@ namespace NETworkManager
             if (!Properties.Settings.Default.Application_AlwaysShowIconInTray)
                 notifyIcon.Visible = false;
         }
-        #endregion
 
         private void BringWindowToFront()
         {
@@ -141,6 +179,15 @@ namespace NETworkManager
 
             Activate();
         }
+
+        #endregion
+
+        #region Load settings
+        private void LoadSettings()
+        {
+            notifyIcon.Visible = Properties.Settings.Default.Application_AlwaysShowIconInTray;
+        }
+        #endregion
 
         #region Events
         private void listViewApps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -154,7 +201,7 @@ namespace NETworkManager
         }
         #endregion
 
-        #region ListView Apps Filter
+        #region ListView search
         private bool SearchFilter(object item)
         {
             if (string.IsNullOrEmpty(txtSearch.Text))
@@ -162,40 +209,17 @@ namespace NETworkManager
             else
                 return ((item as ApplicationInfo).Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
+
+        private void MetroWindowMain_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (!txtSearch.IsKeyboardFocused && ((e.Key >= Key.A && e.Key <= Key.Z)))
+            {
+                txtSearch.Focus();
+            }
+        }
         #endregion
 
-        private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
-        {
-            if (Properties.Settings.Default.Application_MinimizeToTrayOnClose && !_isInTray)
-            {
-                e.Cancel = true;
-
-                HideWindowToTray();
-
-                return;
-            }
-
-            // Dispose the notify icon to prevent errors
-            if (notifyIcon != null)
-                notifyIcon.Dispose();
-        }
-
-        private void MetroWindowMain_StateChanged(object sender, EventArgs e)
-        {
-            if (WindowState == WindowState.Minimized)
-            {
-                if (!_isInTray && Properties.Settings.Default.Application_MinimizeToTrayOnMinimize)
-                    HideWindowToTray();
-            }
-        }
-
-        private void ContextMenu_Opened(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Controls.ContextMenu menu = sender as System.Windows.Controls.ContextMenu;
-            menu.DataContext = this;
-        }
-
-        #region Commands
+        #region Commands & Actions
         public ICommand OpenGithubProjectCommand
         {
             get { return new RelayCommand(p => OpenGithubProjectAction()); }
@@ -239,7 +263,7 @@ namespace NETworkManager
                 ShowWindowFromTray();
             else
                 BringWindowToFront();
-        }              
+        }
 
         public ICommand CloseApplicationCommand
         {
@@ -273,18 +297,8 @@ namespace NETworkManager
         }
         #endregion
 
-        private void MetroWindowMain_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (!txtSearch.IsKeyboardFocused && ((e.Key >= Key.A && e.Key <= Key.Z)))
-            {
-                txtSearch.Focus();
-            }
-        }
+        #region Parameter
 
-        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (Autostart && Properties.Settings.Default.Application_StartApplicationMinimized)
-                HideWindowToTray();
-        }
+        #endregion
     }
 }

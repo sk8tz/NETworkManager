@@ -106,14 +106,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Appearance\AppearanceController.cs" />
-    <Compile Include="Core\Autostart\AutostartManager.cs" />
+    <Compile Include="Core\Settings\Autostart.cs" />
     <Compile Include="Core\Network\SubnetCalculator.cs" />
     <Compile Include="Core\Network\SubnetmaskInfo.cs" />
     <Compile Include="Core\Settings\CustomSettingsProvider.cs" />
-    <Compile Include="GUI\Converter\IsSettingsLocationToBoolConverter.cs" />
-    <Compile Include="GUI\Converter\IsDefaultLocationToBoolConverter.cs" />
-    <Compile Include="GUI\Converter\AccentToBrushConverter.cs" />
-    <Compile Include="GUI\Converter\AppThemeToBrushConverter.cs" />
+    <Compile Include="GUI\Converters\IsSettingsLocationToBoolConverter.cs" />
+    <Compile Include="GUI\Converters\IsDefaultLocationToBoolConverter.cs" />
+    <Compile Include="GUI\Converters\AccentToBrushConverter.cs" />
+    <Compile Include="GUI\Converters\AppThemeToBrushConverter.cs" />
     <Compile Include="Core\Network\ConvertMACAddress.cs" />
     <Compile Include="Core\Network\WakeOnLan.cs" />
     <Compile Include="Core\Network\SubnetInfo.cs" />
@@ -132,18 +132,18 @@
     <Compile Include="GUI\Translator\AppThemeNameTranslator.cs" />
     <Compile Include="Core\Settings\SettingsController.cs" />
     <Compile Include="GUI\ApplicationController.cs" />
-    <Compile Include="GUI\Behavior\TextBlockBehavior.cs" />
+    <Compile Include="GUI\Behaviors\TextBlockBehavior.cs" />
     <Compile Include="GUI\IPScanner.xaml.cs">
       <DependentUpon>IPScanner.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Validator\FolderExistsValidator.cs" />
-    <Compile Include="GUI\Validator\IPv4AddressValidator.cs" />
-    <Compile Include="GUI\Validator\EmptyFieldValidator.cs" />
-    <Compile Include="GUI\Validator\PortValidator.cs" />
-    <Compile Include="GUI\Validator\MACAddressValidator.cs" />
+    <Compile Include="GUI\Validators\FolderExistsValidator.cs" />
+    <Compile Include="GUI\Validators\IPv4AddressValidator.cs" />
+    <Compile Include="GUI\Validators\EmptyFieldValidator.cs" />
+    <Compile Include="GUI\Validators\PortValidator.cs" />
+    <Compile Include="GUI\Validators\MACAddressValidator.cs" />
     <Compile Include="GUI\ViewModels\SubnetCalculatorViewModel.cs" />
     <Compile Include="GUI\ViewModels\SettingsViewModel.cs" />
     <Compile Include="GUI\ViewModels\WakeOnLanViewModel.cs" />
@@ -229,6 +229,7 @@
   <ItemGroup>
     <Resource Include="NETworkManager.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

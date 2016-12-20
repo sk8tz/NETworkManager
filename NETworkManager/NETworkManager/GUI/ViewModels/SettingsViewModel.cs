@@ -1,13 +1,12 @@
 ﻿using MahApps.Metro;
-using NETworkManager.Core.Appearance;
-using NETworkManager.Core.Localization;
 using NETworkManager.Core.Settings;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
 using System.IO;
-using NETworkManager.Core.Autostart;
+using NETworkManager.Core.Localization;
+using NETworkManager.Core.Appearance;
 
 namespace NETworkManager.GUI.ViewModels
 {
@@ -60,9 +59,9 @@ namespace NETworkManager.GUI.ViewModels
                 if (!_isLoading)
                 {
                     if (value)
-                        AutostartManager.Enable();
+                        Autostart.Enable();
                     else
-                        AutostartManager.Disable();
+                        Autostart.Disable();
                 }
 
                 _startApplicationWithWindows = value;
@@ -272,7 +271,7 @@ namespace NETworkManager.GUI.ViewModels
         public void LoadSettings()
         {
             // General
-            StartApplicationWithWindows = AutostartManager.IsEnabled;
+            StartApplicationWithWindows = Autostart.IsEnabled;
             StartApplicationMinimized = Properties.Settings.Default.Application_StartApplicationMinimized;
             AlwaysShowIconInTray = Properties.Settings.Default.Application_AlwaysShowIconInTray;
             MinimizeToTrayOnClose = Properties.Settings.Default.Application_MinimizeToTrayOnClose;

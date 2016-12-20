@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using NETworkManager.Core.Settings;
 
-namespace NETworkManager.GUI.Converter
+namespace NETworkManager.GUI.Converters
 {
     public sealed class IsDefaultLocationToBoolConverter : IValueConverter
     {

@@ -4,7 +4,7 @@ using System.Windows.Data;
 using NETworkManager.Core.Settings;
 using System.Windows;
 
-namespace NETworkManager.GUI.Converter
+namespace NETworkManager.GUI.Converters
 {
     public sealed class IsSettingsLocationToBoolConverter : IValueConverter
     {

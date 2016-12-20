@@ -1,11 +1,9 @@
 ﻿using Microsoft.Win32;
 using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
 
-namespace NETworkManager.Core.Autostart
+namespace NETworkManager.Core.Settings
 {
-    public static class AutostartManager
+    public static class Autostart
     {
         private static string AppName = Assembly.GetEntryAssembly().GetName().Name;
         private const string RunKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
