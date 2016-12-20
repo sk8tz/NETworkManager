@@ -8,7 +8,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title=".NETworkManager" Icon="NETworkManager.ico" Height="450" Width="700" MinWidth="560" MinHeight="350" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen" Closing="MetroWindowMain_Closing" StateChanged="MetroWindowMain_StateChanged" KeyDown="MetroWindowMain_KeyDown" Loaded="MetroWindowMain_Loaded" >
+        Title=".NETworkManager" Icon="NETworkManager.ico" Height="500" Width="760" MinWidth="560" MinHeight="350" TitleCaps="False" TitleAlignment="Left" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen" Closing="MetroWindowMain_Closing" StateChanged="MetroWindowMain_StateChanged" KeyDown="MetroWindowMain_KeyDown" Loaded="MetroWindowMain_Loaded" >
     <Controls:MetroWindow.WindowButtonCommands>
         <Controls:WindowButtonCommands Template="{DynamicResource MahApps.Metro.Templates.WindowButtonCommands.Win10}" />
     </Controls:MetroWindow.WindowButtonCommands>

@@ -30,6 +30,7 @@ namespace NETworkManager
         }
 
         NotifyIcon notifyIcon = new NotifyIcon();
+
         private bool _isInTray;
 
         private bool _autostart;
@@ -93,9 +94,9 @@ namespace NETworkManager
             using (Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/NETworkManager.ico")).Stream)
             {
                 notifyIcon.Icon = new Icon(iconStream);
-                notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
-                notifyIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(NotifyIcon_MouseDown);
                 notifyIcon.Text = Title;
+                notifyIcon.DoubleClick += new EventHandler(NotifyIcon_DoubleClick);
+                notifyIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(NotifyIcon_MouseDown);
             }
         }
 
@@ -103,8 +104,8 @@ namespace NETworkManager
         {
             if (e.Button == MouseButtons.Right)
             {
-                System.Windows.Controls.ContextMenu menu = (System.Windows.Controls.ContextMenu)FindResource("contextMenuNotifyIcon");
-                menu.IsOpen = true;
+                System.Windows.Controls.ContextMenu trayMenu = (System.Windows.Controls.ContextMenu)FindResource("contextMenuNotifyIcon");
+                trayMenu.IsOpen = true;
             }
         }
 
@@ -132,6 +133,14 @@ namespace NETworkManager
                 notifyIcon.Visible = false;
         }
         #endregion
+
+        private void BringWindowToFront()
+        {
+            if (WindowState == WindowState.Minimized)
+                WindowState = WindowState.Normal;
+
+            Activate();
+        }
 
         #region Events
         private void listViewApps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -229,8 +238,8 @@ namespace NETworkManager
             if (_isInTray)
                 ShowWindowFromTray();
             else
-                Activate();
-        }
+                BringWindowToFront();
+        }              
 
         public ICommand CloseApplicationCommand
         {
