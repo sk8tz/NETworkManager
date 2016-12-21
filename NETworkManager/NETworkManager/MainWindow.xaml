@@ -41,7 +41,7 @@
         <ContextMenu x:Key="contextMenuNotifyIcon" MinWidth="200" Opened="ContextMenu_Opened">
             <MenuItem Header="{DynamicResource LocalizedString_Show}" Command="{Binding ShowWindowCommand}">
                 <MenuItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Black">
+                    <Rectangle Width="16" Height="16" Fill="{DynamicResource BlackColorBrush}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_app}" />
                         </Rectangle.OpacityMask>
@@ -50,7 +50,7 @@
             </MenuItem>
             <MenuItem Header="{DynamicResource LocalizedString_Settings}" Command="{Binding OpenSettingsCommand}">
                 <MenuItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Black">
+                    <Rectangle Width="16" Height="16" Fill="{DynamicResource BlackColorBrush}">
                         <Rectangle.OpacityMask>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
                         </Rectangle.OpacityMask>
@@ -104,7 +104,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="10" />
                             </Grid.RowDefinitions>
-                            <Rectangle Width="48" Height="48" Fill="Black">
+                            <Rectangle Width="48" Height="48" Fill="{DynamicResource BlackBrush}">
                                 <Rectangle.OpacityMask>
                                     <VisualBrush Stretch="Fill" Visual="{Binding Icon}" />
                                 </Rectangle.OpacityMask>

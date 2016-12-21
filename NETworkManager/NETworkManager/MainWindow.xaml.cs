@@ -76,10 +76,7 @@ namespace NETworkManager
             InitNotifyIcon();
 
             if (commandLineArgs.Autostart && Properties.Settings.Default.Application_StartApplicationMinimized)
-            {
-                System.Windows.MessageBox.Show("BLA");
                 HideWindowToTray();
-            }
         }
 
         private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
