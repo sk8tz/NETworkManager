@@ -106,8 +106,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\Appearance\AppearanceController.cs" />
-    <Compile Include="Core\Settings\Autostart.cs" />
-    <Compile Include="Core\Network\SubnetCalculator.cs" />
+    <Compile Include="Core\Autostart\AutostartController.cs" />
+    <Compile Include="Core\CommandLine\CommandLineArgsInfo.cs" />
+    <Compile Include="Core\CommandLine\CommandLineParser.cs" />
+    <Compile Include="Core\Network\Subnetmask.cs" />
     <Compile Include="Core\Network\SubnetmaskInfo.cs" />
     <Compile Include="Core\Settings\CustomSettingsProvider.cs" />
     <Compile Include="GUI\Converters\IsSettingsLocationToBoolConverter.cs" />

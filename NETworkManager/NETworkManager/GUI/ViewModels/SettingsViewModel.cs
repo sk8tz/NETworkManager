@@ -59,9 +59,9 @@ namespace NETworkManager.GUI.ViewModels
                 if (!_isLoading)
                 {
                     if (value)
-                        Autostart.Enable();
+                        AutostartManager.EnableAutostart();
                     else
-                        Autostart.Disable();
+                        AutostartManager.DisableAutostart();
                 }
 
                 _startApplicationWithWindows = value;
@@ -98,7 +98,7 @@ namespace NETworkManager.GUI.ViewModels
                 if (value == _alwaysShowIconInTray)
                     return;
 
-                if(!_isLoading)
+                if (!_isLoading)
                 {
                     Properties.Settings.Default.Application_AlwaysShowIconInTray = value;
                     SettingsChanged = true;
@@ -271,7 +271,7 @@ namespace NETworkManager.GUI.ViewModels
         public void LoadSettings()
         {
             // General
-            StartApplicationWithWindows = Autostart.IsEnabled;
+            StartApplicationWithWindows = AutostartManager.IsAutostartEnabled;
             StartApplicationMinimized = Properties.Settings.Default.Application_StartApplicationMinimized;
             AlwaysShowIconInTray = Properties.Settings.Default.Application_AlwaysShowIconInTray;
             MinimizeToTrayOnClose = Properties.Settings.Default.Application_MinimizeToTrayOnClose;

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NETworkManager.Core.Network
 {
-    public static class SubnetCalculator
+    public static class Subnetmask
     {
-        public static List< SubnetmaskInfo> SubnetmaskList
+        public static List< SubnetmaskInfo> List
         {
             get
             {

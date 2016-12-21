@@ -1,5 +1,4 @@
 ﻿using MahApps.Metro.Controls;
-using NETworkManager.Core.Settings;
 using NETworkManager.Core.Localization;
 using NETworkManager.GUI;
 using System;
@@ -15,6 +14,7 @@ using System.Windows.Forms;
 using NETworkManager.GUI.Interface;
 using System.Reflection;
 using NETworkManager.Core.Appearance;
+using NETworkManager.Core.CommandLine;
 
 namespace NETworkManager
 {
@@ -34,21 +34,9 @@ namespace NETworkManager
 
         #region Variables        
         NotifyIcon notifyIcon = new NotifyIcon();
+        CommandLineArgsInfo commandLineArgs;
 
         private bool _isInTray;
-
-        private bool _autostart;
-        public bool Autostart
-        {
-            get { return _autostart; }
-            set
-            {
-                if (value == _autostart)
-                    return;
-
-                _autostart = value;
-            }
-        }
 
         private bool _flyoutRestartRequiredIsOpen;
         public bool FlyoutRestartRequiredIsOpen
@@ -68,6 +56,9 @@ namespace NETworkManager
         #region Window load and close events
         public MainWindow()
         {
+            // Get command line arguments
+            commandLineArgs = CommandLineParser.GetCommandLineArgs();
+
             // Load localization
             LocalizationController.LoadLocalization();
 
@@ -84,14 +75,11 @@ namespace NETworkManager
             // Init notify icon
             InitNotifyIcon();
 
-            // Load Settings
-            LoadSettings();
-        }
-
-        private void MetroWindowMain_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (Autostart && Properties.Settings.Default.Application_StartApplicationMinimized)
+            if (commandLineArgs.Autostart && Properties.Settings.Default.Application_StartApplicationMinimized)
+            {
+                System.Windows.MessageBox.Show("BLA");
                 HideWindowToTray();
+            }
         }
 
         private void MetroWindowMain_Closing(object sender, CancelEventArgs e)
@@ -121,6 +109,7 @@ namespace NETworkManager
                 notifyIcon.Text = Title;
                 notifyIcon.DoubleClick += new EventHandler(NotifyIcon_DoubleClick);
                 notifyIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(NotifyIcon_MouseDown);
+                notifyIcon.Visible = Properties.Settings.Default.Application_AlwaysShowIconInTray;
             }
         }
 
@@ -182,13 +171,6 @@ namespace NETworkManager
 
         #endregion
 
-        #region Load settings
-        private void LoadSettings()
-        {
-            notifyIcon.Visible = Properties.Settings.Default.Application_AlwaysShowIconInTray;
-        }
-        #endregion
-
         #region Events
         private void listViewApps_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -246,7 +228,8 @@ namespace NETworkManager
 
             settingsWindow.ShowDialog();
 
-            LoadSettings();
+            if (!_isInTray)
+                notifyIcon.Visible = Properties.Settings.Default.Application_AlwaysShowIconInTray;
 
             if (settingsWindow.RestartRequired)
                 FlyoutRestartRequiredIsOpen = true;
@@ -300,5 +283,7 @@ namespace NETworkManager
         #region Parameter
 
         #endregion
+
+
     }
 }

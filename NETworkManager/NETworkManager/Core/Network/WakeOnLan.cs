@@ -30,7 +30,7 @@ namespace NETworkManager.Core.Network
             return packet;
         }
 
-        public static byte[] Create(string mac)
+        public static byte[] CreateMagicPacket(string mac)
         {
             byte[] macBytes = ConvertMACAddress.ToByteArray(mac);
 

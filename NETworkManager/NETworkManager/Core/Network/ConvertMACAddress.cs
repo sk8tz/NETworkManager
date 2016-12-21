@@ -11,7 +11,7 @@ namespace NETworkManager.Core.Network
         /// <param name="MACAddress"></param>
         /// <returns></returns>
         public static byte[] ToByteArray(string MACAddress)
-        {
+        {            
             // Regex to replace "-" and ":" in MAC-Address
             Regex regex = new Regex("-|:");
             string mac = regex.Replace(MACAddress, "");
