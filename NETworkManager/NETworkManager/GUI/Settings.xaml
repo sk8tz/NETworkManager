@@ -90,10 +90,20 @@
                         <ListBoxItem Content="{DynamicResource LocalizedString_Language}" />
                         <ListBoxItem Content="{DynamicResource LocalizedString_Settings}" />
                     </ListBox>
-                    <Separator Grid.Column="2" Background="{DynamicResource AccentColorBrush2}">
+                    <Separator Grid.Column="2">
                         <Separator.LayoutTransform>
                             <RotateTransform Angle="90" />
                         </Separator.LayoutTransform>
+                        <Separator.Style>
+                            <Style TargetType="{x:Type Separator}">
+                                <Setter Property="Background" Value="{DynamicResource AccentColorBrush2}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=MetroWindowSettings, Path=IsActive}" Value="False">
+                                        <Setter Property="Background" Value="{DynamicResource NonActiveBorderColorBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Separator.Style>
                     </Separator>
                     <TabControl SelectedIndex="{Binding ElementName=listBoxSettings, Path=SelectedIndex}" Grid.Column="4" >
                         <TabControl.Resources>

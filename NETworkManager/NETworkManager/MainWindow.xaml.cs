@@ -276,11 +276,5 @@ namespace NETworkManager
             Close();
         }
         #endregion
-
-        #region Parameter
-
-        #endregion
-
-
     }
 }
