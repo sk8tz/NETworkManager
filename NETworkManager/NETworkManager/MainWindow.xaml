@@ -38,7 +38,7 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Resources>
-        <ContextMenu x:Key="contextMenuNotifyIcon" MinWidth="200" Opened="ContextMenu_Opened">
+        <ContextMenu x:Key="contextMenuNotifyIcon" MinWidth="200" Opened="ContextMenu_Opened" x:Shared="False">
             <MenuItem Header="{DynamicResource LocalizedString_Show}" Command="{Binding ShowWindowCommand}">
                 <MenuItem.Icon>
                     <Rectangle Width="16" Height="16" Fill="{DynamicResource BlackColorBrush}">
